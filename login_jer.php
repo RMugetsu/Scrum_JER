@@ -15,24 +15,48 @@
 
 	<?php
 
+	if($_POST != null){
 		$connection = mysqli_connect('localhost', 'jose','jose123');
-
 		mysqli_select_db($connection, 'project');
 
-		$consulta = "SELECT Nombre, Password FROM usuario Where Nombre = ;";
+		$nombre = mysqli_real_escape_string($connection, $_POST['nombre']);
+		$password = mysqli_real_escape_string($connection, $_POST['password']);
+
+		
+		$consulta = "SELECT Nombre FROM usuario Where Nombre = '$nombre'";
 
 		$resultado = mysqli_query($connection, $consulta);
 
+		$num_row = mysqli_num_rows($resultado);
 
-		$nombre = $_POST['nombre'];
-		$password = $_POST['password'];
+		if ($num_row == 1){
+			$usuarioPassword = "SELECT Nombre, Password FROM usuario Where Nombre = '$nombre' AND Password = SHA2('$password', 512);";
+			$checkUserPassword = mysqli_query($connection, $usuarioPassword);
+			$num_row_password = mysqli_num_rows($checkUserPassword);
+
+			if ($num_row_password == 1){
+				echo "Usuario correcto";	
+			}
+
+			else{
+				echo "Password incorrecto";
+			}
+			
+		}
+
+			else{
+				echo "Usuario Incorrecto";
+			}
+
+	
 
 
+	}
 
 	 ?>
 
 	<?php 
-		echo "<form action='connection.php method='post'>";
+		echo "<form action='#' method='post'>";
 		echo "<div class='row'>";
 		echo "<div class='col s12 m4 offset-m4'>";
 		echo "<div class='card'>";
@@ -56,7 +80,6 @@
 		echo "</div>";
 		echo "</div>";
 		echo "</form>";
-
 
 	 ?>
 	
