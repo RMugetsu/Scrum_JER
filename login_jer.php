@@ -3,9 +3,8 @@
 <head>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/login.css">
-
+	<script type="text/javascript" src="script/script.js" defer></script>
 	<meta charset="UTF-8">
 	<title>Gestor de Proyectos SCRUMM</title>
 </head>
@@ -15,9 +14,12 @@
 
 	<?php
 
+
+	session_start();
+
 	if($_POST != null){
-		$connection = mysqli_connect('localhost', 'jose','jose123');
-		mysqli_select_db($connection, 'project');
+		$connection = mysqli_connect('localhost', 'root','');
+		mysqli_select_db($connection, 'projecte_scrumb');
 
 		$nombre = mysqli_real_escape_string($connection, $_POST['nombre']);
 		$password = mysqli_real_escape_string($connection, $_POST['password']);
@@ -26,31 +28,42 @@
 		$consulta = "SELECT Nombre FROM usuario Where Nombre = '$nombre'";
 
 		$resultado = mysqli_query($connection, $consulta);
-
+		print_r($resultado);
 		$num_row = mysqli_num_rows($resultado);
 
+
+		if (!$resultado) {
+			$message = 'Consulta invàlida: ' . mysqli_error() . "\n";
+			die ($message);
+		}
+
+		
 		if ($num_row == 1){
 			$usuarioPassword = "SELECT Nombre, Password FROM usuario Where Nombre = '$nombre' AND Password = SHA2('$password', 512);";
 			$checkUserPassword = mysqli_query($connection, $usuarioPassword);
 			$num_row_password = mysqli_num_rows($checkUserPassword);
 
 			if ($num_row_password == 1){
-				echo "Usuario correcto";	
-			}
+				$queryAll = "SELECT Id, Nombre, Tipo, IdGrupo, IdEspecifiacion  FROM usuario Where Nombre = '$nombre';";
+				$infoUsuario = mysqli_query($connection, $queryAll);
 
-			else{
-				echo "Password incorrecto";
+
+				while ($registre = mysqli_fetch_assoc($infoUsuario)){
+					$_SESSION['Id'] = $registre['Id'];
+					$_SESSION['Nombre'] = $registre['Nombre'];
+					$_SESSION['Tipo'] = $registre['Tipo'];
+					$_SESSION['IdGrupo'] = $registre['IdGrupo'];
+					$_SESSION['IdEspecifiacion'] = $registre['IdEspecifiacion'];
+				}
+				header('Location: index.php');
 			}
-			
+			else{
+				echo "Password Incorrecto";
+			}
 		}
-
-			else{
-				echo "Usuario Incorrecto";
-			}
-
-	
-
-
+		else{
+			echo "Usuario Incorrecto";
+		}
 	}
 
 	 ?>
@@ -80,6 +93,7 @@
 		echo "</div>";
 		echo "</div>";
 		echo "</form>";
+		echo "<div id='error'></div>";
 
 	 ?>
 	
