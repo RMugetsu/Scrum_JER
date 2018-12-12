@@ -14,21 +14,21 @@
 	</script>
 	<input type="button" id="CreateB" name="ButtonCreate" value="New Project" onclick="DeshabButton()"/><br>
 
-<form method="Post" action="<?php echo $_SERVER['PHP_SELF']?>">
-	<?php
-	if(isset($_POST['CrearProyecto'])){
-		$Nombre=$_POST['TextName'];
-		$Numero=$_POST['TextSprint'];
-		$Owner=$_POST['Owner'];
-		$Master=$_POST['Master'];
-		$Grupo=$_POST['Grupo'];
-		$Descripción=$_POST['TextDescript'];
-	}
-?>
+	<form method="Post" action="pruebaaaa.php">
+		<?php
+		if(isset($_POST['CrearProyecto'])){
+			$Nombre=$_POST['TextName'];
+			$Numero=$_POST['TextSprint'];
+			$Owner=$_POST['Owner'];
+			$Master=$_POST['Master'];
+			$Grupo=$_POST['Grupo'];
+			$Descripción=$_POST['TextDescript'];
+		}
+	?>
 
 	<?php
 		$con = mysqli_connect('localhost','root','');
-		mysqli_select_db($con, 'projecte_scrumb');
+		mysqli_select_db($con, 'test');
 		$consultaM="Select Nombre, Id From Usuario Where tipo=1";
 		$consultaO="Select Nombre,Id From usuario where tipo=2";
 		$consultaG="Select Nombre,Id From grupos";
@@ -84,6 +84,69 @@
         Div.style.display ="inline";
 
         }
+
+		function PasarOption(){
+			
+			for(var i=0; i<MegaListaM.length;i++){
+				var containerM = document.querySelector("Select[name=Master]");	
+				var optionM=document.createElement("option");
+				var ContenidoM=document.createTextNode(MegaListaM[i][1]);
+				optionM.setAttribute("IdMaster",MegaListaM[i][0]);
+				optionM.setAttribute("NombreMaster",MegaListaM[i][1]);
+				optionM.appendChild(ContenidoM);
+				containerM.appendChild(optionM);
+			}
+			for(var i=0; i<MegaListaO.length;i++){
+				var containerO = document.querySelector("Select[name=Owner]");
+				var optionO=document.createElement("option");
+				var ContenidoO=document.createTextNode(MegaListaO[i][1]);
+				optionO.setAttribute("IdOwner",MegaListaO[i][0]);
+				optionO.setAttribute("NombreOwner",MegaListaO[i][1]);
+				optionO.appendChild(ContenidoO);
+				containerO.appendChild(optionO);
+			}
+			
+
+		}
+	
+		function optionGrupo(){
+			for(var i=0; i<MegaListaG.length;i++){
+				var containerG = document.querySelector("Select[name=Grupo]");
+				var optionG=document.createElement("option");
+				var ContenidoG=document.createTextNode(MegaListaG[i][1]);
+				optionG.setAttribute("IdGrupo",MegaListaG[i][0]);
+				optionG.setAttribute("NombreGrupo",MegaListaG[i][1]);
+				optionG.appendChild(ContenidoG);
+				containerG.appendChild(optionG);
+			}
+	 }
+		function optionGrupo2(){
+			for(var i=0; i<MegaListaG.length;i++){
+				var containerG = document.querySelector("Select[name=Grupo2]");
+				var optionG=document.createElement("option");
+				var ContenidoG=document.createTextNode(MegaListaG[i][1]);
+				optionG.setAttribute("IdGrupo",MegaListaG[i][0]);
+				optionG.setAttribute("NombreGrupo",MegaListaG[i][1]);
+				optionG.appendChild(ContenidoG);
+				containerG.appendChild(optionG);
+			}
+	 }
+
+		function Mas(){
+			
+			var div1 = document.querySelector("div[id=formulario]");
+			if (contadorMas<=1){
+			 	
+			 	contadorMas++;
+			 	
+			 	addElement(div1,"Select",undefined,[ "name=Grupo"]);
+			 	optionGrupo();
+			 }
+
+		}
+
+
+
 
         function GenerarForm () { 
 		 
@@ -164,145 +227,16 @@
 
 	     	document.getElementById("CreateB").disabled=true;
 	     }
-
-
-/*
-    	function ComprobarAction(){
-			ComprobarNombre();
-			ComprobarSprint();
-			ComprobarMaster();
-			ComprobarOwner();
-			MensajeComprobar();
-		
-		}
-
-		function ComprobarNombre(){
-			
-			if (document.getElementsByClassName("TextName").value == null) {
-				NombreCom = false;
-			}
-			else{
-				NombreCom = true;
-			}
-		}
-		function ComprobarSprint(){
-
-			if (document.getElementsByClassName("TextSprint").value == null) {
-				SprintCom = false;
-			}
-			else{
-				SprintCom = true;
-			}
-		}
-		function ComprobarMaster(){
-			var SelectMaster = document.getElementsByClassName("Master");
-		    if(SelectMaster.selectedIndex !=0 )
-		    	MasterCom = true;
-		    else{
-		    	MasterCom = false;
-		    }
-		}
-		function ComprobarOwner(){
-			var SelectOwner = document.getElementsByClassName("Owner");
-		    if(SelectOwner.selectedIndex !=0 )
-		    	OwnerCom = true;
-		    else{
-		    	OwnerCom = false;
-		    }
-		}
-		function MensajeComprobar(){
-			if (NombreCom == false ) {
-				 document.getElementsByClassName('ErrorNombre').innerHTML ="El proyecto necesita un nombre.";
-			}
-			else if (SprintCom == false) {
-				document.getElementsByClassName('ErrorSprint').innerHTML ="El proyecto necesita un numero de Sprint.";
-			}
-			else if (MasterCom == false) {
-				document.getElementsByClassName('ErrorMaster').innerHTML ="Selecciona un Scrum Master.";
-			}
-			else if (OwnerCom == false) {
-				document.getElementsByClassName('ErrorOwner').innerHTML ="Selecciona un Product Owner.";
-			}
-			
-			else if (NombreCom == true && SprintCom == true 
-			&& MasterCom == true && OwnerCom == true) {
-				document.getElementsByClassName("CrearProyecto").value=true;
-			}
-		}
-*/		
-	</script>
-
-	<script type="text/javascript">
-		function PasarOption(){
-			
-			for(var i=0; i<MegaListaM.length;i++){
-				var containerM = document.querySelector("Select[name=Master]");	
-				var optionM=document.createElement("option");
-				var ContenidoM=document.createTextNode(MegaListaM[i][1]);
-				optionM.setAttribute("IdMaster",MegaListaM[i][0]);
-				optionM.setAttribute("NombreMaster",MegaListaM[i][1]);
-				optionM.appendChild(ContenidoM);
-				containerM.appendChild(optionM);
-			}
-			for(var i=0; i<MegaListaO.length;i++){
-				var containerO = document.querySelector("Select[name=Owner]");
-				var optionO=document.createElement("option");
-				var ContenidoO=document.createTextNode(MegaListaO[i][1]);
-				optionO.setAttribute("IdOwner",MegaListaO[i][0]);
-				optionO.setAttribute("NombreOwner",MegaListaO[i][1]);
-				optionO.appendChild(ContenidoO);
-				containerO.appendChild(optionO);
-			}
-			
-
-		}
 	
-		function optionGrupo(){
-			for(var i=0; i<MegaListaG.length;i++){
-				var containerG = document.querySelector("Select[name=Grupo]");
-				var optionG=document.createElement("option");
-				var ContenidoG=document.createTextNode(MegaListaG[i][1]);
-				optionG.setAttribute("IdGrupo",MegaListaG[i][0]);
-				optionG.setAttribute("NombreGrupo",MegaListaG[i][1]);
-				optionG.appendChild(ContenidoG);
-				containerG.appendChild(optionG);
-			}
-	 }
-		function optionGrupo2(){
-			for(var i=0; i<MegaListaG.length;i++){
-				var containerG = document.querySelector("Select[name=Grupo2]");
-				var optionG=document.createElement("option");
-				var ContenidoG=document.createTextNode(MegaListaG[i][1]);
-				optionG.setAttribute("IdGrupo",MegaListaG[i][0]);
-				optionG.setAttribute("NombreGrupo",MegaListaG[i][1]);
-				optionG.appendChild(ContenidoG);
-				containerG.appendChild(optionG);
-			}
-	 }
-
-		function Mas(){
-			
-			var div1 = document.querySelector("div[id=formulario]");
-			if (contadorMas<=1){
-			 	
-			 	contadorMas++;
-			 	
-			 	addElement(div1,"Select",undefined,[ "name=Grupo"]);
-			 	optionGrupo();
-			 }
-
-		}
-
-	 	
-	 		<?php
+	</script>
+	<!--<?php
 	 			$conIn = mysqli_connect('localhost','root','');
-				mysqli_select_db($conIn, 'projecte_scrumb');
+				mysqli_select_db($conIn, 'test');
 				$consultaIn="Insert into proyecto(Nombre,NumSprint,Descripcion,PO_Id,SM_Id) values('$Nombre',$Numero','$Descripción','$Owner','$Master')";
 				if( mysqli_query($conIn, $consultaIn)){
 					echo "Valores insertados";
 				}
-	 		?>
-	</script>
+	 		?>-->
 </form>
 
 </body>

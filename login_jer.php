@@ -28,7 +28,6 @@
 		$consulta = "SELECT Nombre FROM usuario Where Nombre = '$nombre'";
 
 		$resultado = mysqli_query($connection, $consulta);
-		print_r($resultado);
 		$num_row = mysqli_num_rows($resultado);
 
 
