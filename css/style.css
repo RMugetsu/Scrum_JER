@@ -1,21 +1,66 @@
-div{
-	border: 1px red solid;
+body{
+  background-color: #ccffcc;
+}
+#generarError{
+  margin-left: 10%;
 }
 .ImgError{
-	width: 40px;
-	height: 40px;
+  width: 40px;
+  height: 40px;
+}
+h2{
+    margin-left: 58%;
+}
+#grid{
+  margin-left: 10%;
+  width: 60%;
+  height: 30%;
+  border: 4px teal solid;
 }
 #error{
-	z-index: 1;
-	position: fixed;
-	margin-left: 60%;
+  z-index: 1;
+  position: fixed;
+  margin-left: 80%;
+  border: 4px teal solid;
 }
 #hola{
-	height: 100px;
-	width: 100px;
+  height: 100px;
+  width: 100px;
 }
 
 .animacion {
+       /*position: absolute;*/
+
+  animation-name: blink1;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name:blink1;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blink1{
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blink1 {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@keyframes blink1 {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+.animacion2 {
        /*position: absolute;*/
 
   animation-name: blink;
@@ -30,19 +75,37 @@ div{
 }
 
 @-moz-keyframes blink{
-  0% { opacity: 1.0; }
-  50% { opacity: 0.0; }
-  100% { opacity: 1.0; }
+  50% { border: 4px solid rgba(0,0,0,0.3); }
 }
 
 @-webkit-keyframes blink {  
-  0% { opacity: 1.0; }
-  50% { opacity: 0.0; }
-   100% { opacity: 1.0; }
+ 50% { border: 4px solid rgba(0,0,0,0.3); }
 }
 
-@keyframes blink {  
-  0% { opacity: 1.0; }
-   50% { opacity: 0.0; }
-  100% { opacity: 1.0; }
+@keyframes blink {
+  50% { border: 4px solid rgba(0,0,0,0.3); }
+}
+
+#cabecera{
+  width:100%;
+  height: 10%;
+  background-color: teal   ;
+}
+
+#titulo{
+  float: left;
+  width: 70%;
+}
+#usuario{
+  float: left;
+  width: 25%;
+}
+.linksProyectos{
+  font-size: 20px;
+}
+label{
+  font-size: 25px;
+}
+.ubicar{
+  margin-left: 10%;
 }
