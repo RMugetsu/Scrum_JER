@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `especificaciones`
 --
 
+
 CREATE TABLE `especificaciones` (
   `Id` int(11) NOT NULL,
   `IdSprint` int(11) NOT NULL,

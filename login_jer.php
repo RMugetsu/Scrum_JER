@@ -10,15 +10,13 @@
 </head>
 <body>
 
-
-
 	<?php
 
 
 	session_start();
 
 	if($_POST != null){
-		$connection = mysqli_connect('localhost', 'root','');
+		$connection = mysqli_connect('localhost', 'admin','1234');
 		mysqli_select_db($connection, 'projecte_scrumb');
 
 		$nombre = mysqli_real_escape_string($connection, $_POST['nombre']);
@@ -57,17 +55,27 @@
 				header('Location: index.php');
 			}
 			else{
-				echo "Password Incorrecto";
+				?>
+				<script type="text/javascript">
+					var error = "Contraseña Incorrecta";
+					var Condicion = 1;
+				</script>
+				<?php
 			}
 		}
 		else{
-			echo "Usuario Incorrecto";
+			?>
+				<script type="text/javascript">
+					var error = "Usuario Incorrecto";
+					var Condicion = 1;
+				</script>
+				<?php
 		}
 	}
 
 	 ?>
-
-	<?php 
+	<?php
+		echo "<div id='error' style='display: none'></div>";
 		echo "<form action='#' method='post'>";
 		echo "<div class='row'>";
 		echo "<div class='col s12 m4 offset-m4'>";
@@ -92,9 +100,24 @@
 		echo "</div>";
 		echo "</div>";
 		echo "</form>";
-		echo "<div id='error'></div>";
-
 	 ?>
-	
 </body>
+<script type="text/javascript">
+	function generarError(error){
+		if(Condicion==1){
+			var divError = document.querySelector("div[id=error]");
+			divError.style.display= "block";
+			var mensaje = document.createElement("LABEL");
+			var contenido = document.createTextNode(error);
+			mensaje.setAttribute("for",error);
+			var img = document.createElement("IMG");
+			img.setAttribute("src","img/error.png");
+			img.setAttribute("class","ImgError animacion");
+			divError.appendChild(img);
+			divError.appendChild(contenido);
+		}
+	
+}
+generarError(error);
+</script>
 </html>

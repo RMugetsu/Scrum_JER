@@ -13,7 +13,7 @@
 <body>
 	<?php
 		session_start();
-		$con = mysqli_connect('localhost','root','');
+		$con = mysqli_connect('localhost','admin','1234');
 		mysqli_select_db($con, 'projecte_scrumb');
 		$consulta = "SELECT Id, Nombre, NumSprint as Sprints, PO_Id as PO, SM_Id as SM FROM proyecto";
 		$resultat = mysqli_query($con, $consulta);
@@ -37,6 +37,7 @@
 			<label>Bienvenido a la mejor pagina de gestion de SCRUM</label>
 		</div>
 		<div id="usuario">
+			<img src="img/usuario.png" id="imgUsuario">
 			<?php echo "<label>Usuario: ".$_SESSION['Nombre']."</label>";?>
 		</div>
 	</div>
@@ -128,16 +129,13 @@
 ?>
 
 	<?php
-		$con = mysqli_connect('localhost','root','');
-		mysqli_select_db($con, 'projecte_scrumb');
 		$consultaM="Select Nombre, Id From Usuario Where tipo=1";
 		$consultaO="Select Nombre,Id From usuario where tipo=2";
 		$consultaG="Select Nombre,Id From grupos";
 		$resultatM=mysqli_query($con, $consultaM);
 		$resultatO=mysqli_query($con, $consultaO);
 		$resultatG=mysqli_query($con, $consultaG);
-			while ($registreM = mysqli_fetch_assoc($resultatM)) {
-			
+		while ($registreM = mysqli_fetch_assoc($resultatM)) {		
 	?><script type="text/javascript">
 		var NombreM='<?=$registreM["Nombre"]?>';	
 		var IdM=<?=$registreM["Id"]?>;

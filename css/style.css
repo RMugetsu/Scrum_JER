@@ -4,6 +4,10 @@ body{
 #generarError{
   margin-left: 10%;
 }
+#imgUsuario{
+  width: 30px;
+  height: 30px;
+}
 .ImgError{
   width: 40px;
   height: 40px;
