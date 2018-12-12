@@ -91,6 +91,9 @@
 		echo "<div class='form-field'>";
 		echo "<label for='password'>Contraseña</label>";
 		echo "<input type='password' name='password'>";
+		echo "<label style='float: right;'>
+				<a class='pink-text' href='mail_recuperacion.php'><b>Olvidaste la contraseña?</b></a>
+				</label><br><br>";
 		echo "</div><br>";
 		echo "<div class='form-field'>";
 		echo "<button class='btn btn-large' style='width:100%;'>LOG IN</button>";
