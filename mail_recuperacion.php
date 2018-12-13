@@ -25,7 +25,7 @@
       <div class="container">
         <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-          <form class="col s12" method="post" action="enviar_mail.php">
+          <form class="col s12" method="post" action="mail_recuperacion.php">
             <h5 class="indigo-text">Recupera la contraseña</h5>
             <div class="section"></div>
             <h6 class="indigo-text">Introduce el mail para poder <br>recuperar la contraseña</h6>
@@ -34,6 +34,24 @@
               <div class='input-field col s12'>
                 <i class="material-icons prefix">email</i>
                 <input class='validate' type='email' name='email' id='email' />
+                <?php 
+                  if (isset($_POST['email'])) {
+                    $email = $_POST['email'];
+                    session_start();
+                    $_SESSION['email'] = $email;
+                    $con = mysqli_connect('localhost','admin','1234');
+                    mysqli_select_db($con, 'scrum');
+                    $sql="select * from usuario WHERE Email = '$email'"; //Va obtener los datos y si no tiene nada pues no hace nada el programa.
+                    $result=$con->query($sql);
+                    $rows = $result->num_rows;
+                    if($rows > 0) {
+                      header ('Location: enviar_mail.php');
+                    }
+                    else{
+                      echo "<font size=2 style='color:red';>Este correo no existe</font>";
+                    }
+                  }
+                 ?>
                 <label for='email'>Email</label>
               </div>
             </div>
