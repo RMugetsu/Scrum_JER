@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Vista Projectos</title>
+	<title>Vista Proyectos</title>
 	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -49,8 +49,8 @@
 	<br>
 	<br>
 	<div>
-		<div id="grid" class="animacion2">
-			<h4>Listado de Projectos</h4>
+		<div id="pro" class="grid" class="animacion2">
+			<h4>Listado de Proyectos</h4>
 		</div>
 		<div id="generarError">
 			<button onclick="generarError()">Generar Error</button>
@@ -83,7 +83,7 @@
 		function generarProyectos(){
 		for (var i = 0; i < proyects.length; i++) {
 			var salto = document.createElement("BR");
-			var contenedor = document.querySelector("div[id=grid]");
+			var contenedor = document.querySelector("div[id=pro]");
 			var element = document.createElement("A");
 			var contenido = document.createTextNode(proyects[i][1]);
 			element.setAttribute("Identidicador",proyects[i][0]);
@@ -92,7 +92,7 @@
 			element.setAttribute("PO",proyects[i][3]);
 			element.setAttribute("SM",proyects[i][4]);
 			element.setAttribute("class","linksProyectos");
-			element.setAttribute("href","detalleProyectos.php");
+			element.setAttribute("href","detalleProyectos.php?proyect="+proyects[i][1]);
 			element.appendChild(contenido);
 			contenedor.appendChild(element);
 			contenedor.appendChild(salto);
