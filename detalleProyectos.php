@@ -20,10 +20,10 @@
 
 		$con = mysqli_connect('localhost', 'admin','1234');
 		mysqli_select_db($con, 'projecte_scrumb');
-		$id_usuario= $_SESSION['Id'];
-		$consulta = "select * from especificaciones where IdUsuario = $id_usuario" ;
+		$nombre_proyecto = $_GET['proyect'];
+		$consulta = "select e.Nombre from especificaciones e, proyecto p where '$nombre_proyecto' = p.Nombre and p.Id = e.IdProyecto" ;
 		$resultat = mysqli_query($con, $consulta);
-			
+
 			echo "<ul>";
 			while($registre = mysqli_fetch_assoc($resultat))
  				{
