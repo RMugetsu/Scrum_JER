@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 12-12-2018 a las 17:32:14
--- Versión del servidor: 10.1.32-MariaDB
--- Versión de PHP: 5.6.36
+-- Servidor: localhost:3306
+-- Tiempo de generación: 14-12-2018 a las 18:09:43
+-- Versión del servidor: 5.7.24-0ubuntu0.18.04.1
+-- Versión de PHP: 7.2.10-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,16 +26,27 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `especificaciones`
 --
 
-
 CREATE TABLE `especificaciones` (
   `Id` int(11) NOT NULL,
-  `IdSprint` int(11) NOT NULL,
-  `Descripción` varchar(500) COLLATE latin1_spanish_ci NOT NULL,
+  `Nombre` varchar(200) COLLATE latin1_spanish_ci NOT NULL,
+  `IdSprint` int(11) DEFAULT NULL,
+  `Descripción` varchar(500) COLLATE latin1_spanish_ci DEFAULT NULL,
   `Horas` int(2) NOT NULL,
   `Dificultad` varchar(20) COLLATE latin1_spanish_ci NOT NULL,
   `IdUsuario` int(11) NOT NULL,
   `IdProyecto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `especificaciones`
+--
+
+INSERT INTO `especificaciones` (`Id`, `Nombre`, `IdSprint`, `Descripción`, `Horas`, `Dificultad`, `IdUsuario`, `IdProyecto`) VALUES
+(1, 'Proyecto1', NULL, NULL, 20, 'Dificil', 1, 2),
+(2, 'Proyecto2', NULL, NULL, 20, 'Dificil', 2, 1),
+(3, 'Proyecto3', NULL, NULL, 20, 'Dificil', 3, 3),
+(4, 'Proyecto4', NULL, NULL, 20, 'Dificil', 3, 1),
+(5, 'Proyecto5', NULL, NULL, 20, 'Dificil', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -192,38 +201,32 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `especificaciones`
 --
 ALTER TABLE `especificaciones`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `sprints`
 --
 ALTER TABLE `sprints`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -233,7 +236,6 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `FOREIGN` FOREIGN KEY (`Tipo`) REFERENCES `tipo_usuario` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
