@@ -4,6 +4,7 @@
 	<title></title>
 </head>
 <body>
+
 	
 	<?php
 
@@ -18,20 +19,34 @@
 		$id_usuario= $_SESSION['Id'];
 		$consulta = "select * from especificaciones where IdUsuario = $id_usuario";
 		$resultat = mysqli_query($con, $consulta);
-		
+			
+			echo "<ul>";
 			while($registre = mysqli_fetch_assoc($resultat))
  				{
+ 					echo "<li>";
  					echo $registre["Nombre"]
- 					.'<img onclick="posicionArriba()" src="img/flecha_arriba.svg" height="20">'."\t"
- 					.'<img onclick="posicionAbajo()" src="img/flecha_arriba.svg" height="20">'."\t"
- 					.'<img onclick="eliminarEspecificacion()" src="img/eliminar.png" height="20">';
- 					echo "<br>";
+ 					.'<img onclick="posicionArriba(element)" src="img/flecha_arriba.svg" height="50">'."\t"
+ 					.'<img onclick="posicionAbajo()" src="img/flecha_arriba.svg" height="50">'."\t"
+ 					.'<img onclick="eliminarEspecificacion(this)" src="img/eliminar.png" height="50">';
+ 					echo "</li>";
  				}
+ 			echo "</ul>";
 	?>
 	<script type="text/javascript">
-		function eliminarEspecificacion(){
-			alert("a");
-		}
+
+		    function eliminarEspecificacion(element){
+		    	var elemento_padre = element.parentNode;
+		    	elemento_padre.parentNode.removeChild(elemento_padre);
+		    	//removeChild(element);
+		    }
+
+		    function posicionArriba(){
+		    	linea_a_mover=this;
+		    	//alert(this);
+		    	this.insertBefore(this);
+		    	//this.parentNode.removeChild(this);
+		    }
+		
 	</script>
 </body>
 </html>
