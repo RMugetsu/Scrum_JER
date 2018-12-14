@@ -6,23 +6,21 @@ function generarError(error){
 		controlError++;
 	}
 	var mensaje = document.createElement("LABEL");
-	var contenido = document.createTextNode("Esto es un mensaje de prueba");
-	mensaje.setAttribute("for",'Esto es un mensaje de prueba');
+	var contenido = document.createTextNode(error);
+	mensaje.setAttribute("for",error);
 	var img = document.createElement("IMG");
+	img.setAttribute("name","imgErrores")
 	img.setAttribute("src","img/error.png");
 	img.setAttribute("class","ImgError animacion");
 	var salto = document.createElement("BR");
 	divError.appendChild(img);
 	divError.appendChild(contenido);
 	divError.appendChild(salto);
-	//activarEfecto();
+	var newDiv = divError.cloneNode(true);
+	reiniciarAnimacionErrores();
 }
-/*function activarEfecto(){
-	var errores = document.getElementById("error").childNodes;
-	if (errores.length>1) {
-		for (var i = 0; i<errores.length; i++) {
-			errores[i].removeAttribute("class");
-			errores[i].setAttribute("class","ImgError animacion");
-		}	
-	}
-}*/
+function reiniciarAnimacionErrores(){
+	var divError = document.querySelector("div[id=error]");
+	var newDiv = divError.cloneNode(true);
+	divError.parentNode.replaceChild(newDiv,divError);
+}

@@ -4,7 +4,7 @@ body{
 #generarError{
   margin-left: 10%;
 }
-#imgUsuario{
+#imgUsuario, #imgCerrar{
   width: 30px;
   height: 30px;
 }
@@ -12,8 +12,8 @@ body{
   width: 40px;
   height: 40px;
 }
-h2{
-    margin-left: 58%;
+h4{
+    margin-left: 75%;
 }
 #grid{
   margin-left: 10%;
@@ -34,14 +34,13 @@ h2{
 
 .animacion {
        /*position: absolute;*/
-
   animation-name: blink1;
-  animation-duration: 1.5s;
+  animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 
   -webkit-animation-name:blink1;
-  -webkit-animation-duration: 1.5s;
+  -webkit-animation-duration: 3s;
   -webkit-animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
 }
@@ -98,11 +97,11 @@ h2{
 
 #titulo{
   float: left;
-  width: 70%;
+  width: 75%;
 }
 #usuario{
   float: left;
-  width: 25%;
+  width: 20%;
 }
 .linksProyectos{
   font-size: 20px;
