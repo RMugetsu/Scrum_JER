@@ -17,9 +17,6 @@
   <div class="section"></div>
   <main>
     <center>
-      <div class="section"></div>
-      <div class="section"></div>
-      <div class="section"></div>
       <img class="responsive-img" style="width: 100px;" src="img/recuperar_contraseña.png" />
       <div class="section"></div>
       <div class="container">

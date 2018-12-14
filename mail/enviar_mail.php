@@ -23,7 +23,7 @@
       <div class="container">
         <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-          <form class="col s12" action="login_jer.php">
+          <form class="col s12" action="../login_jer.php">
             <h5 class="red-text darken-4">Mail de recuperacion enviado!</h5>
             <div class="section"></div>
             <h6 class="red-text darken-4">Revisa tu buzon de entrada para <br>poder recuperar la contraseña</h6>
