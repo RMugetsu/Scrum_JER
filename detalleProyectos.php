@@ -5,13 +5,13 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<script src="js/script.js"></script>
+		<script src="script/script_proyectos.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" type="text/css" href="css/especificaciones.css">
 		<script type="text/javascript" src="script/script.js" defer></script>
 	</head>
 	<body>
-
+		
 		<?php
 
 			//ejemplo de insert
@@ -42,9 +42,7 @@
 	 		}
 	 		echo "</ul>";
 	 		?>
-	 		<input type="textfield" name="nueva_especificacion" id="nueva_especificacion">
-	 		<a id="boton_nueva_especificacion" class="btn-floating btn-large waves-effect waves-light red" onclick="añadirEspecificacion()"><i class="material-icons">add</i></a>
-	 		<div id="prueba"></div>
+	 		<div id="div_añadir_especificaciones"></div>
 
 	</body>
 </html>

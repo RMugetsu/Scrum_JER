@@ -1,13 +1,13 @@
 //Comienzan las funciones de ordenar o eliminar las especificaiones
 function eliminarEspecificacion(element){
-
+	//boton de eliminar
    	var elemento_padre = element.parentNode;
 	elemento_padre.parentNode.removeChild(elemento_padre);
 
 }
 
 function posicionArriba(element){
-
+	//boton de flecha arriba
    	var elemento_anterior = element.parentNode.previousSibling;
    	var elemento_seleccionado = element.parentNode.cloneNode(true);
    	var abuelo = element.parentNode.parentNode;
@@ -21,7 +21,7 @@ function posicionArriba(element){
 }
 
 function posicionAbajo(element){
-
+	//boton de flecha abajo
 	var elemento_posterior1 = element.parentNode.nextSibling;
 	var elemento_posterior2 = element.parentNode.nextSibling.nextSibling;
 	var elemento_seleccionado = element.parentNode.cloneNode(true);
@@ -35,17 +35,41 @@ function posicionAbajo(element){
 
 }
 
+document.addEventListener('DOMContentLoaded', function(){
+    //añade el textfield y el boton de añadir especificaciones
+    div_añadir_especificaciones = document.getElementById("div_añadir_especificaciones");
+    var texto_añadir = document.createElement("input");
+    texto_añadir.setAttribute("type","textfield");
+    texto_añadir.setAttribute("id","nueva_especificacion");
+    div_añadir_especificaciones.appendChild(texto_añadir);
+
+    //añade el textfield y el boton de añadir especificaciones
+    div_añadir_especificaciones = document.getElementById("div_añadir_especificaciones");
+    var boton_añadir = document.createElement("a");
+    boton_añadir.setAttribute("class","btn-floating btn-large waves-effect waves-light red");
+    boton_añadir.setAttribute("id","boton_nueva_especificacion");
+    boton_añadir.setAttribute("onclick","añadirEspecificacion()");
+
+    var icono_boton_añadir = document.createElement("i");
+    icono_boton_añadir.setAttribute("class","material-icons");
+
+    texto_icono_boton_añadir = document.createTextNode("add");
+
+    icono_boton_añadir.appendChild(texto_icono_boton_añadir);
+    boton_añadir.appendChild(icono_boton_añadir);
+    div_añadir_especificaciones.appendChild(boton_añadir);
+    
+});
+
 function añadirEspecificacion(){
 
 	var lista_especificaciones = document.getElementsByTagName("li")[1].parentNode
 	var ultimo_elemento_lista = lista_especificaciones.lastChild;
-	console.log(ultimo_elemento_lista);
 	//cogemos el segundo valor (1), ya que el primero pertenece a otra lista,
 	//cogemos el padre, y del padre sacamos el ultimo hijo, que sera el ultimo de la lista.
 	//a partir de aqui, ya podremos isertar lo del textfield
 	var nueva_especificacion = document.getElementById("nueva_especificacion").value;
 
-	var divprueba = document.getElementById("prueba");
 	var nuevo_li = document.createElement("li");
 	nuevo_li.setAttribute("class", "collection-item");
 	nuevo_li.setAttribute("id", "listado_esp");
@@ -75,9 +99,6 @@ function añadirEspecificacion(){
 	nuevo_li.appendChild(flecha_arriba);
 
 	lista_especificaciones.appendChild(nuevo_li);
-
-	//lista_especificaciones.insertBefore(nueva_especificacion,ultimo_elemento_lista);
-
 
 }
 //Terminan las funciones de ordenar o eliminar las especificaiones
