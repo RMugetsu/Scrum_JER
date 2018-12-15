@@ -112,27 +112,6 @@
 		//mysql de prueba, insert:
 		//INSERT INTO `usuario`(`Id`, `Nombre`, `Password`, `Tipo`, `IdGrupo`, `IdEspecifiacion`, `Email`) VALUES (NULL,'Jordi',SHA2('jordi123',512),1,0,0,'martinezmat.j@gmail.com')
 
-/*
-
-		$smtp = Mail::factory('smtp',
-		array ('host' => $host,
-		   'port' => $port,
-		   'auth' => true,
-		   'username' => $username,
-		   'password' => $password));
-
-		$mail = $smtp->send($to, $headers, $body);
-
-	    ini_set( 'display_errors', 1 );
-	    error_reporting( E_ALL );
-	    $from = "test@hostinger-tutorials.com";
-	    $to = "test@gmail.com";
-	    $subject = "Checking PHP mail";
-	    $message = "PHP mail works just fine";
-	    $headers = "From:" . $from;
-	    mail($to,$subject,$message, $headers);
-	    echo "The email message was sent.";
-*/
 	 ?>
 
 </body>
