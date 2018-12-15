@@ -70,35 +70,41 @@ function añadirEspecificacion(){
 	//a partir de aqui, ya podremos isertar lo del textfield
 	var nueva_especificacion = document.getElementById("nueva_especificacion").value;
 
-	var nuevo_li = document.createElement("li");
-	nuevo_li.setAttribute("class", "collection-item");
-	nuevo_li.setAttribute("id", "listado_esp");
-	var texto_nueva_esp = document.createTextNode(nueva_especificacion);
-	nuevo_li.appendChild(texto_nueva_esp);
+	if (nueva_especificacion != "") {
 
-	//botones subir bajar y eliminar
-	var boton_eliminar = document.createElement("img");
-	boton_eliminar.setAttribute("class","secondary-content boton_eliminar");
-	boton_eliminar.setAttribute("onclick","eliminarEspecificacion(this)")
-	boton_eliminar.setAttribute("src","img/eliminar.png");
-	boton_eliminar.setAttribute("height","25");
-	nuevo_li.appendChild(boton_eliminar);
+		var nuevo_li = document.createElement("li");
+		nuevo_li.setAttribute("class", "collection-item");
+		nuevo_li.setAttribute("id", "listado_esp");
+		var texto_nueva_esp = document.createTextNode(nueva_especificacion);
+		nuevo_li.appendChild(texto_nueva_esp);
 
-	var flecha_abajo = document.createElement("img");
-	flecha_abajo.setAttribute("class","secondary-content flecha_abajo");
-	flecha_abajo.setAttribute("onclick","posicionAbajo(this)")
-	flecha_abajo.setAttribute("src","img/flecha_arriba.svg");
-	flecha_abajo.setAttribute("height","25");
-	nuevo_li.appendChild(flecha_abajo);
+		//botones subir bajar y eliminar
+		var boton_eliminar = document.createElement("img");
+		boton_eliminar.setAttribute("class","secondary-content boton_eliminar");
+		boton_eliminar.setAttribute("onclick","eliminarEspecificacion(this)")
+		boton_eliminar.setAttribute("src","img/eliminar.png");
+		boton_eliminar.setAttribute("height","25");
+		nuevo_li.appendChild(boton_eliminar);
 
-	var flecha_arriba = document.createElement("img");
-	flecha_arriba.setAttribute("class","secondary-content flecha_arriba");
-	flecha_arriba.setAttribute("onclick","posicionArriba(this)")
-	flecha_arriba.setAttribute("src","img/flecha_arriba.svg");
-	flecha_arriba.setAttribute("height","25");
-	nuevo_li.appendChild(flecha_arriba);
+		var flecha_abajo = document.createElement("img");
+		flecha_abajo.setAttribute("class","secondary-content flecha_abajo");
+		flecha_abajo.setAttribute("onclick","posicionAbajo(this)")
+		flecha_abajo.setAttribute("src","img/flecha_arriba.svg");
+		flecha_abajo.setAttribute("height","25");
+		nuevo_li.appendChild(flecha_abajo);
 
-	lista_especificaciones.appendChild(nuevo_li);
+		var flecha_arriba = document.createElement("img");
+		flecha_arriba.setAttribute("class","secondary-content flecha_arriba");
+		flecha_arriba.setAttribute("onclick","posicionArriba(this)")
+		flecha_arriba.setAttribute("src","img/flecha_arriba.svg");
+		flecha_arriba.setAttribute("height","25");
+		nuevo_li.appendChild(flecha_arriba);
+
+		lista_especificaciones.appendChild(nuevo_li);
+	}
+	else{
+		alert("Introduce un nombre");
+	}
 
 }
 //Terminan las funciones de ordenar o eliminar las especificaiones
