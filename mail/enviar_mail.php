@@ -51,8 +51,8 @@
 
 	<?php 
 
-		///////////////////////////// PRUEBAS ////////////////////////////////////////
-
+		///////////////////////////// PRUEBAS DE INICIO/FIN FECHA SPRINTS (COLORES VERDE, NEGRO Y GRIS)////////////////////////////////////////
+/*
 		session_start();
 		$con = mysqli_connect('localhost','admin','1234');
 		mysqli_select_db($con, 'projecte_scrumb');
@@ -65,7 +65,34 @@
 		//insert tabla sprint de prueba
 		//INSERT INTO `sprints`(`IdProyecto`, `Inicio_Sprint`, `Final_Sprint`, `Estado`) VALUES (2,STR_TO_DATE('03/08/2009', '%d/%m/%Y'),STR_TO_DATE('03/08/2020', '%d/%m/%Y'),'ok')
 
-		
+		$sql="select * from sprints"; //Va obtener los datos y si no tiene nada pues no hace nada el programa.
+        $result = mysqli_query($con, $sql);
+
+        $fecha_actual = strtotime(date('y-m-d'));
+
+        if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {
+
+		    	$fecha_inicio_sprint = strtotime($row['Inicio_Sprint']);
+		    	$fecha_final_sprint = strtotime($row['Final_Sprint']);
+
+		    	if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
+		    		echo "<p style='background-color:green'> ".$row['Id']." , Esta en ello </p>";
+		    	}
+		    	else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
+		    		echo "<p style='background-color:white'> ".$row['Id']." , Por empezar </p>";
+		    	}
+		    	else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
+		    		echo "<p style='background-color:grey'> ".$row['Id']." , Acabado </p>";
+		    	}
+		    }
+		} 
+		else {
+		    echo "0 results";
+		}
+*/
+		///////////////////////////// PRUEBAS DE MAIL////////////////////////////////////////
 /*
 		$smtp = Mail::factory('smtp',
 		array ('host' => $host,
