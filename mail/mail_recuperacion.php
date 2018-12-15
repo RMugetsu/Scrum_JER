@@ -62,7 +62,7 @@
           </form>
         </div>
       </div>
-      <a href="login_jer.php">Volver atras</a>
+      <a href="../login_jer.php">Volver atras</a>
     </center>
 
     <div class="section"></div>
