@@ -55,7 +55,7 @@
 
 		session_start();
 		$con = mysqli_connect('localhost','admin','1234');
-		mysqli_select_db($con, 'scrum');
+		mysqli_select_db($con, 'projecte_scrumb');
 		session_destroy(); 
 
 		//mysql de prueba, insert:

@@ -37,7 +37,7 @@
                     session_start();
                     $_SESSION['email'] = $email;
                     $con = mysqli_connect('localhost','admin','1234');
-                    mysqli_select_db($con, 'scrum');
+                    mysqli_select_db($con, 'projecte_scrumb');
                     $sql="select * from usuario WHERE Email = '$email'"; //Va obtener los datos y si no tiene nada pues no hace nada el programa.
                     $result=$con->query($sql);
                     $rows = $result->num_rows;
