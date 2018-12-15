@@ -1,0 +1,16 @@
+/*Rota la flecha hacia abajo*/
+.flecha_abajo {
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Safari */
+  transform: rotate(180deg); /* Standard syntax */
+}
+li, #listado_esp {
+	margin-left: 20%;
+	margin-right: 20%;
+}
+#nueva_especificacion{
+	margin-left: 40%;
+}
+#boton_nueva_especificacion {
+	margin-left: 2%;
+}
