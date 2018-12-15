@@ -3,10 +3,10 @@
 <head>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/login.css">
-  	<link rel="stylesheet" type="text/css" href="css/recuperar.css">
+	<link rel="stylesheet" type="text/css" href="../css/login.css">
+  	<link rel="stylesheet" type="text/css" href="../css/recuperar.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<script type="text/javascript" src="script/script.js" defer></script>
+	<script type="text/javascript" src="../script/script.js" defer></script>
 	<meta charset="UTF-8">
 	<title>Mail de recuperacion</title>
 </head>
@@ -62,27 +62,9 @@
 		//INSERT INTO `usuario`(`Id`, `Nombre`, `Password`, `Tipo`, `IdGrupo`, `IdEspecifiacion`, `Email`) VALUES (NULL,'Jordi',SHA2('jordi123',512),1,0,0,'martinezmat.j@gmail.com')
 
 
-		if (isset($_SESSION['email'])) {
-			$email = $_SESSION['email'];
-		    //Suponiendo que esta la base de datos.
-		    $sql="select * from usuario WHERE Email = '$email'"; //Va obtener los datos y si no tiene nada pues no hace nada el programa.
-		    $result=$con->query($sql);
-		    $rows = $result->num_rows;
-		    if($rows > 0) {
-		        $row = $result->fetch_assoc();
-		        $_SESSION['email_Admin'] = $row['Email'];
-		        $msg = "Tu contraseña es: ".$row['Password'];
-		        echo $row['Email'];
-		        //mail($row['Email'], "Mi titulo", $msg);
-		   	}
-		   	else{
-		   		echo "No existe";
-		   	}
-		}
-		/////////////////////////////////// acordeon:
-		/////////////////////////////////// https://codepen.io/ionic/pen/uJkCz
-		// tutorial:
-		//https://www.youtube.com/watch?v=aqLpV324eho
+		//insert tabla sprint de prueba
+		//INSERT INTO `sprints`(`IdProyecto`, `Inicio_Sprint`, `Final_Sprint`, `Estado`) VALUES (2,STR_TO_DATE('03/08/2009', '%d/%m/%Y'),STR_TO_DATE('03/08/2020', '%d/%m/%Y'),'ok')
+
 		
 /*
 		$smtp = Mail::factory('smtp',
