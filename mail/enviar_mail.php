@@ -100,8 +100,8 @@
 		$email = $_SESSION['email'];
 
 		$titulo    = 'Recuperacion de contraseña de Scrum';
-		$mensaje   = 'Hola, utiliza el siguiente enlace para restaurar tu contraseña: <br>
-		<a href="nuevaPass.php">Enlace</a>';
+		$mensaje   = 'Hola, utiliza el siguiente enlace para restaurar tu contraseña:
+		http://localhost:8080/Scrum_JER/mail/nuevaPass.php';
 		$cabeceras = 'From: webmaster@example.com' . "\r\n" .
 		    'Reply-To: webmaster@example.com' . "\r\n" .
 		    'X-Mailer: PHP/' . phpversion();

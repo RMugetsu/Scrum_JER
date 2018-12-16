@@ -27,6 +27,7 @@
 
 			$sql = "UPDATE `usuario` SET `Password`=SHA2('$nuevaPass',512) WHERE `Email`='martinezmat.j@gmail.com'";
 			$con->query($sql);
+			session_destroy();
 			?>
 			<div class="section"></div>
 			  <main>
@@ -36,7 +37,7 @@
 			      <div class="container">
 			        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-			          <form class="col s12" method="post" action="nuevaPass.php">
+			          <form class="col s12" action="../login_jer.php">
 			            <h5 class="indigo-text">La contraseña ha sido cambiada</h5>
 			            <div class="section"></div>
 			            <h6 class="indigo-text">Vuelve iniciar sesion <br>con tu nueva contraseña</h6>
@@ -44,7 +45,7 @@
 			            <br />
 			            <center>
 			              <div class='row'>
-			                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Siguiente</button>
+			                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Volver</button>
 			              </div>
 			            </center>
 			          </form>
@@ -56,10 +57,6 @@
 			    <div class="section"></div>
 			  </main>
 			<?php 
-			echo "$email <br>";
-			echo "$nuevaPass <br>";
-			echo "la contraseña ha sido actualizada <br>";
-
 		}
 		else{
 			?>
@@ -79,8 +76,8 @@
 			            <div class="section"></div>
 			            <div class='row'>
 			              <div class='input-field col s12'>
-			                <input class='validate' type='password' name='nuevaPass' id='password' />
-			                <label for='Password'>Password</label>
+                			<input class='validate' type='password' name='nuevaPass' id='nuevaPass' />
+			                <label for='nuevaPass'>Password</label>
 			              </div>
 			            </div>
 			            <br />
