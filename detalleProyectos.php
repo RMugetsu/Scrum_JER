@@ -70,6 +70,9 @@
 			echo "</div>";
 			echo "<br>";
 
+			//fecha actual:
+			$fecha_actual = strtotime(date('y-m-d'));
+
 			//Sprints del proyecto
 			$consultaSpr = "SELECT s.Id, s.Inicio_Sprint, s.Final_Sprint FROM proyecto p, sprints s WHERE p.Nombre='$nombre_proyecto' AND p.Id = s.IdProyecto";
 			$resultatSpr = mysqli_query($con, $consultaSpr);
@@ -78,8 +81,22 @@
 			while($registreSpr = mysqli_fetch_assoc($resultatSpr)){
 				echo "<li>";
 				echo "<div>";
-				echo "<div class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
-      			echo "<div class='collapsible-body'>";
+				//fechas de inicio y fin metidas en strtotime para calcular tiempos
+				$fecha_inicio_sprint = strtotime($registreSpr['Inicio_Sprint']);
+		    	$fecha_final_sprint = strtotime($registreSpr['Final_Sprint']);
+		    	//if de colores
+				if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
+		    		echo "<div style='background-color:green' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
+		    	}
+		    	//este tendria que ser negro?
+		    	else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
+		    		echo "<div style='background-color:red' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
+		    	}
+		    	else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
+		    		echo "<div style='background-color:grey' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
+		    	}
+		    	//esto era class='collapsible-body'
+      			echo "<div class='collection-item'>";
       			echo "<p>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
       			echo "<p>Fecha Fin:".$registreSpr['Final_Sprint']."</p>";
       			echo "<table>";
