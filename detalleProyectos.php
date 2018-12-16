@@ -112,7 +112,7 @@
 			//Tiene que cerrar y volver a abrir porque hay un problema de 
 			//compatibilidad de nuestro javascript con el materialize
 			echo "<div class='col s12 m12 info'>";
-			echo "<ul class='collection with-header'>";
+			echo "<ul id='lista_especificaciones' class='collection with-header'>";
 			while($registre = mysqli_fetch_assoc($resultat)){
 	 			echo "<li class='collection-item' id='listado_esp'>";
 	 			echo $registre["Nombre"]

@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function añadirEspecificacion(){
 
-	var lista_especificaciones = document.getElementsByTagName("li")[1].parentNode
+	var lista_especificaciones = document.getElementById("lista_especificaciones");
 	var ultimo_elemento_lista = lista_especificaciones.lastChild;
 	//cogemos el segundo valor (1), ya que el primero pertenece a otra lista,
 	//cogemos el padre, y del padre sacamos el ultimo hijo, que sera el ultimo de la lista.
