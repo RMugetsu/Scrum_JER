@@ -24,3 +24,8 @@ function reiniciarAnimacionErrores(){
 	var newDiv = divError.cloneNode(true);
 	divError.parentNode.replaceChild(newDiv,divError);
 }
+//Acordeon
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, {acordion:true});
+  });

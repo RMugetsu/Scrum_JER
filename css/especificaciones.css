@@ -4,10 +4,10 @@
   -webkit-transform: rotate(180deg); /* Safari */
   transform: rotate(180deg); /* Standard syntax */
 }
-li, #listado_esp {
+/*li, #listado_esp {
 	margin-left: 20%;
 	margin-right: 20%;
-}
+}*/
 #nueva_especificacion{
 	margin-left: 40%;
 }
