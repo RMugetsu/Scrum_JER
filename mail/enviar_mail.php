@@ -93,26 +93,25 @@
 		}
 */
 		///////////////////////////// PRUEBAS DE MAIL////////////////////////////////////////
-/*
-		$smtp = Mail::factory('smtp',
-		array ('host' => $host,
-		   'port' => $port,
-		   'auth' => true,
-		   'username' => $username,
-		   'password' => $password));
 
-		$mail = $smtp->send($to, $headers, $body);
+		session_start();
+		$con = mysqli_connect('localhost','admin','1234');
+		mysqli_select_db($con, 'projecte_scrumb');
+		$email = $_SESSION['email'];
 
-	    ini_set( 'display_errors', 1 );
-	    error_reporting( E_ALL );
-	    $from = "test@hostinger-tutorials.com";
-	    $to = "test@gmail.com";
-	    $subject = "Checking PHP mail";
-	    $message = "PHP mail works just fine";
-	    $headers = "From:" . $from;
-	    mail($to,$subject,$message, $headers);
-	    echo "The email message was sent.";
-*/
+		$titulo    = 'Recuperacion de contraseña de Scrum';
+		$mensaje   = 'Hola, utiliza el siguiente enlace para restaurar tu contraseña: <br>
+		<a href="nuevaPass.php">Enlace</a>';
+		$cabeceras = 'From: webmaster@example.com' . "\r\n" .
+		    'Reply-To: webmaster@example.com' . "\r\n" .
+		    'X-Mailer: PHP/' . phpversion();
+
+		mail($email, $titulo, $mensaje, $cabeceras);
+		
+
+		//mysql de prueba, insert:
+		//INSERT INTO `usuario`(`Id`, `Nombre`, `Password`, `Tipo`, `IdGrupo`, `IdEspecifiacion`, `Email`) VALUES (NULL,'Jordi',SHA2('jordi123',512),1,0,0,'martinezmat.j@gmail.com')
+
 	 ?>
 
 </body>
