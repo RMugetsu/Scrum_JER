@@ -19,13 +19,15 @@
 		$con = mysqli_connect('localhost','admin','1234');
 		mysqli_select_db($con, 'projecte_scrumb');
 
-		$email = $_SESSION['email'];
+		if (isset($_GET['id'])) {
+			$id_cambiar = $_GET['id'];
+		}
 
 		if (isset($_POST['nuevaPass'])) {
 
 			$nuevaPass = $_POST['nuevaPass'];
 
-			$sql = "UPDATE `usuario` SET `Password`=SHA2('$nuevaPass',512) WHERE `Email`='martinezmat.j@gmail.com'";
+			$sql = "UPDATE `usuario` SET `Password`=SHA2('$nuevaPass',512) WHERE `Id`= '$id_cambiar'";
 			$con->query($sql);
 			session_destroy();
 			?>
@@ -69,7 +71,7 @@
 			      <div class="container">
 			        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-			          <form class="col s12" method="post" action="nuevaPass.php">
+			          <form class="col s12" method="post" action="nuevaPass.php?=<?php echo $id_cambiar?>">
 			            <h5 class="indigo-text">Recupera la contraseña</h5>
 			            <div class="section"></div>
 			            <h6 class="indigo-text">Inserte la nueva contraseña</h6>
