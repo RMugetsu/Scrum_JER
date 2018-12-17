@@ -52,7 +52,7 @@
 					$_SESSION['IdGrupo'] = $registre['IdGrupo'];
 					$_SESSION['IdEspecifiacion'] = $registre['IdEspecifiacion'];
 				}
-				header('Location: index.php');
+				header('Location: home.php');
 			}
 			else{
 				?>

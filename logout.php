@@ -2,6 +2,6 @@
 
 session_start();
 session_destroy();
-header('location: login_jer.php');
+header('location: index.php');
 exit();
 ?>

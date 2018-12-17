@@ -1,145 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Vista Proyectos</title>
-	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="text/javascript">
-		var proyects = [];
-	</script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<script type="text/javascript" src="script/script.js" defer></script>
+	<meta charset="UTF-8">
+	<title>Gestor de Proyectos SCRUMM</title>
 </head>
 <body>
+
 	<?php
-		session_start();
-		$con = mysqli_connect('localhost','admin','1234');
-		mysqli_select_db($con, 'projecte_scrumb');
-		$consulta = "SELECT Id, Nombre, NumSprint as Sprints, PO_Id as PO, SM_Id as SM FROM proyecto";
-		$resultat = mysqli_query($con, $consulta);
-			while($registre = mysqli_fetch_assoc($resultat))
- 				{
- 					//print_r($registre);
- 					?><script type="text/javascript">
-						var id = <?php echo $registre["Id"]?>;
-						var nombre = '<?php echo $registre["Nombre"]?>';
-						var sprints = <?php echo $registre["Sprints"]?>;
-						var po = <?php echo $registre["PO"]?>;
-						var sm = <?php echo $registre["SM"]?>;
-						var proyecto = [id,nombre,sprints,po,sm];
-						proyects.push(proyecto);
-					</script>
-					<?php
- 				}
-	?>
-	<div id="cabecera">
-		<div id="titulo">
-			<label>Bienvenido a la mejor pagina de gestion de SCRUM</label>
-		</div>
-		<div id="usuario">
-			<img src="img/usuario.png" id="imgUsuario">
-			<?php echo "<label>Usuario: ".$_SESSION['Nombre']."</label>";?>
-		</div>
-		<div id="session">
-			<a href="logout.php"><img src="img/cerrar.png" id="imgCerrar"></a>
-		</div>
-	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<div>
-		<div id="pro" class="grid" class="animacion2">
-			<h4>Listado de Proyectos</h4>
-		</div>
-		<div id="generarError">
-			<button onclick="generarError()">Generar Error</button>
-		</div>
-		<div  id="error" class="animacion2" style="display: none">
-		</div>
-	</div>
-	
 
 
+	session_start();
+
+	if($_POST != null){
+		$connection = mysqli_connect('localhost', 'admin','1234');
+		mysqli_select_db($connection, 'projecte_scrumb');
+
+		$nombre = mysqli_real_escape_string($connection, $_POST['nombre']);
+		$password = mysqli_real_escape_string($connection, $_POST['password']);
+
+		
+		$consulta = "SELECT Nombre FROM usuario Where Nombre = '$nombre'";
+
+		$resultado = mysqli_query($connection, $consulta);
+		$num_row = mysqli_num_rows($resultado);
 
 
-	<div id="formulario">
-		<form>
-			
-		</form>
-	</div>
+		if (!$resultado) {
+			$message = 'Consulta invàlida: ' . mysqli_error() . "\n";
+			die ($message);
+		}
 
-</body>
-	<script type="text/javascript">
-		var MegaListaM=[];
-		var MegaListaO=[];
-		var MegaListaG=[];	
-		var contadorMas=0;
-	</script>
-	<script type="text/javascript">
-		var tipo = <?=$_SESSION['Tipo']?>;
+		
+		if ($num_row == 1){
+			$usuarioPassword = "SELECT Nombre, Password FROM usuario Where Nombre = '$nombre' AND Password = SHA2('$password', 512);";
+			$checkUserPassword = mysqli_query($connection, $usuarioPassword);
+			$num_row_password = mysqli_num_rows($checkUserPassword);
+
+			if ($num_row_password == 1){
+				$queryAll = "SELECT Id, Nombre, Tipo, IdGrupo, IdEspecifiacion  FROM usuario Where Nombre = '$nombre';";
+				$infoUsuario = mysqli_query($connection, $queryAll);
 
 
-		function generarProyectos(){
-		for (var i = 0; i < proyects.length; i++) {
-			var salto = document.createElement("BR");
-			var contenedor = document.querySelector("div[id=pro]");
-			var element = document.createElement("A");
-			var contenido = document.createTextNode(proyects[i][1]);
-			element.setAttribute("Identidicador",proyects[i][0]);
-			element.setAttribute("Nombre",proyects[i][1]);
-			element.setAttribute("NSprint",proyects[i][2]);
-			element.setAttribute("PO",proyects[i][3]);
-			element.setAttribute("SM",proyects[i][4]);
-			element.setAttribute("class","linksProyectos");
-			element.setAttribute("href","detalleProyectos.php?proyect="+proyects[i][1]);
-			element.appendChild(contenido);
-			contenedor.appendChild(element);
-			contenedor.appendChild(salto);
+				while ($registre = mysqli_fetch_assoc($infoUsuario)){
+					$_SESSION['Id'] = $registre['Id'];
+					$_SESSION['Nombre'] = $registre['Nombre'];
+					$_SESSION['Tipo'] = $registre['Tipo'];
+					$_SESSION['IdGrupo'] = $registre['IdGrupo'];
+					$_SESSION['IdEspecifiacion'] = $registre['IdEspecifiacion'];
+				}
+				header('Location: home.php');
+			}
+			else{
+				?>
+				<script type="text/javascript">
+					var error = "Contraseña Incorrecta";
+					var Condicion = 1;
+				</script>
+				<?php
 			}
 		}
-	generarProyectos();
-		function botonFormulario(){
-			if(tipo=="1"){
-				var cuerpo = document.querySelector("div[id=formulario]");
-				var boton = document.createElement("Input");
-				boton.setAttribute("type","button");
-				boton.setAttribute("id","CreateB");
-				boton.setAttribute("name","ButtonCreate");
-				boton.setAttribute("value","Nuevo Projecto");
-				boton.setAttribute("onclick","DeshabButton()");
-				boton.setAttribute("class","ubicar");
-				cuerpo.appendChild(boton);
-			}
+		else{
+			?>
+				<script type="text/javascript">
+					var error = "Usuario Incorrecto";
+					var Condicion = 1;
+				</script>
+				<?php
 		}
-		botonFormulario();
-		  function DeshabButton(){
-
-	     	document.getElementById("CreateB").disabled=true;
-	     }
-
-	</script>
-
-<form method="Post" action="<?php echo $_SERVER['PHP_SELF']?>">
-	<?php
-	if(isset($_POST['CrearProyecto'])){
-		$Nombre=$_POST['TextName'];
-		$Numero=$_POST['TextSprint'];
-		$Owner=$_POST['Owner'];
-		$Master=$_POST['Master'];
-		$Grupo=$_POST['Grupo'];
-		$Descripción=$_POST['TextDescript'];
 	}
-?>
 
-	 <script type="text/javascript">
-	 /*	var NombreCom= false;
-	 	var SprintCom=false;
-	 	var MasterCom=false;
-	 	var OwnerCom=false;*/
-	 	if(tipo=="1"){
-	 		var construirInput= document.querySelector("input[name=ButtonCreate]");
-      		construirInput.addEventListener("click",GenerarForm);
-      	}
-    </script>
+	 ?>
+	<?php
+		echo "<div id='error' style='display: none'></div>";
+		echo "<form action='#' method='post'>";
+		echo "<div class='row'>";
+		echo "<div class='col s12 m4 offset-m4'>";
+		echo "<div class='card'>";
+		echo "<div class='card-action green lighten-1 white-text'>";
+		echo "<h3 style='text-align:center'>SCRUM JER</h3>";
+		echo "</div>";
+		echo "<div class='card-content'></div>";
+		echo "<div class='form-field'>";
+		echo "<label for='username'>Username</label>";
+		echo "<input type='text' name='nombre'>";
+		echo "</div><br>";
+		echo "<div class='form-field'>";
+		echo "<label for='password'>Contraseña</label>";
+		echo "<input type='password' name='password'>";
+		echo "<label style='float: right;'>
+				<a class='pink-text' href='mail/mail_recuperacion.php'><b>Olvidaste la contraseña?</b></a>
+				</label><br><br>";
+		echo "</div><br>";
+		echo "<div class='form-field'>";
+		echo "<button class='btn btn-large' style='width:100%;'>LOG IN</button>";
+		echo "</div><br>";
+		echo "</div>";
+		echo "</div>";
+		echo "</div>";
+		echo "</div>";
+		echo "</form>";
+	 ?>
+</body>
+<script type="text/javascript">
+	function generarError(error){
+		if(Condicion==1){
+			var divError = document.querySelector("div[id=error]");
+			divError.style.display= "block";
+			var mensaje = document.createElement("LABEL");
+			var contenido = document.createTextNode(error);
+			mensaje.setAttribute("for",error);
+			var img = document.createElement("IMG");
+			img.setAttribute("src","img/error.png");
+			img.setAttribute("class","ImgError animacion");
+			divError.appendChild(img);
+			divError.appendChild(contenido);
+		}
+	
+}
+generarError(error);
+</script>
 </html>
