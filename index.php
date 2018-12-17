@@ -76,7 +76,7 @@
 	 ?>
 	<?php
 		echo "<div id='error' style='display: none'></div>";
-		echo "<form action='#' method='post'>";
+		echo "<form action='index.php' method='post'>";
 		echo "<div class='row'>";
 		echo "<div class='col s12 m4 offset-m4'>";
 		echo "<div class='card'>";
