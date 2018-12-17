@@ -64,7 +64,7 @@
                             <div class="section"></div>
                           </main>
                       <?php 
-                      
+
                       $titulo    = 'Recuperacion de contraseña de Scrum';
                       $mensaje   = 'Hola, utiliza el siguiente enlace para restaurar tu contraseña:
                       http://localhost/Scrum_JER/mail/nuevaPass.php?id='.$obtencion_datos_para_pasar;
@@ -73,7 +73,7 @@
                           'X-Mailer: PHP/' . phpversion();
 
                       mail($email, $titulo, $mensaje, $cabeceras);
-                      echo "$titulo <br> $mensaje <br> $cabeceras <br>";
+                      //echo "$titulo <br> $mensaje <br> $cabeceras <br>";
                     }
                     else{
                       ?>
