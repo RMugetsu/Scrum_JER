@@ -21,6 +21,10 @@
 
 		if (isset($_GET['id'])) {
 			$id_cambiar = $_GET['id'];
+			$_SESSION["id"] = $id_cambiar;
+		}
+		else if (isset($_SESSION["id"])) {
+			$id_cambiar = $_SESSION["id"];
 		}
 
 		if (isset($_POST['nuevaPass'])) {
@@ -70,8 +74,9 @@
 			      <div class="section"></div>
 			      <div class="container">
 			        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
-
-			          <form class="col s12" method="post" action="nuevaPass.php?=<?php echo $id_cambiar?>">
+						
+			           <form class="col s12" method="post" action="nuevaPass.php">
+			     
 			            <h5 class="indigo-text">Recupera la contraseña</h5>
 			            <div class="section"></div>
 			            <h6 class="indigo-text">Inserte la nueva contraseña</h6>

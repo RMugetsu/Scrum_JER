@@ -64,9 +64,7 @@
                             <div class="section"></div>
                           </main>
                       <?php 
-                      //print_r($obtencion_datos["Id"]);
-                      //header ('Location: enviar_mail.php?id='+$obtencion_datos_para_pasar);
-
+                      
                       $titulo    = 'Recuperacion de contraseña de Scrum';
                       $mensaje   = 'Hola, utiliza el siguiente enlace para restaurar tu contraseña:
                       http://localhost/Scrum_JER/mail/nuevaPass.php?id='.$obtencion_datos_para_pasar;
