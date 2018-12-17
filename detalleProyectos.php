@@ -20,7 +20,7 @@
 			//echo $_SESSION['Nombre'];
 			//echo "$_GET['Nombre']";
 
-			$con = mysqli_connect('localhost', 'root','');
+			$con = mysqli_connect('localhost', 'admin','1234');
 			mysqli_select_db($con, 'projecte_scrumb');
 			$nombre_proyecto = $_GET['proyect'];
 			$consulta = "select e.Nombre from especificaciones e, proyecto p where '$nombre_proyecto' = p.Nombre and p.Id = e.IdProyecto" ;

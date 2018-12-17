@@ -27,7 +27,7 @@
 	?>
 
 	<?php
-		$con = mysqli_connect('localhost','root','');
+		$con = mysqli_connect('localhost','admin','1234');
 		mysqli_select_db($con, 'test');
 		$consultaM="Select Nombre, Id From Usuario Where tipo=1";
 		$consultaO="Select Nombre,Id From usuario where tipo=2";

@@ -13,7 +13,7 @@
 <body>
 	<?php
 		session_start();
-		$con = mysqli_connect('localhost','root','');
+		$con = mysqli_connect('localhost','admin','1234');
 		mysqli_select_db($con, 'projecte_scrumb');
 		$consulta = "SELECT Id, Nombre, NumSprint as Sprints, PO_Id as PO, SM_Id as SM FROM proyecto";
 		$resultat = mysqli_query($con, $consulta);

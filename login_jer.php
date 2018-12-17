@@ -16,7 +16,7 @@
 	session_start();
 
 	if($_POST != null){
-		$connection = mysqli_connect('localhost', 'root','');
+		$connection = mysqli_connect('localhost', 'admin','1234');
 		mysqli_select_db($connection, 'projecte_scrumb');
 
 		$nombre = mysqli_real_escape_string($connection, $_POST['nombre']);
