@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2018 a las 01:28:11
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.0.32
+-- Servidor: localhost:3306
+-- Tiempo de generación: 17-12-2018 a las 19:00:11
+-- Versión del servidor: 5.7.24-0ubuntu0.18.04.1
+-- Versión de PHP: 7.2.10-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -44,11 +42,15 @@ CREATE TABLE `especificaciones` (
 --
 
 INSERT INTO `especificaciones` (`Id`, `Nombre`, `IdSprint`, `Descripción`, `Horas`, `Dificultad`, `IdUsuario`, `IdProyecto`) VALUES
-(1, 'Proyecto1', 1, NULL, 20, 'Dificil', 1, 2),
-(2, 'Proyecto2', 1, NULL, 20, 'Dificil', 2, 1),
-(3, 'Proyecto3', NULL, NULL, 20, 'Dificil', 3, 3),
-(4, 'Proyecto4', 2, NULL, 20, 'Dificil', 3, 1),
-(5, 'Proyecto5', NULL, NULL, 20, 'Dificil', 1, 3);
+(1, 'Espec1', 1, NULL, 20, 'Dificil', 1, 2),
+(2, 'Espec2', 2, NULL, 20, 'Dificil', 2, 1),
+(3, 'Espec3', 3, NULL, 20, 'Dificil', 3, 3),
+(4, 'Espec4', 1, NULL, 20, 'Dificil', 3, 1),
+(5, 'Espec6', 2, NULL, 20, 'Dificil', 1, 3),
+(6, 'Espec7', 3, NULL, 20, 'Dificil', 1, 2),
+(7, 'Espec8', 1, NULL, 20, 'Dificil', 1, 3),
+(8, 'Espec19', 2, NULL, 20, 'Dificil', 1, 1),
+(9, 'Espec10', 3, NULL, 20, 'Dificil', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -114,9 +116,12 @@ CREATE TABLE `sprints` (
 --
 
 INSERT INTO `sprints` (`Id`, `IdProyecto`, `Inicio_Sprint`, `Final_Sprint`, `Estado`) VALUES
-(1, 1, '2018-12-03', '2018-12-10', 'Finalizado'),
-(2, 1, '2018-12-10', '2018-12-17', 'Activo'),
-(3, 1, '2018-12-17', '2018-12-24', 'Por empezar');
+(1, 1, '2018-12-01', '2018-12-09', ''),
+(2, 1, '2018-12-16', '2021-08-16', ''),
+(3, 1, '2018-12-01', '2018-12-09', ''),
+(4, 1, '2018-12-16', '2021-08-16', ''),
+(5, 1, '2021-12-14', '2050-12-07', ''),
+(6, 1, '2021-12-14', '2050-12-07', '');
 
 -- --------------------------------------------------------
 
@@ -159,9 +164,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`Id`, `Nombre`, `Password`, `Tipo`, `IdGrupo`, `IdEspecifiacion`, `Email`) VALUES
-(1, 'Ruben', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413', 2, 0, 0, ''),
+(1, 'Ruben', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413', 2, 0, 0, 'rubengapa97@gmail.com'),
 (2, 'Jose', '1f04f125724e9115cf8f65bc1ee77970fe1cd4d0816f7d1349ccbe5064e055d75fd3dab16e96bb4780709c7b651822e3a4383d66f3451468483c5da2b8965c8a', 1, 0, 0, ''),
-(3, 'Eric', 'df1425e6ee274c69e813efffc072d542d856b7959fd3dc034a44a382dea4772d06d9664d92cbb0c452f959f102e3e712a7b582745ef0f2642d8903e2466f529c', 3, 0, 0, '');
+(3, 'Eric', 'df1425e6ee274c69e813efffc072d542d856b7959fd3dc034a44a382dea4772d06d9664d92cbb0c452f959f102e3e712a7b582745ef0f2642d8903e2466f529c', 3, 0, 0, 'eric.18p@gmail.com'),
+(4, 'Jordi', '2385bd1542542aac275db5f88b8e3f788145c773da97a137131ac5433c0b9ed41f9704ff1a431f8473b6b82f9da963a270029a818bcfb299c857174b73a61a89', 1, 0, 0, 'martinezmat.j@gmail.com');
 
 --
 -- Índices para tablas volcadas
@@ -212,38 +218,32 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `especificaciones`
 --
 ALTER TABLE `especificaciones`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `sprints`
 --
 ALTER TABLE `sprints`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Restricciones para tablas volcadas
 --
@@ -253,7 +253,6 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `FOREIGN` FOREIGN KEY (`Tipo`) REFERENCES `tipo_usuario` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
