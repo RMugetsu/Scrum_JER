@@ -1,8 +1,8 @@
-Participantes Jordi, Eric y Ruben 
-Nombre Archivo BD: projecte scrum 
-Usuario BD: Admin-1234 
-Usuarios Aplicacion: 
-		Usuario-Password-tipo 
-		Ruben-123456-Product Owner 
-		Eric-Eric123-Developer 
-		Jose-jose123-Scrum Master 
+Participantes Jordi, Eric y Ruben <br />
+Nombre Archivo BD: projecte scrum <br />
+Usuario BD: Admin-1234 <br />
+Usuarios Aplicacion: <br />
+		Usuario-Password-tipo <br />
+		Ruben-123456-Product Owner <br />
+		Eric-Eric123-Developer <br />
+		Jose-jose123-Scrum Master <br />
