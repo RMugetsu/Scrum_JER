@@ -1,0 +1,12 @@
+Retro Sprint 2
+
+				Miembros del grupo:	Eric, Jordi y Ruben
+
+
+				Cosas a mejorar:
+
+					Con la incorporacion de Jordi en este sprint hemos visto que el codigo que habíamos hecho hasta el momento solo lo entidia aquel que habia estado desde el principio a pesar de ser una aplicación de pocos archivos y poco tiempo de vida.
+
+				Como mejorar:
+
+					Hay que procurar hacer un codigo facil de leer y comentar todo aquello que pensemos que puede causar confusion.
