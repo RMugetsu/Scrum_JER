@@ -1,1 +1,8 @@
-Hola este es el proyecto de scrum de Jose, Eric y Ruben
+Participantes Jordi, Eric y Ruben
+Nombre Archivo BD: projecte scrum
+Usuario BD: Admin-1234
+Usuarios Aplicacion:
+					Usuario-Password-tipo
+					Ruben-123456-Product Owner
+					Eric-Eric123-Developer
+					Jose-jose123-Scrum Master
