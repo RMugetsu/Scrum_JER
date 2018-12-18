@@ -1,5 +1,5 @@
 Participantes Jordi, Eric y Ruben <br />
-Nombre Archivo BD: projecte scrum <br />
+Nombre Archivo BD: projecte_scrumb.sql <br />
 Usuario BD: Admin-1234 <br />
 Usuarios Aplicacion: <br />
 		Usuario-Password-tipo <br />
