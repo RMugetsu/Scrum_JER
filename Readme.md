@@ -1,1 +1,1 @@
-Hola este es el proyecto de scrum de Jose, Eric y Ruben
+Hola este es el proyecto de scrum de Jordi, Eric y Ruben
