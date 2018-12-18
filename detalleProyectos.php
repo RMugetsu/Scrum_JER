@@ -132,16 +132,24 @@
             echo "<ul id='lista_especificaciones' class='collection with-header'>";
             while($registre = mysqli_fetch_assoc($resultat)){
                  echo "<li class='collection-item' id='listado_esp'>";
-                 echo $registre["Nombre"]
+                 if ($_SESSION['Tipo'] == 2) {
+                     echo $registre["Nombre"]
                  .'<img class="secondary-content boton_eliminar" onclick="eliminarEspecificacion(this)" src="img/eliminar.png" height="25">'
                  .'<img class="secondary-content flecha_abajo" onclick="posicionAbajo(this)" src="img/flecha_arriba.svg" height="25">'
                  .'<img class="secondary-content flecha_arriba" onclick="posicionArriba(this)" src="img/flecha_arriba.svg" height="25">';       
+                 }
+                 else{
+                    echo $registre["Nombre"];
+                 }
                  echo "</li>";
+                 
              }
              echo "</ul>";
              echo "</div>";
+             if ($_SESSION['Tipo'] == 2) {
              ?>
              <div id="div_añadir_especificaciones"></div>
+            <?php } ?>
              </div>
             
 

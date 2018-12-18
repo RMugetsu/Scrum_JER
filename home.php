@@ -52,9 +52,11 @@
 		<div id="pro" class="grid" class="animacion2">
 			<h4>Listado de Proyectos</h4>
 		</div>
+		<!--
 		<div id="generarError">
 			<button onclick="generarError()">Generar Error</button>
 		</div>
+		-->
 		<div  id="error" class="animacion2" style="display: none">
 		</div>
 	</div>
@@ -133,7 +135,7 @@
 ?>
 	<?php
 		mysqli_select_db($con, 'projecte_scrumb');
-		$consultaM="Select Nombre, Id From Usuario Where tipo=1";
+		$consultaM="Select Nombre, Id From usuario Where tipo=1";
 		$consultaO="Select Nombre,Id From usuario where tipo=2";
 		$consultaG="Select Nombre,Id From grupos";
 		$resultatM=mysqli_query($con, $consultaM);
