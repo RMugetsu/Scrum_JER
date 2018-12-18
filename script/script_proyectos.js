@@ -108,3 +108,10 @@ function añadirEspecificacion(){
 
 }
 //Terminan las funciones de ordenar o eliminar las especificaiones
+
+//Acordeon
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, {acordion:true});
+  });
+//termina el acordeon
