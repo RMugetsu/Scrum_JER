@@ -183,6 +183,13 @@ function comprobarFechas() {
 	fecha_inicio_sprint_valor = new Date(fecha_inicio_sprint).getTime();
 	fecha_fin_sprint_valor = new Date(fecha_fin_sprint).getTime();
 
+	if (fecha_inicio_sprint == "") {
+		alert("rellena la fecha de inicio")
+	}
+	if (fecha_fin_sprint == "") {
+		alert("rellena la fecha de fin")
+	}
+
 	if (fecha_inicio_sprint_valor < fecha_actual_comparacion) {
 		alert("fecha de inicio elegida es anterior a hoy");
 	}
