@@ -130,7 +130,65 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // funcion para generar el formulario del nuevo sprint
 function generar_formulario_nuevo_sprint() {
+	deshabilitarBotonNuevoSprint();
 	var div_nuevo_sprint = document.getElementById("nuevo_sprint");
-	var 
+	var form_nuevo_sprint = document.createElement("form");
+	form_nuevo_sprint.setAttribute("action","#");
+	form_nuevo_sprint.setAttribute("id","form_nuevo_sprint");
 
+
+	var label_inicio_nuevo_sprint = document.createElement("label");
+	var texto_inicio_nuevo_sprint = document.createTextNode("Fecha inicio");
+	label_inicio_nuevo_sprint.appendChild(texto_inicio_nuevo_sprint);
+	form_nuevo_sprint.appendChild(label_inicio_nuevo_sprint);
+
+	var fecha_inicio_nuevo_sprint = document.createElement("input");
+	fecha_inicio_nuevo_sprint.setAttribute("id","fecha_inicial_sprint");
+	fecha_inicio_nuevo_sprint.setAttribute("type","date");
+	fecha_inicio_nuevo_sprint.setAttribute("required","true");
+	form_nuevo_sprint.appendChild(fecha_inicio_nuevo_sprint);
+
+	form_nuevo_sprint.appendChild(document.createElement("br"));
+
+	var label_final_nuevo_sprint = document.createElement("label");
+	var texto_final_nuevo_sprint = document.createTextNode("Fecha final");
+	label_final_nuevo_sprint.appendChild(texto_final_nuevo_sprint);
+	form_nuevo_sprint.appendChild(label_final_nuevo_sprint);
+
+	var fecha_final_nuevo_sprint = document.createElement("input");
+	fecha_final_nuevo_sprint.setAttribute("id","fecha_final_sprint");
+	fecha_final_nuevo_sprint.setAttribute("type","date");
+	fecha_final_nuevo_sprint.setAttribute("required","true");
+	form_nuevo_sprint.appendChild(fecha_final_nuevo_sprint);
+
+	var boton_nuevo_sprint = document.createElement("input");
+	boton_nuevo_sprint.setAttribute("type","button");
+	boton_nuevo_sprint.setAttribute("onclick","comprobarFechas()");
+	form_nuevo_sprint.appendChild(boton_nuevo_sprint);
+
+	div_nuevo_sprint.appendChild(form_nuevo_sprint);
 }
+
+function deshabilitarBotonNuevoSprint() {
+	document.getElementsByName("CrearSprint")[0].disabled = true;
+}
+
+function comprobarFechas() {
+	var fecha_actual = new Date();
+	var fecha_actual_comparacion = fecha_actual.getTime();
+
+	fecha_inicio_sprint = document.getElementById("fecha_inicial_sprint").value;
+	fecha_fin_sprint = document.getElementById("fecha_final_sprint").value;
+
+	fecha_inicio_sprint_valor = new Date(fecha_inicio_sprint).getTime();
+	fecha_fin_sprint_valor = new Date(fecha_fin_sprint).getTime();
+
+	if (fecha_inicio_sprint_valor < fecha_actual_comparacion) {
+		alert("fecha de inicio elegida es anterior a hoy");
+	}
+	if (fecha_fin_sprint_valor < fecha_actual_comparacion) {
+		alert("fecha de fin elegida es anterior a hoy");
+	}
+}
+
+console.log(Date());
