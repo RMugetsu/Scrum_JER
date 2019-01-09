@@ -124,5 +124,13 @@ document.addEventListener('DOMContentLoaded', function() {
     boton_añadir_sprints.setAttribute("name","CrearSprint");
     boton_añadir_sprints.setAttribute("type","button");
     boton_añadir_sprints.setAttribute("value","Añadir nuevo sprint");
+    boton_añadir_sprints.setAttribute("onclick","generar_formulario_nuevo_sprint()");
     div_sprints.appendChild(boton_añadir_sprints);
   });
+
+// funcion para generar el formulario del nuevo sprint
+function generar_formulario_nuevo_sprint() {
+	var div_nuevo_sprint = document.getElementById("nuevo_sprint");
+	var 
+
+}

@@ -152,6 +152,7 @@
             <?php } ?>
              </div>
             
+            <div id="nuevo_sprint"></div>
 
     </body>
 </html>
