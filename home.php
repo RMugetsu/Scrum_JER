@@ -108,7 +108,7 @@
 				boton.setAttribute("type","button");
 				boton.setAttribute("id","CreateB");
 				boton.setAttribute("name","ButtonCreate");
-				boton.setAttribute("value","Nuevo Projecto");
+				boton.setAttribute("value","Nuevo Proyecto");
 				boton.setAttribute("onclick","DeshabButton()");
 				boton.setAttribute("class","ubicar");
 				cuerpo.appendChild(boton);

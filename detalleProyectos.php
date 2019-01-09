@@ -77,7 +77,7 @@
             //Sprints del proyecto
             $consultaSpr = "SELECT s.Id, s.Inicio_Sprint, s.Final_Sprint FROM proyecto p, sprints s WHERE p.Nombre='$nombre_proyecto' AND p.Id = s.IdProyecto";
             $resultatSpr = mysqli_query($con, $consultaSpr);
-            echo "<div class='col s12 m12 info'>";
+            echo "<div id='sprints' class='col s12 m12 info'>";
             echo "<ul class='collapsible'>";
             while($registreSpr = mysqli_fetch_assoc($resultatSpr)){
                 echo "<li>";

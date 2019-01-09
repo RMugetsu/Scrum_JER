@@ -45,19 +45,19 @@ document.addEventListener('DOMContentLoaded', function(){
 
     //añade el textfield y el boton de añadir especificaciones
     div_añadir_especificaciones = document.getElementById("div_añadir_especificaciones");
-    var boton_añadir = document.createElement("a");
-    boton_añadir.setAttribute("class","btn-floating btn-large waves-effect waves-light red");
-    boton_añadir.setAttribute("id","boton_nueva_especificacion");
-    boton_añadir.setAttribute("onclick","añadirEspecificacion()");
+    var boton_añadir_espec = document.createElement("a");
+    boton_añadir_espec.setAttribute("class","btn-floating btn-large waves-effect waves-light red");
+    boton_añadir_espec.setAttribute("id","boton_nueva_especificacion");
+    boton_añadir_espec.setAttribute("onclick","añadirEspecificacion()");
 
-    var icono_boton_añadir = document.createElement("i");
-    icono_boton_añadir.setAttribute("class","material-icons");
+    var icono_boton_añadir_espec = document.createElement("i");
+    icono_boton_añadir_espec.setAttribute("class","material-icons");
 
-    texto_icono_boton_añadir = document.createTextNode("add");
+    texto_icono_boton_añadir_espec = document.createTextNode("add");
 
-    icono_boton_añadir.appendChild(texto_icono_boton_añadir);
-    boton_añadir.appendChild(icono_boton_añadir);
-    div_añadir_especificaciones.appendChild(boton_añadir);
+    icono_boton_añadir_espec.appendChild(texto_icono_boton_añadir_espec);
+    boton_añadir_espec.appendChild(icono_boton_añadir_espec);
+    div_añadir_especificaciones.appendChild(boton_añadir_espec);
     
 });
 
@@ -115,3 +115,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.Collapsible.init(elems, {acordion:true});
   });
 //termina el acordeon
+
+
+//esto creara el boton de añadir sprints:
+document.addEventListener('DOMContentLoaded', function() {
+    var div_sprints = document.getElementById("sprints");
+    var boton_añadir_sprints = document.createElement("input");
+    boton_añadir_sprints.setAttribute("name","CrearSprint");
+    boton_añadir_sprints.setAttribute("type","button");
+    boton_añadir_sprints.setAttribute("value","Añadir nuevo sprint");
+    div_sprints.appendChild(boton_añadir_sprints);
+  });
