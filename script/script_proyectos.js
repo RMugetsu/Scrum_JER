@@ -136,7 +136,7 @@ function generar_formulario_nuevo_sprint() {
 	form_nuevo_sprint.setAttribute("action","#");
 	form_nuevo_sprint.setAttribute("id","form_nuevo_sprint");
 
-
+	//crea el label y el date de la fecha inicio
 	var label_inicio_nuevo_sprint = document.createElement("label");
 	var texto_inicio_nuevo_sprint = document.createTextNode("Fecha inicio");
 	label_inicio_nuevo_sprint.appendChild(texto_inicio_nuevo_sprint);
@@ -145,11 +145,12 @@ function generar_formulario_nuevo_sprint() {
 	var fecha_inicio_nuevo_sprint = document.createElement("input");
 	fecha_inicio_nuevo_sprint.setAttribute("id","fecha_inicial_sprint");
 	fecha_inicio_nuevo_sprint.setAttribute("type","date");
-	fecha_inicio_nuevo_sprint.setAttribute("required","true");
+	//fecha_inicio_nuevo_sprint.setAttribute("required","true");
 	form_nuevo_sprint.appendChild(fecha_inicio_nuevo_sprint);
 
 	form_nuevo_sprint.appendChild(document.createElement("br"));
 
+	//crea el label y el date de la fecha final
 	var label_final_nuevo_sprint = document.createElement("label");
 	var texto_final_nuevo_sprint = document.createTextNode("Fecha final");
 	label_final_nuevo_sprint.appendChild(texto_final_nuevo_sprint);
@@ -158,11 +159,26 @@ function generar_formulario_nuevo_sprint() {
 	var fecha_final_nuevo_sprint = document.createElement("input");
 	fecha_final_nuevo_sprint.setAttribute("id","fecha_final_sprint");
 	fecha_final_nuevo_sprint.setAttribute("type","date");
-	fecha_final_nuevo_sprint.setAttribute("required","true");
+	//fecha_final_nuevo_sprint.setAttribute("required","true");
 	form_nuevo_sprint.appendChild(fecha_final_nuevo_sprint);
 
+	//crea el label y el introducir un numero de horas
+	var label_horasDisponibles_nuevo_sprint = document.createElement("label");
+	var texto_horasDisponibles_nuevo_sprint = document.createTextNode("Horas disponibles para el sprint");
+	label_horasDisponibles_nuevo_sprint.appendChild(texto_horasDisponibles_nuevo_sprint);
+	form_nuevo_sprint.appendChild(label_horasDisponibles_nuevo_sprint);
+
+	var numero_horasDisponibles_nuevo_sprint = document.createElement("input");
+	numero_horasDisponibles_nuevo_sprint.setAttribute("id","numero_horas_disponibles");
+	numero_horasDisponibles_nuevo_sprint.setAttribute("type","number");
+	//numero_horasDisponibles_nuevo_sprint.setAttribute("max","999");
+	//numero_horasDisponibles_nuevo_sprint.setAttribute("required","true");
+	form_nuevo_sprint.appendChild(numero_horasDisponibles_nuevo_sprint);
+
+	//crea el boton de enviar
 	var boton_nuevo_sprint = document.createElement("input");
 	boton_nuevo_sprint.setAttribute("type","button");
+	boton_nuevo_sprint.setAttribute("value","Insertar Sprint");
 	boton_nuevo_sprint.setAttribute("onclick","comprobarFechas()");
 	form_nuevo_sprint.appendChild(boton_nuevo_sprint);
 
@@ -176,26 +192,36 @@ function deshabilitarBotonNuevoSprint() {
 function comprobarFechas() {
 	var fecha_actual = new Date();
 	var fecha_actual_comparacion = fecha_actual.getTime();
+	var horas_disponibles = document.getElementById("numero_horas_disponibles").value;
 
-	fecha_inicio_sprint = document.getElementById("fecha_inicial_sprint").value;
-	fecha_fin_sprint = document.getElementById("fecha_final_sprint").value;
+	var fecha_inicio_sprint = document.getElementById("fecha_inicial_sprint").value;
+	var fecha_fin_sprint = document.getElementById("fecha_final_sprint").value;
 
-	fecha_inicio_sprint_valor = new Date(fecha_inicio_sprint).getTime();
-	fecha_fin_sprint_valor = new Date(fecha_fin_sprint).getTime();
+	var fecha_inicio_sprint_valor = new Date(fecha_inicio_sprint).getTime();
+	var fecha_fin_sprint_valor = new Date(fecha_fin_sprint).getTime();
 
 	if (fecha_inicio_sprint == "") {
 		alert("rellena la fecha de inicio")
 	}
-	if (fecha_fin_sprint == "") {
-		alert("rellena la fecha de fin")
-	}
-
-	if (fecha_inicio_sprint_valor < fecha_actual_comparacion) {
+	else if (fecha_inicio_sprint_valor < fecha_actual_comparacion) {
 		alert("fecha de inicio elegida es anterior a hoy");
 	}
-	if (fecha_fin_sprint_valor < fecha_actual_comparacion) {
+	else if (fecha_fin_sprint == "") {
+		alert("rellena la fecha de fin")
+	}
+	else if (fecha_fin_sprint_valor < fecha_actual_comparacion) {
 		alert("fecha de fin elegida es anterior a hoy");
 	}
+	else if (fecha_fin_sprint_valor < fecha_inicio_sprint_valor) {
+		alert("fecha de fin es anterior a la fecha de inicio");
+	}
+	else if (horas_disponibles < 1) {
+		alert("las horas no pueden ser menos de 1");
+	}
+	else if (horas_disponibles > 999) {
+		alert("las horas no pueden ser mas de 999");
+	}
+
 }
 
 console.log(Date());
