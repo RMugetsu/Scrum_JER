@@ -28,8 +28,21 @@
             $resultat = mysqli_query($con, $consulta);
            
            
-
-
+            //Cabecera
+            ?>
+            <div id="cabecera">
+                <div id="titulo">
+                    <label>Vista de Proyectos</label>
+                </div>
+                <div id="usuario">
+                    <img src="img/usuario.png" id="imgUsuario">
+                    <?php echo "<label>Usuario: ".$_SESSION['Nombre']."</label>";?>
+                </div>
+                <div id="session">
+                    <a href="logout.php"><img src="img/cerrar.png" id="imgCerrar"></a>
+                </div>
+            </div>
+            <?php
             //Informacion del proyecto
             //Info General
             $consulta2 = "SELECT * FROM proyecto WHERE nombre='$nombre_proyecto'" ;
@@ -61,7 +74,7 @@
                     </div>
                     <div class="col m6" id="info1">
                         <label>Número de Sprints: <?php echo $registre2['NumSprint']?></label><br>
-                        <label>Descripcion: </label><br>
+                        <label>Descripción: </label><br>
                         <textarea disabled><?php echo $registre2['Descripcion']?></textarea>
                     </div>
                     <?php
@@ -74,7 +87,7 @@
             $fecha_actual = strtotime(date('y-m-d'));
 
             //Sprints del proyecto
-            $consultaSpr = "SELECT s.Id, s.Inicio_Sprint, s.Final_Sprint FROM proyecto p, sprints s WHERE p.Nombre='$nombre_proyecto' AND p.Id = s.IdProyecto";
+            $consultaSpr = "SELECT s.Id, s.Inicio_Sprint, s.Final_Sprint, s.Horas_Disponibles FROM proyecto p, sprints s WHERE p.Nombre='$nombre_proyecto' AND p.Id = s.IdProyecto";
             $resultatSpr = mysqli_query($con, $consultaSpr);
             echo "<div class='row'>";
             echo "<div class='col s12 m12'>";
@@ -120,7 +133,7 @@
                         echo "</tr>";
                         $horas += $registreSprs['Horas'];
                     }
-                echo 'Total horas: '.$horas;
+                echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
                 echo "</table>";
                 echo "</div>";
                 echo "</li>";
@@ -158,6 +171,9 @@
              </div>
             
             <div id="nuevo_sprint"></div>
-
+            <div class="row">
+                <div class="col s11 m11"></div>
+                <div class="col s1 m1">Hola</div>
+            </div>
     </body>
 </html>

@@ -1,6 +1,9 @@
 body{
   background-color: #ccffcc;
 }
+div{
+  color: gray;
+}
 #generarError{
   margin-left: 10%;
 }
