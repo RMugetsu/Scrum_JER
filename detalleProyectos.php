@@ -175,5 +175,15 @@
                 <div class="col s11 m11"></div>
                 <div class="col s1 m1">Hola</div>
             </div>
+             <?php
+             /*ESTO ES DE PRUEBA*/ 
+            	$consultaSprs = "SELECT Inicio_Sprint, Final_Sprint as inicio, final FROM sprints";
+                $resultatSprs = mysqli_query($con, $consultaSprs);
+                
+                    while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
+                    	echo "<br>";
+                    	echo $registreSprs['Inicio_Sprint'];
+                    }
+             ?>
     </body>
 </html>
