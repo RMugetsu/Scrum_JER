@@ -24,7 +24,7 @@
             $con = mysqli_connect('localhost', 'admin','1234');
             mysqli_select_db($con, 'projecte_scrumb');
             $nombre_proyecto = $_GET['proyect'];
-            $consulta = "select e.Nombre from especificaciones e, proyecto p where '$nombre_proyecto' = p.Nombre and p.Id = e.IdProyecto" ;
+            $consulta = "select e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto" ;
             $resultat = mysqli_query($con, $consulta);
            
            
@@ -56,7 +56,6 @@
                 while($registre2 = mysqli_fetch_assoc($resultat2)){
                     ?>
                     <div class="col m6" >
-                        <label>Nombre del Proyecto: <?php echo $registre2['Nombre']?></label><br>
                         <label>Product Owner: <?php echo $ProductOwner?></label><br>
                         <label>Scrum Master: <?php echo $ScrumMaster?></label>
                     </div>
@@ -77,7 +76,10 @@
             //Sprints del proyecto
             $consultaSpr = "SELECT s.Id, s.Inicio_Sprint, s.Final_Sprint FROM proyecto p, sprints s WHERE p.Nombre='$nombre_proyecto' AND p.Id = s.IdProyecto";
             $resultatSpr = mysqli_query($con, $consultaSpr);
-            echo "<div id='sprints' class='col s12 m12 info'>";
+            echo "<div class='row'>";
+            echo "<div class='col s12 m12'>";
+            echo "<div class='row'>";
+            echo "<div id='sprints' class='col s6 m6 info'>";
             echo "<ul class='collapsible'>";
             while($registreSpr = mysqli_fetch_assoc($resultatSpr)){
                 echo "<li>";
@@ -120,15 +122,16 @@
                     }
                 echo 'Total horas: '.$horas;
                 echo "</table>";
-                  echo "</div>";
+                echo "</div>";
                 echo "</li>";
             }
             echo "</ul>";
             echo "</div>";
-            echo "<br>";
             //Tiene que cerrar y volver a abrir porque hay un problema de
             //compatibilidad de nuestro javascript con el materialize
-            echo "<div class='col s12 m12 info'>";
+            echo "<div class='col s1 m1'>";
+            echo "</div>";
+            echo "<div class='col s5 m5 info'>";
             echo "<ul id='lista_especificaciones' class='collection with-header'>";
             while($registre = mysqli_fetch_assoc($resultat)){
                  echo "<li class='collection-item' id='listado_esp'>";
@@ -144,8 +147,10 @@
                  echo "</li>";
                  
              }
-             echo "</ul>";
-             echo "</div>";
+            echo "</ul>";
+            echo "</div>";
+            echo "</div>";
+            echo "</div>";
              if ($_SESSION['Tipo'] == 2) {
              ?>
              <div id="div_añadir_especificaciones"></div>
