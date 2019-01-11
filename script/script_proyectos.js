@@ -236,7 +236,12 @@ function comprobarFechas() {
 	var fecha_fin_ultimo_sprint = fecha_fin_ultimo_sprint.replace("Fecha Fin:", "");
 	var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
 
-	
+	else if (fecha_inicio_ultimo_sprint < fecha_inicio_sprint_valor) {
+		alert("La fecha de inicio introducida es anterior a la fecha inicio del ultimo sprint");
+	}
+	else if (fecha_fin_ultimo_sprint < fecha_fin_sprint_valor) {
+		alert("La fecha de inicio introducida es anterior a la fecha inicio del ultimo sprint");
+	}
 
 }
 
