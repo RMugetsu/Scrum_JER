@@ -37,7 +37,7 @@ function posicionAbajo(element){
 
 document.addEventListener('DOMContentLoaded', function(){
     //añade el textfield y el boton de añadir especificaciones
-    div_añadir_especificaciones = document.getElementById("div_añadir_especificaciones");
+    var div_añadir_especificaciones = document.getElementById("div_añadir_especificaciones");
     var texto_añadir = document.createElement("input");
     texto_añadir.setAttribute("type","textfield");
     texto_añadir.setAttribute("id","nueva_especificacion");
@@ -200,27 +200,9 @@ function comprobarFechas() {
 	var fecha_inicio_sprint_valor = new Date(fecha_inicio_sprint).getTime();
 	var fecha_fin_sprint_valor = new Date(fecha_fin_sprint).getTime();
 
-	if (fecha_inicio_sprint == "") {
-		alert("rellena la fecha de inicio")
-	}
-	else if (fecha_inicio_sprint_valor < fecha_actual_comparacion) {
-		alert("fecha de inicio elegida es anterior a hoy");
-	}
-	else if (fecha_fin_sprint == "") {
-		alert("rellena la fecha de fin")
-	}
-	else if (fecha_fin_sprint_valor < fecha_actual_comparacion) {
-		alert("fecha de fin elegida es anterior a hoy");
-	}
-	else if (fecha_fin_sprint_valor < fecha_inicio_sprint_valor) {
-		alert("fecha de fin es anterior a la fecha de inicio");
-	}
-	else if (horas_disponibles < 1) {
-		alert("las horas no pueden ser menos de 1");
-	}
-	else if (horas_disponibles > 999) {
-		alert("las horas no pueden ser mas de 999");
-	}
+
+
+
 	//coge la "p" dentro del "div" que esta dentro de la "ul"
 	var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
 	//coge el contenido de la "p"
@@ -236,7 +218,38 @@ function comprobarFechas() {
 	var fecha_fin_ultimo_sprint = fecha_fin_ultimo_sprint.replace("Fecha Fin:", "");
 	var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
 
-	
+
+	if (fecha_inicio_sprint == "") {
+		alert("rellena la fecha de inicio")
+	}
+	else if (fecha_inicio_sprint_valor <= fecha_actual_comparacion) {
+		alert("fecha de inicio elegida es anterior o igual a hoy");
+	}
+	else if (fecha_fin_sprint == "") {
+		alert("rellena la fecha de fin")
+	}
+	else if (fecha_fin_sprint_valor <= fecha_actual_comparacion) {
+		alert("fecha de fin elegida es anterior o igual a hoy");
+	}
+	else if (fecha_fin_sprint_valor <= fecha_inicio_sprint_valor) {
+		alert("fecha de fin es anterior o igual a la fecha de inicio");
+	}
+	else if (horas_disponibles < 1) {
+		alert("las horas no pueden ser menos de 1");
+	}
+	else if (horas_disponibles > 999) {
+		alert("las horas no pueden ser mas de 999");
+	}
+
+
+
+
+	else if (fecha_inicio_sprint_valor <= fecha_fin_ultimo_sprint) {
+		alert("La fecha de inicio introducida es anterior a la fecha fin del ultimo sprint");
+	}
+	else {
+		alert("ta to bien");
+	}
 
 }
 
