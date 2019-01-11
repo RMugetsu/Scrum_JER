@@ -173,7 +173,7 @@
             <div id="nuevo_sprint"></div>
             <div class="row">
                 <div class="col s11 m11"></div>
-                <div class="col s1 m1">Hola</div>
+                <div class="col s1 m1"><img src="./img/flecha_arriba.svg" id="retroceder" onclick="paginaAnterior()"></div>
             </div>
     </body>
 </html>
