@@ -24,7 +24,7 @@
             $con = mysqli_connect('localhost', 'admin','1234');
             mysqli_select_db($con, 'projecte_scrumb');
             $nombre_proyecto = $_GET['proyect'];
-            $consulta = "select e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto" ;
+            $consulta = "select e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto AND e.IdSprint=NULL" ;
             $resultat = mysqli_query($con, $consulta);
            
            
@@ -168,7 +168,6 @@
              ?>
              <div id="div_añadir_especificaciones"></div>
             <?php } ?>
-             </div>
             
             <div id="nuevo_sprint"></div>
             <div class="row">

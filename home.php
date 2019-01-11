@@ -16,17 +16,16 @@
 		$con = mysqli_connect('localhost','admin','1234');
 		$idusuario = mysqli_real_escape_string($con, $_SESSION['Id']);
 		mysqli_select_db($con, 'projecte_scrumb');
-		if ($_SESSION['Tipo']="1") {
+		if ($_SESSION['Tipo']=="1") {
 			$consulta = "SELECT p.Id, p.Nombre, p.NumSprint as Sprints, p.PO_Id as PO, p.SM_Id as SM FROM proyecto p, usuario u Where p.SM_Id = '$idusuario' AND '$idusuario'=u.Id";
-		}elseif($_SESSION['Tipo']="2"){
+		}elseif($_SESSION['Tipo']=="2"){
 			$consulta = "SELECT p.Id, p.Nombre, p.NumSprint as Sprints, p.PO_Id as PO, p.SM_Id as SM FROM proyecto p, usuario u Where p.PO_Id = '$idusuario' AND '$idusuario'=u.Id";
-		}elseif ($_SESSION['Tipo']="3") {
+		}elseif ($_SESSION['Tipo']=="3") {
 			$consulta = "SELECT p.Id, p.Nombre, p.NumSprint as Sprints, p.PO_Id as PO, p.SM_Id as SM FROM proyecto p, grupos g, usuario u Where '$idusuario'=u.Id AND u.IdGrupo=g.id AND g.IdProyecto=p.Id";
 		}
 		$resultat = mysqli_query($con, $consulta);
 			while($registre = mysqli_fetch_assoc($resultat))
  				{
- 					//print_r($registre);
  					?><script type="text/javascript">
 						var id = <?php echo $registre["Id"]?>;
 						var nombre = '<?php echo $registre["Nombre"]?>';
@@ -68,10 +67,6 @@
 		</div>
 	</div>
 	
-
-
-
-
 	<div id="formulario">
 		<form>
 			
