@@ -221,6 +221,22 @@ function comprobarFechas() {
 	else if (horas_disponibles > 999) {
 		alert("las horas no pueden ser mas de 999");
 	}
+	//coge la "p" dentro del "div" que esta dentro de la "ul"
+	var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
+	//coge el contenido de la "p"
+	var fecha_inicio_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_inicio]").innerHTML;
+	//filtra para que solo coja la fecha y no todo el contenido 
+	var fecha_inicio_ultimo_sprint = fecha_inicio_ultimo_sprint.replace("Fecha Inicio:", "");
+	//y lo convierte a "time"
+	var fecha_inicio_ultimo_sprint = new Date(fecha_inicio_ultimo_sprint).getTime();
+
+	//ahora lo mismo pero con la fecha de fin:
+	var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
+	var fecha_fin_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_fin]").innerHTML;
+	var fecha_fin_ultimo_sprint = fecha_fin_ultimo_sprint.replace("Fecha Fin:", "");
+	var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
+
+	
 
 }
 
