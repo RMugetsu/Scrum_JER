@@ -14,8 +14,15 @@
 	<?php
 		session_start();
 		$con = mysqli_connect('localhost','admin','1234');
+		$idusuario = mysqli_real_escape_string($con, $_SESSION['Id']);
 		mysqli_select_db($con, 'projecte_scrumb');
-		$consulta = "SELECT Id, Nombre, NumSprint as Sprints, PO_Id as PO, SM_Id as SM FROM proyecto";
+		if ($_SESSION['Tipo']="1") {
+			$consulta = "SELECT p.Id, p.Nombre, p.NumSprint as Sprints, p.PO_Id as PO, p.SM_Id as SM FROM proyecto p, usuario u Where p.SM_Id = '$idusuario' AND '$idusuario'=u.Id";
+		}elseif($_SESSION['Tipo']="2"){
+			$consulta = "SELECT p.Id, p.Nombre, p.NumSprint as Sprints, p.PO_Id as PO, p.SM_Id as SM FROM proyecto p, usuario u Where p.PO_Id = '$idusuario' AND '$idusuario'=u.Id";
+		}elseif ($_SESSION['Tipo']="3") {
+			$consulta = "SELECT p.Id, p.Nombre, p.NumSprint as Sprints, p.PO_Id as PO, p.SM_Id as SM FROM proyecto p, grupos g, usuario u Where '$idusuario'=u.Id AND u.IdGrupo=g.id AND g.IdProyecto=p.Id";
+		}
 		$resultat = mysqli_query($con, $consulta);
 			while($registre = mysqli_fetch_assoc($resultat))
  				{

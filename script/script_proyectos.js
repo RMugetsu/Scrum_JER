@@ -245,4 +245,6 @@ function comprobarFechas() {
 
 }
 
-console.log(Date());
+function paginaAnterior(){
+	document.location = "home.php";
+}
