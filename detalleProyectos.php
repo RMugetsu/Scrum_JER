@@ -93,7 +93,7 @@
             echo "<div class='col s12 m12'>";
             echo "<div class='row'>";
             echo "<div id='sprints' class='col s6 m6 info'>";
-            echo "<ul class='collapsible'>";
+            echo "<ul id='ul_sprints' class='collapsible'>";
             while($registreSpr = mysqli_fetch_assoc($resultatSpr)){
                 echo "<li>";
                 //fechas de inicio y fin metidas en strtotime para calcular tiempos
@@ -112,8 +112,8 @@
                 }
                 //Se crea el contenido del sprint
                   echo "<div class='collapsible-body'>";
-                  echo "<p>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
-                  echo "<p>Fecha Fin:".$registreSpr['Final_Sprint']."</p>";
+                  echo "<p name='fecha_inicio'>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
+                  echo "<p name='fecha_fin'>Fecha Fin:".$registreSpr['Final_Sprint']."</p>";
                   echo "<table>";
                   $idSprint=$registreSpr['Id'];
                   $horas = 0;
@@ -176,7 +176,8 @@
                 <div class="col s1 m1">Hola</div>
             </div>
              <?php
-             /*ESTO ES DE PRUEBA*/ 
+             /*
+             ///ESTO ES DE PRUEBA 
             	$consultaSprs = "SELECT Inicio_Sprint, Final_Sprint as inicio, final FROM sprints";
                 $resultatSprs = mysqli_query($con, $consultaSprs);
                 
@@ -184,6 +185,7 @@
                     	echo "<br>";
                     	echo $registreSprs['Inicio_Sprint'];
                     }
+             */
              ?>
     </body>
 </html>
