@@ -256,3 +256,8 @@ function comprobarFechas() {
 function paginaAnterior(){
 	document.location = "home.php";
 }
+function eliminarSprint(element){
+	//boton de eliminar
+   	var elemento_padre = element.parentNode;
+	elemento_padre.parentNode.removeChild(elemento_padre);
+}
