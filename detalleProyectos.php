@@ -92,7 +92,7 @@
             echo "<div class='row'>";
             echo "<div id='sprints' class='col s6 m6 info'>";
             echo "<ul id='ul_sprints' class='collapsible'>";
-            if ($registreSpr = mysqli_fetch_assoc($resultatSpr)) {
+            //if ($registreSpr = mysqli_fetch_assoc($resultatSpr)) {
                 while($registreSpr = mysqli_fetch_assoc($resultatSpr)){
                     echo "<li>";
                     //fechas de inicio y fin metidas en strtotime para calcular tiempos
@@ -152,10 +152,12 @@
                 //compatibilidad de nuestro javascript con el materialize
                 echo "<div class='col s1 m1'>";
                 echo "</div>";
+            /*
             }
             else {
                 echo "no hay esp";
             }
+            */
             
             echo "<div class='col s5 m5 info'>";
             echo "<ul id='lista_especificaciones' class='collection with-header'>";

@@ -257,7 +257,7 @@ function paginaAnterior(){
 	document.location = "home.php";
 }
 function eliminarSprint(element){
-	//boton de eliminar
-   	var elemento_padre = element.parentNode;
+	//elimina el sprint
+   	var elemento_padre = element.parentNode.parentNode;
 	elemento_padre.parentNode.removeChild(elemento_padre);
 }
