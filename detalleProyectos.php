@@ -15,12 +15,11 @@
        
         <?php
 
-            //ejemplo de insert
-            //INSERT INTO `especificaciones`(`Nombre`,`Horas`, `Dificultad`, `IdUsuario`, `IdProyecto`) VALUES ('Proyecto1',20,'Dificil',1,2);
             session_start();
-            //echo $_SESSION['Nombre'];
-            //echo "$_GET['Nombre']";
-
+            //guardaremos la url para poder luego acceder al insertar un nuevo sprint
+            $_SESSION['url'] = $_SERVER["REQUEST_URI"];  
+            echo $_SESSION['url'];
+            //y nos conectamos a la base de datos
             $con = mysqli_connect('localhost', 'admin','1234');
             mysqli_select_db($con, 'projecte_scrumb');
             $nombre_proyecto = $_GET['proyect'];
@@ -99,8 +98,9 @@
                 //fechas de inicio y fin metidas en strtotime para calcular tiempos
                 $fecha_inicio_sprint = strtotime($registreSpr['Inicio_Sprint']);
                 $fecha_final_sprint = strtotime($registreSpr['Final_Sprint']);
-                //guardo el id proyecto en una session para luego poder crear un insert
-                $_SESSION['id_proyecto'] = $registreSpr['IdProyecto'];
+                //guardo el id proyecto en una session para luego poder crear un insert y el id normal
+                $_SESSION['id_proyecto'] = $registreSpr['IdProyecto']; 
+                $_SESSION['id_sprint'] = $registreSpr['Id']+1; 
                 //if de colores
                 if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                     echo "<div style='border:green 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
