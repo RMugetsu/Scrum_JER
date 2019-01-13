@@ -2,7 +2,9 @@
 function eliminarEspecificacion(element){
 	//boton de eliminar
    	var elemento_padre = element.parentNode;
+
 	elemento_padre.parentNode.removeChild(elemento_padre);
+	eliminarEspecificacionBBDD(elemento_padre.innerText);
 
 }
 
@@ -295,4 +297,15 @@ function añadirEspecificacionBBDD(nueva_especificacion){
 	form_a_enviar_para_agregar_sprint.appendChild(input_para_añadir);
 
 	document.getElementById("nueva_especifiacion").submit();
+}
+
+function eliminarEspecificacionBBDD(elemento_padre){
+	var form_a_enviar_para_eliminar_especificacion = document.getElementById("eliminar_especifiacion");
+	var input_para_añadir = document.createElement("input");
+	input_para_añadir.setAttribute("value",elemento_padre);
+    input_para_añadir.setAttribute("name","espec_a_eliminar");
+    input_para_añadir.setAttribute("hidden","true");
+	form_a_enviar_para_eliminar_especificacion.appendChild(input_para_añadir);
+
+	document.getElementById("eliminar_especifiacion").submit();
 }

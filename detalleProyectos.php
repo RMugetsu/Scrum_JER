@@ -23,6 +23,7 @@
             mysqli_select_db($con, 'projecte_scrumb');
             $nombre_proyecto = $_GET['proyect'];
             $consulta = "select e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto AND e.IdSprint=NULL" ;
+            //$consulta = "select e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto"; //AND e.IdSprint=NULL" ;
             $resultat = mysqli_query($con, $consulta);
            
            
@@ -196,6 +197,9 @@
             </form>
             <!--- Esto es para añadir la especificacion a la base de datos -->
             <form action="insert/nueva_especifiacion.php" method="post" id="nueva_especifiacion">
+            </form>
+            <!--- Esto es para eliminar la especificacion de la base de datos -->
+            <form action="delete/eliminar_especificacion.php" method="post" id="eliminar_especifiacion">
             </form>
     </body>
 </html>
