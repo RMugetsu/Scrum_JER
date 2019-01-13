@@ -92,59 +92,65 @@
             echo "<div class='row'>";
             echo "<div id='sprints' class='col s6 m6 info'>";
             echo "<ul id='ul_sprints' class='collapsible'>";
-            while($registreSpr = mysqli_fetch_assoc($resultatSpr)){
-                echo "<li>";
-                //fechas de inicio y fin metidas en strtotime para calcular tiempos
-                $fecha_inicio_sprint = strtotime($registreSpr['Inicio_Sprint']);
-                $fecha_final_sprint = strtotime($registreSpr['Final_Sprint']);
-                //guardo el id proyecto en una session para luego poder crear un insert y el id normal
-                $_SESSION['id_proyecto'] = $registreSpr['IdProyecto']; 
-                $_SESSION['id_sprint'] = $registreSpr['Id']+1; 
-                //if de colores
-                if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
-                    echo "<div style='border:green 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
-                }
-                //este tendria que ser negro?
-                else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
-                    echo "<div style='border:black 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
-                }
-                else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
-                    echo "<div style='border:gray 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
-                }
-                //Se crea el contenido del sprint
-                  echo "<div class='collapsible-body'>";
-                  echo "<p name='fecha_inicio'>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
-                  echo "<p name='fecha_fin'>Fecha Fin:".$registreSpr['Final_Sprint']."</p>";
-                  echo "<table>";
-                  $idSprint=$registreSpr['Id'];
-                  $horas = 0;
-                  $consultaSprs = "SELECT e.Nombre, e.Dificultad, e.Horas, u.Nombre as usuario FROM especificaciones e, usuario u  WHERE e.IdSprint= $idSprint AND e.IdUsuario= u.Id";
-                $resultatSprs = mysqli_query($con, $consultaSprs);
-                //Se muestran las especificaciones del sprint
-                    while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
-                        echo "<tr>";
-                            echo "<td> ".$registreSprs['Nombre'];
-                            echo "</td>";
-                            echo "<td> ".$registreSprs['Dificultad'];
-                            echo "</td>";
-                            echo "<td> ".$registreSprs['Horas'];
-                            echo "</td>";
-                            echo "<td> ".$registreSprs['usuario'];
-                            echo "</td>";
-                        echo "</tr>";
-                        $horas += $registreSprs['Horas'];
+            if ($registreSpr = mysqli_fetch_assoc($resultatSpr)) {
+                while($registreSpr = mysqli_fetch_assoc($resultatSpr)){
+                    echo "<li>";
+                    //fechas de inicio y fin metidas en strtotime para calcular tiempos
+                    $fecha_inicio_sprint = strtotime($registreSpr['Inicio_Sprint']);
+                    $fecha_final_sprint = strtotime($registreSpr['Final_Sprint']);
+                    //guardo el id proyecto en una session para luego poder crear un insert y el id normal
+                    $_SESSION['id_proyecto'] = $registreSpr['IdProyecto']; 
+                    $_SESSION['id_sprint'] = $registreSpr['Id']+1; 
+                    //if de colores
+                    if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
+                        echo "<div style='border:green 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
                     }
-                echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
-                echo "</table>";
+                    //este tendria que ser negro?
+                    else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
+                        echo "<div style='border:black 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
+                    }
+                    else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
+                        echo "<div style='border:gray 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
+                    }
+                    //Se crea el contenido del sprint
+                      echo "<div class='collapsible-body'>";
+                      echo "<p name='fecha_inicio'>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
+                      echo "<p name='fecha_fin'>Fecha Fin:".$registreSpr['Final_Sprint']."</p>";
+                      echo "<table>";
+                      $idSprint=$registreSpr['Id'];
+                      $horas = 0;
+                      $consultaSprs = "SELECT e.Nombre, e.Dificultad, e.Horas, u.Nombre as usuario FROM especificaciones e, usuario u  WHERE e.IdSprint= $idSprint AND e.IdUsuario= u.Id";
+                    $resultatSprs = mysqli_query($con, $consultaSprs);
+                    //Se muestran las especificaciones del sprint
+                        while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
+                            echo "<tr>";
+                                echo "<td> ".$registreSprs['Nombre'];
+                                echo "</td>";
+                                echo "<td> ".$registreSprs['Dificultad'];
+                                echo "</td>";
+                                echo "<td> ".$registreSprs['Horas'];
+                                echo "</td>";
+                                echo "<td> ".$registreSprs['usuario'];
+                                echo "</td>";
+                            echo "</tr>";
+                            $horas += $registreSprs['Horas'];
+                        }
+                    echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
+                    echo "</table>";
+                    echo "</div>";
+                    echo "</li>";
+                }
+                echo "</ul>";
                 echo "</div>";
-                echo "</li>";
+                //Tiene que cerrar y volver a abrir porque hay un problema de
+                //compatibilidad de nuestro javascript con el materialize
+                echo "<div class='col s1 m1'>";
+                echo "</div>";
             }
-            echo "</ul>";
-            echo "</div>";
-            //Tiene que cerrar y volver a abrir porque hay un problema de
-            //compatibilidad de nuestro javascript con el materialize
-            echo "<div class='col s1 m1'>";
-            echo "</div>";
+            else {
+                echo "no hay esp";
+            }
+            
             echo "<div class='col s5 m5 info'>";
             echo "<ul id='lista_especificaciones' class='collection with-header'>";
             while($registre = mysqli_fetch_assoc($resultat)){
