@@ -18,7 +18,6 @@
             session_start();
             //guardaremos la url para poder luego acceder al insertar un nuevo sprint
             $_SESSION['url'] = $_SERVER["REQUEST_URI"];  
-            echo $_SESSION['url'];
             //y nos conectamos a la base de datos
             $con = mysqli_connect('localhost', 'admin','1234');
             mysqli_select_db($con, 'projecte_scrumb');
