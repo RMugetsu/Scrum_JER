@@ -133,7 +133,8 @@ function generar_formulario_nuevo_sprint() {
 	deshabilitarBotonNuevoSprint();
 	var div_nuevo_sprint = document.getElementById("nuevo_sprint");
 	var form_nuevo_sprint = document.createElement("form");
-	form_nuevo_sprint.setAttribute("action","#");
+	form_nuevo_sprint.setAttribute("action","insert/insert_nuevo_sprint.php");
+	form_nuevo_sprint.setAttribute("method","post");
 	form_nuevo_sprint.setAttribute("id","form_nuevo_sprint");
 
 	//crea el label y el date de la fecha inicio
@@ -145,6 +146,7 @@ function generar_formulario_nuevo_sprint() {
 	var fecha_inicio_nuevo_sprint = document.createElement("input");
 	fecha_inicio_nuevo_sprint.setAttribute("id","fecha_inicial_sprint");
 	fecha_inicio_nuevo_sprint.setAttribute("type","date");
+	fecha_inicio_nuevo_sprint.setAttribute("name","nueva_fecha_inicio");
 	//fecha_inicio_nuevo_sprint.setAttribute("required","true");
 	form_nuevo_sprint.appendChild(fecha_inicio_nuevo_sprint);
 
@@ -159,6 +161,7 @@ function generar_formulario_nuevo_sprint() {
 	var fecha_final_nuevo_sprint = document.createElement("input");
 	fecha_final_nuevo_sprint.setAttribute("id","fecha_final_sprint");
 	fecha_final_nuevo_sprint.setAttribute("type","date");
+	fecha_inicio_nuevo_sprint.setAttribute("name","nueva_fecha_fin");
 	//fecha_final_nuevo_sprint.setAttribute("required","true");
 	form_nuevo_sprint.appendChild(fecha_final_nuevo_sprint);
 
@@ -171,6 +174,7 @@ function generar_formulario_nuevo_sprint() {
 	var numero_horasDisponibles_nuevo_sprint = document.createElement("input");
 	numero_horasDisponibles_nuevo_sprint.setAttribute("id","numero_horas_disponibles");
 	numero_horasDisponibles_nuevo_sprint.setAttribute("type","number");
+	fecha_inicio_nuevo_sprint.setAttribute("name","nueva_horas_disponibles");
 	//numero_horasDisponibles_nuevo_sprint.setAttribute("max","999");
 	//numero_horasDisponibles_nuevo_sprint.setAttribute("required","true");
 	form_nuevo_sprint.appendChild(numero_horasDisponibles_nuevo_sprint);

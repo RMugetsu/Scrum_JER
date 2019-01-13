@@ -87,7 +87,7 @@
             $fecha_actual = strtotime(date('y-m-d'));
 
             //Sprints del proyecto
-            $consultaSpr = "SELECT s.Id, s.Inicio_Sprint, s.Final_Sprint, s.Horas_Disponibles FROM proyecto p, sprints s WHERE p.Nombre='$nombre_proyecto' AND p.Id = s.IdProyecto";
+            $consultaSpr = "SELECT s.Id, s.Inicio_Sprint, s.Final_Sprint, s.Horas_Disponibles, s.IdProyecto FROM proyecto p, sprints s WHERE p.Nombre='$nombre_proyecto' AND p.Id = s.IdProyecto";
             $resultatSpr = mysqli_query($con, $consultaSpr);
             echo "<div class='row'>";
             echo "<div class='col s12 m12'>";
@@ -99,6 +99,8 @@
                 //fechas de inicio y fin metidas en strtotime para calcular tiempos
                 $fecha_inicio_sprint = strtotime($registreSpr['Inicio_Sprint']);
                 $fecha_final_sprint = strtotime($registreSpr['Final_Sprint']);
+                //guardo el id proyecto en una session para luego poder crear un insert
+                $_SESSION['id_proyecto'] = $registreSpr['IdProyecto'];
                 //if de colores
                 if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                     echo "<div style='border:green 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
@@ -174,17 +176,5 @@
                 <div class="col s11 m11"></div>
                 <div class="col s1 m1"><img src="./img/flecha_arriba.svg" id="retroceder" onclick="paginaAnterior()"></div>
             </div>
-             <?php
-             /*
-             ///ESTO ES DE PRUEBA 
-            	$consultaSprs = "SELECT Inicio_Sprint, Final_Sprint as inicio, final FROM sprints";
-                $resultatSprs = mysqli_query($con, $consultaSprs);
-                
-                    while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
-                    	echo "<br>";
-                    	echo $registreSprs['Inicio_Sprint'];
-                    }
-             */
-             ?>
     </body>
 </html>
