@@ -101,6 +101,8 @@ function añadirEspecificacion(){
 		nuevo_li.appendChild(flecha_arriba);
 
 		lista_especificaciones.appendChild(nuevo_li);
+
+		añadirEspecificacionBBDD(nueva_especificacion);
 	}
 	else{
 		alert("Introduce un nombre");
@@ -282,4 +284,8 @@ function eliminarSprintBDD(elemento_padre_sin_espacios){
 	form_a_enviar_para_eliminar_sprint.appendChild(input_para_eliminar);
 
 	document.getElementById("eliminar__sprint").submit();
+}
+
+function añadirEspecificacionBBDD(nueva_especificacion){
+	alert(nueva_especificacion);
 }
