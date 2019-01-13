@@ -14,3 +14,18 @@
 #boton_nueva_especificacion {
 	margin-left: 2%;
 }
+#EliminarSprint{
+	margin-left: 2%;
+}
+#CandadoA{
+	margin-left: 70%;
+}
+#CandadoB{
+	margin-left: 70%;
+}
+#CandadoB:hover{
+	filter: blur(2px);
+}
+#CandadoC{
+	margin-left: 70%;
+}
