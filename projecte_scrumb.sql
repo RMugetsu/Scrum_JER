@@ -1,4 +1,5 @@
 -- phpMyAdmin SQL Dump
+CREATE DATABASE IF NOT EXISTS projecte_scrumb;
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
