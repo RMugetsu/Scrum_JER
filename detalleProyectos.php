@@ -189,5 +189,9 @@
                 <div class="col s11 m11"></div>
                 <div class="col s1 m1"><img src="./img/flecha_arriba.svg" id="retroceder" onclick="paginaAnterior()"></div>
             </div>
+
+            <!--- Esto es para eliminar el sprint seleccionado -->
+            <form action="delete/eliminar_sprint.php" method="post" id="eliminar__sprint">
+            </form>
     </body>
 </html>

@@ -260,12 +260,23 @@ function eliminarSprint(element){
 	//elimina el sprint
    	var elemento_padre = element.parentNode;
    	//quitamos el texto de "sprint"
-   	elemento_padre_sin_sprint = elemento_padre.innerText.replace("Sprint","");
+   	var elemento_padre_sin_sprint = elemento_padre.innerText.replace("Sprint","");
    	//eliminamos los espacios del texto
-   	elemento_padre_sin_espacios = elemento_padre_sin_sprint.trim();
+   	var elemento_padre_sin_espacios = elemento_padre_sin_sprint.trim();
    	//y tendremos el numero del sprint para poderlo borrar de la base de datos
-   	console.log(elemento_padre_sin_espacios);
    	var elemento_abuelo = elemento_padre.parentNode;
 	elemento_abuelo.parentNode.removeChild(elemento_abuelo);
 
+	eliminarSprintBDD(elemento_padre_sin_espacios);
+}
+
+function eliminarSprintBDD(elemento_padre_sin_espacios){
+
+	var form_a_enviar_para_eliminar_sprint = document.getElementById("eliminar__sprint");
+	var input_para_eliminar = document.createElement("input");
+	input_para_eliminar.setAttribute("value",elemento_padre_sin_espacios);
+    input_para_eliminar.setAttribute("name","numero_a_eliminar");
+	form_a_enviar_para_eliminar_sprint.appendChild(input_para_eliminar);
+
+	document.getElementById("eliminar__sprint").submit();
 }
