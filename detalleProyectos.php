@@ -104,18 +104,18 @@
                     //if de colores
                     if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                         echo "<div style='border:green 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."
-                        ----<img class='secondary-content boton_eliminar' src='img/eliminar.png' height='25' onclick='eliminarSprint(this)'></img>
+                        <img class='secondary-content boton_eliminar' src='img/eliminar.png' height='25' onclick='eliminarSprint(this)'></img>
                         </div>";
                     }
                     //este tendria que ser negro?
                     else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                         echo "<div style='border:black 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."
-                        ----<img class='secondary-content boton_eliminar' src='img/eliminar.png' height='25' onclick='eliminarSprint(this)'></img>
+                        <img class='secondary-content boton_eliminar' src='img/eliminar.png' height='25' onclick='eliminarSprint(this)'></img>
                         </div>";
                     }
                     else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
                         echo "<div style='border:gray 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."
-                        ----<img class='secondary-content boton_eliminar' src='img/eliminar.png' height='25' onclick='eliminarSprint(this)'></img>
+                        <img class='secondary-content boton_eliminar' src='img/eliminar.png' height='25' onclick='eliminarSprint(this)'></img>
                         </div>";
                     }
                     //Se crea el contenido del sprint

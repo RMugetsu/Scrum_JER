@@ -258,6 +258,14 @@ function paginaAnterior(){
 }
 function eliminarSprint(element){
 	//elimina el sprint
-   	var elemento_padre = element.parentNode.parentNode;
-	elemento_padre.parentNode.removeChild(elemento_padre);
+   	var elemento_padre = element.parentNode;
+   	//quitamos el texto de "sprint"
+   	elemento_padre_sin_sprint = elemento_padre.innerText.replace("Sprint","");
+   	//eliminamos los espacios del texto
+   	elemento_padre_sin_espacios = elemento_padre_sin_sprint.trim();
+   	//y tendremos el numero del sprint para poderlo borrar de la base de datos
+   	console.log(elemento_padre_sin_espacios);
+   	var elemento_abuelo = elemento_padre.parentNode;
+	elemento_abuelo.parentNode.removeChild(elemento_abuelo);
+
 }
