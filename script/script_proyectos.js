@@ -287,5 +287,12 @@ function eliminarSprintBDD(elemento_padre_sin_espacios){
 }
 
 function añadirEspecificacionBBDD(nueva_especificacion){
-	alert(nueva_especificacion);
+	var form_a_enviar_para_agregar_sprint = document.getElementById("nueva_especifiacion");
+	var input_para_añadir = document.createElement("input");
+	input_para_añadir.setAttribute("value",nueva_especificacion);
+    input_para_añadir.setAttribute("name","especificacion_bbdd");
+    input_para_añadir.setAttribute("hidden","true");
+	form_a_enviar_para_agregar_sprint.appendChild(input_para_añadir);
+
+	document.getElementById("nueva_especifiacion").submit();
 }

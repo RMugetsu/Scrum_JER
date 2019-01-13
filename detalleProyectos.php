@@ -194,5 +194,8 @@
             <!--- Esto es para eliminar el sprint seleccionado -->
             <form action="delete/eliminar_sprint.php" method="post" id="eliminar__sprint">
             </form>
+            <!--- Esto es para eliminar el sprint seleccionado -->
+            <form action="insert/nueva_especifiacion.php" method="post" id="nueva_especifiacion">
+            </form>
     </body>
 </html>
