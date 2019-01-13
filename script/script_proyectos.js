@@ -276,7 +276,8 @@ function eliminarSprintBDD(elemento_padre_sin_espacios){
 	var input_para_eliminar = document.createElement("input");
 	input_para_eliminar.setAttribute("value",elemento_padre_sin_espacios);
     input_para_eliminar.setAttribute("name","numero_a_eliminar");
-    input_para_eliminar.setAttribute("disabled","true");
+    //si esta deshabilitado no lo hace
+    //input_para_eliminar.setAttribute("disabled","true");
     input_para_eliminar.setAttribute("hidden","true");
 	form_a_enviar_para_eliminar_sprint.appendChild(input_para_eliminar);
 
