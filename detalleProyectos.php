@@ -22,7 +22,7 @@
             $con = mysqli_connect('localhost', 'admin','1234');
             mysqli_select_db($con, 'projecte_scrumb');
             $nombre_proyecto = $_GET['proyect'];
-            $consulta = "select e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto AND e.IdSprint=NULL" ;
+            $consulta = "select e.IdSprint, e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto" ;
             //$consulta = "select e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto"; //AND e.IdSprint=NULL" ;
             $resultat = mysqli_query($con, $consulta);
            
@@ -135,7 +135,7 @@
                       echo "<table>";
                       $idSprint=$registreSpr['Id'];
                       $horas = 0;
-                      $consultaSprs = "SELECT e.Id, e.Nombre, e.Dificultad, e.Horas, u.Nombre as usuario FROM especificaciones e, usuario u  WHERE e.IdSprint= $idSprint AND e.IdUsuario= u.Id";
+                      $consultaSprs = "SELECT e.Id, e.Nombre, e.Dificultad, e.Horas, u.Nombre as usuario FROM especificaciones e, usuario u  WHERE e.IdSprint= $idSprint AND( e.IdUsuario= u.Id or e.IdUsuario IS  NULL)";
                     $resultatSprs = mysqli_query($con, $consultaSprs);
                     //Se muestran las especificaciones del sprint
                         while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
@@ -174,7 +174,8 @@
             echo "<div class='col s5 m5 info'>";
             echo "<ul id='lista_especificaciones' class='collection with-header'>";
             while($registre = mysqli_fetch_assoc($resultat)){
-                 echo "<li class='collection-item' id='listado_esp'>";
+                if (is_null($registre["IdSprint"])) {
+                    echo "<li class='collection-item' id='listado_esp'>";
                  if ($_SESSION['Tipo'] == 2) {
                      echo $registre["Nombre"]
                  .'<img class="secondary-content boton_eliminar" onclick="eliminarEspecificacion(this)" src="img/eliminar.png" height="25">'
@@ -185,6 +186,8 @@
                     echo $registre["Nombre"];
                  }
                  echo "</li>";
+                }
+                 
                  
              }
             echo "</ul>";
