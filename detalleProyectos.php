@@ -90,6 +90,11 @@
             $resultatSpr = mysqli_query($con, $consultaSpr);
             $numero_de_sprints = mysqli_num_rows($resultatSpr);
             echo "<p id='numero_de_sprints' hidden>$numero_de_sprints</p>";
+            //comprobara si existe algun sprint, si no existe se asignara un numero, sino sumara el que tenia
+                    if ($numero_de_sprints == 0) {
+                    	$_SESSION['id_sprint'] = 1;
+                    	echo "<p id='id_sprint' hidden>".$_SESSION['id_sprint']."</p>";
+                    }
             echo "<div class='row'>";
             echo "<div class='col s12 m12'>";
             echo "<div class='row'>";
@@ -103,7 +108,11 @@
                     $fecha_final_sprint = strtotime($registreSpr['Final_Sprint']);
                     //guardo el id proyecto en una session para luego poder crear un insert y el id normal
                     $_SESSION['id_proyecto'] = $registreSpr['IdProyecto']; 
-                    $_SESSION['id_sprint'] = $registreSpr['Id']+1; 
+                    //comprobara si existe algun sprint, si no existe se asignara un numero, sino sumara el que tenia
+                    if ($numero_de_sprints != 0) {
+                    	$_SESSION['id_sprint'] = $registreSpr['Id']+1; 
+                    	echo "<p id='id_sprint' hidden>".$_SESSION['id_sprint']."</p>";
+                    }
                     //if de colores
                     if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                         //no puede aparecer el boton de eliminar si la fecha de inicio es anterior a hoy

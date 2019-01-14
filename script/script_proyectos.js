@@ -1,3 +1,16 @@
+//variables globales
+
+document.addEventListener('DOMContentLoaded', function(){
+    //comprobara si hay sprints o no
+	var numero_de_sprints = document.getElementById("numero_de_sprints").innerText;
+	if (numero_de_sprints == 0) {
+		existen_sprints = false;
+		}
+	else{
+		existen_sprints = true;
+	}
+});
+
 //Comienzan las funciones de ordenar o eliminar las especificaiones
 function eliminarEspecificacion(element){
 	//boton de eliminar
@@ -142,6 +155,27 @@ function generar_formulario_nuevo_sprint() {
 	form_nuevo_sprint.setAttribute("id","form_nuevo_sprint");
 
 	//crea el label y el date de la fecha inicio
+	var label_numero_nuevo_sprint = document.createElement("label");
+	var texto_numero_nuevo_sprint = document.createTextNode("Numero de Sprint");
+	label_numero_nuevo_sprint.appendChild(texto_numero_nuevo_sprint);
+	form_nuevo_sprint.appendChild(label_numero_nuevo_sprint);
+
+	form_nuevo_sprint.appendChild(document.createElement("br"));
+
+	var label_horas_numero_nuevo_sprint = document.createElement("label");
+	var id_sprint_nuevo = document.getElementById("id_sprint").innerText;
+	if (existen_sprints == false) {
+		var horas_numero_nuevo_sprint = document.createTextNode(id_sprint_nuevo);
+	}
+	else{
+		var horas_numero_nuevo_sprint = document.createTextNode(id_sprint_nuevo);
+	}
+	label_horas_numero_nuevo_sprint.appendChild(horas_numero_nuevo_sprint);
+	form_nuevo_sprint.appendChild(horas_numero_nuevo_sprint);
+
+	form_nuevo_sprint.appendChild(document.createElement("br"));
+
+	//crea el label y el date de la fecha inicio
 	var label_inicio_nuevo_sprint = document.createElement("label");
 	var texto_inicio_nuevo_sprint = document.createTextNode("Fecha inicio");
 	label_inicio_nuevo_sprint.appendChild(texto_inicio_nuevo_sprint);
@@ -205,9 +239,9 @@ function comprobarFechas() {
 	var fecha_fin_sprint_valor = new Date(fecha_fin_sprint).getTime();
 
 
-	var numero_de_sprints = document.getElementById("numero_de_sprints").innerText;
-	if (numero_de_sprints == 0) {
-		alert("cuidaor")
+	
+	if (existen_sprints == false) {
+		var ul_sprints = document.getElementById("ul_sprints");
 	}
 	else{
 
