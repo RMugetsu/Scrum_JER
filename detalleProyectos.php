@@ -24,7 +24,7 @@
             $con = mysqli_connect('localhost', 'admin','1234');
             mysqli_select_db($con, 'projecte_scrumb');
             $nombre_proyecto = $_GET['proyect'];
-            $consulta = "select e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto AND e.IdSprint=NULL" ;
+            $consulta = "select e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto AND e.IdSprint='null'" ;
             $resultat = mysqli_query($con, $consulta);
            
            
@@ -42,6 +42,7 @@
                     <a href="logout.php"><img src="img/cerrar.png" id="imgCerrar"></a>
                 </div>
             </div>
+            <div id="error" onclick="generarError('error','holanxdgjlfskjvrbggjbsklfbgñhsloñduilvbdfzblxcbzklvzuvgbukdzsbuildjkv kjzsv bdkbzsdjk.vbskdjvbgkjzsvjuzbskjvbkjzsvbckhjzbgkjuvbzsjkdvbzk')" class="poscError">Error</div>
             <?php
             //Informacion del proyecto
             //Info General
@@ -161,6 +162,8 @@
                  
              }
             echo "</ul>";
+            echo "</div>";
+            echo "</div>";
             echo "</div>";
             echo "</div>";
             echo "</div>";

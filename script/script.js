@@ -1,11 +1,11 @@
 var controlError = 0;
-function generarError(error){
-	var divError = document.querySelector("div[id=error]");
+function generarError(div,error){
+	var divError = document.querySelector("#error");
 	if(controlError==0){
 		divError.style.display= "block";
 		controlError++;
 	}
-	var mensaje = document.createElement("LABEL");
+	var mensaje = document.createElement("div");
 	var contenido = document.createTextNode(error);
 	mensaje.setAttribute("for",error);
 	var img = document.createElement("IMG");
