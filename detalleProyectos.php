@@ -88,6 +88,8 @@
             //Sprints del proyecto
             $consultaSpr = "SELECT s.Id, s.Inicio_Sprint, s.Final_Sprint, s.Horas_Disponibles, s.IdProyecto FROM proyecto p, sprints s WHERE p.Nombre='$nombre_proyecto' AND p.Id = s.IdProyecto";
             $resultatSpr = mysqli_query($con, $consultaSpr);
+            $numero_de_sprints = mysqli_num_rows($resultatSpr);
+            echo "<p id='numero_de_sprints' hidden>$numero_de_sprints</p>";
             echo "<div class='row'>";
             echo "<div class='col s12 m12'>";
             echo "<div class='row'>";
