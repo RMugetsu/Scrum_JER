@@ -111,7 +111,6 @@
                     //comprobara si existe algun sprint, si no existe se asignara un numero, sino sumara el que tenia
                     if ($numero_de_sprints != 0) {
                     	$_SESSION['id_sprint'] = $registreSpr['Id']+1; 
-                    	echo "<p id='id_sprint' hidden>".$_SESSION['id_sprint']."</p>";
                     }
                     //if de colores
                     if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
@@ -163,6 +162,8 @@
                 //compatibilidad de nuestro javascript con el materialize
                 echo "<div class='col s1 m1'>";
                 echo "</div>";
+                //añadimos un echo de una "p" en hidden para poder pasar los datos al formulario a traves de javascript
+                echo "<p id='id_sprint' hidden>".$_SESSION['id_sprint']."</p>";
             /*
             }
             else {

@@ -241,7 +241,30 @@ function comprobarFechas() {
 
 	
 	if (existen_sprints == false) {
-		var ul_sprints = document.getElementById("ul_sprints");
+		if (fecha_inicio_sprint == "") {
+			alert("rellena la fecha de inicio")
+		}
+		else if (fecha_inicio_sprint_valor <= fecha_actual_comparacion) {
+			alert("fecha de inicio elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_sprint == "") {
+			alert("rellena la fecha de fin")
+		}
+		else if (fecha_fin_sprint_valor <= fecha_actual_comparacion) {
+			alert("fecha de fin elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_sprint_valor <= fecha_inicio_sprint_valor) {
+			alert("fecha de fin es anterior o igual a la fecha de inicio");
+		}
+		else if (horas_disponibles < 1) {
+			alert("las horas no pueden ser menos de 1");
+		}
+		else if (horas_disponibles > 999) {
+			alert("las horas no pueden ser mas de 999");
+		}
+		else {
+			document.getElementById("form_nuevo_sprint").submit();
+		}
 	}
 	else{
 
