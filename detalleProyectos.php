@@ -110,7 +110,7 @@
                     }
                     else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                         echo "<div style='border:black 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id'].
-                        "<img src='img/Abierto.png' id='CandadoNegro' height='20px' width='20px'><img src='img/X.png' onclick= 'eliminarSprint()' id='EliminarSprint' height='20px' width='20px'>
+                        "<img src='img/Abierto.png' id='CandadoNegro' height='20px' width='20px'><img src='img/X.png' onclick= 'eliminarSprint(this)' id='EliminarSprint' height='20px' width='20px'>
                         </div>";
                     }
                     else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
