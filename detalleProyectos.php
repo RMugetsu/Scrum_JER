@@ -105,20 +105,18 @@
                     //if de colores
                     if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                         //no puede aparecer el boton de eliminar si la fecha de inicio es anterior a hoy
-                        echo "<div style='border:green 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."
-                        "//<img class='secondary-content boton_eliminar' src='img/eliminar.png' height='25' onclick='eliminarSprint(this)'></img>
-                        ."</div>";
+                        echo "<div style='border:green 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."<img src='img/Cerrado.png' id='CandadoVerde' height='20px' width='20px'>
+                        </div>";
                     }
                     else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                         echo "<div style='border:black 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id'].
-                        "<img class='secondary-content boton_eliminar' src='img/eliminar.png' height='25' onclick='eliminarSprint(this)'></img>
+                        "<img src='img/Abierto.png' id='CandadoNegro' height='20px' width='20px'><img src='img/X.png' onclick= 'eliminarSprint()' id='EliminarSprint' height='20px' width='20px'>
                         </div>";
                     }
                     else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
                         //no puede aparecer el boton de eliminar si la fecha de inicio es anterior a hoy
                         echo "<div style='border:gray 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."
-                        "//<img class='secondary-content boton_eliminar' src='img/eliminar.png' height='25' onclick='eliminarSprint(this)'></img>
-                        ."</div>";
+                        <img src='img/Abierto.png' id='CandadoGris' height='20px' width='20px'></div>";
                     }
                     //Se crea el contenido del sprint
                       echo "<div class='collapsible-body'>";
