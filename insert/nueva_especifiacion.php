@@ -10,6 +10,8 @@
 			$con = mysqli_connect('localhost', 'admin','1234');
             mysqli_select_db($con, 'projecte_scrumb');
 
+            /*
+            //esto servia para añadir directamente la especificacion
             $especificacion_a_insertar = $_POST["especificacion_bbdd"];
             $id_proyecto = $_SESSION['id_proyecto'];
 
@@ -19,7 +21,8 @@
 			mysqli_close($con);
 			
 			header("Location:$pagina_proyectos");
-
+			*/
 		 ?>
+		 
 </body>
 </html>

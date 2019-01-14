@@ -1,5 +1,7 @@
 //variables globales
 
+var nueva_especiificacion = [];
+
 document.addEventListener('DOMContentLoaded', function(){
     //comprobara si hay sprints o no
 	var numero_de_sprints = document.getElementById("numero_de_sprints").innerText;
@@ -11,13 +13,31 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+	//crea el boton de enviar
+    var div_especificaciones = document.getElementById("especificaciones");
+    var boton_añadir_especificaciones = document.createElement("input");
+    boton_añadir_especificaciones.setAttribute("name","Crearespecificaciones");
+    boton_añadir_especificaciones.setAttribute("type","button");
+    boton_añadir_especificaciones.setAttribute("value","Guardar cambios");
+    boton_añadir_especificaciones.setAttribute("onclick","guardarCambiosEspecificaciones()");
+    div_especificaciones.appendChild(boton_añadir_especificaciones);
+
+  });
+
+
 //Comienzan las funciones de ordenar o eliminar las especificaiones
 function eliminarEspecificacion(element){
 	//boton de eliminar
    	var elemento_padre = element.parentNode;
 
 	elemento_padre.parentNode.removeChild(elemento_padre);
-	eliminarEspecificacionBBDD(elemento_padre.innerText);
+
+	console.log(elemento_padre.innerText);
+	//elimina la especificacion del array
+	nueva_especiificacion.splice( nueva_especiificacion.indexOf(elemento_padre.innerText), 1 );
+	console.log("array"+nueva_especiificacion);
+	//eliminarEspecificacionBBDD(elemento_padre.innerText);
 
 }
 
@@ -117,7 +137,10 @@ function añadirEspecificacion(){
 
 		lista_especificaciones.appendChild(nuevo_li);
 
-		añadirEspecificacionBBDD(nueva_especificacion);
+		nueva_especiificacion.push(nueva_especificacion);
+		console.log(nueva_especiificacion);
+
+		//añadirEspecificacionBBDD(nueva_especificacion);
 	}
 	else{
 		alert("Introduce un nombre");
@@ -366,4 +389,11 @@ function eliminarEspecificacionBBDD(elemento_padre){
 	form_a_enviar_para_eliminar_especificacion.appendChild(input_para_añadir);
 
 	document.getElementById("eliminar_especifiacion").submit();
+}
+
+function guardarCambiosEspecificaciones(){
+	alert("En produccion");
+	//document.getElementById("nueva_especifiacion").submit();
+	console.log(nueva_especiificacion);
+	document.getElementById("rueba").innerText = nueva_especiificacion;
 }

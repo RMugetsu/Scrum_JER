@@ -171,7 +171,7 @@
             }
             */
             
-            echo "<div class='col s5 m5 info'>";
+            echo "<div id='especificaciones' class='col s5 m5 info'>";
             echo "<ul id='lista_especificaciones' class='collection with-header'>";
             while($registre = mysqli_fetch_assoc($resultat)){
                 echo "<li class='collection-item' id='listado_esp'>";
@@ -213,5 +213,7 @@
             <!--- Esto es para eliminar la especificacion de la base de datos -->
             <form action="delete/eliminar_especificacion.php" method="post" id="eliminar_especifiacion">
             </form>
+
+            <p id="rueba"></p>
     </body>
 </html>
