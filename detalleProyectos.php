@@ -16,6 +16,8 @@
         <?php
 
             session_start();
+            $tipo_usuario = $_SESSION['Tipo'];
+            echo "<p id=tipo_usuario hidden>$tipo_usuario</p>";
             //guardaremos la url para poder luego acceder al insertar un nuevo sprint
             $_SESSION['url'] = $_SERVER["REQUEST_URI"];  
             //y nos conectamos a la base de datos

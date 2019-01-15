@@ -3,6 +3,9 @@
 var nueva_especiificacion = [];
 
 document.addEventListener('DOMContentLoaded', function(){
+	//cogera que tipo de usuario es
+	var tipo_usuario = document.getElementById("tipo_usuario");
+
     //comprobara si hay sprints o no
 	var numero_de_sprints = document.getElementById("numero_de_sprints").innerText;
 	if (numero_de_sprints == 0) {
@@ -15,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 document.addEventListener('DOMContentLoaded', function() {
 	//crea el boton de enviar
+	if (tipo_usuario == 2) {
+                	    
+                 
     var div_especificaciones = document.getElementById("especificaciones");
     var boton_añadir_especificaciones = document.createElement("input");
     boton_añadir_especificaciones.setAttribute("name","Crearespecificaciones");
@@ -22,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     boton_añadir_especificaciones.setAttribute("value","Guardar cambios");
     boton_añadir_especificaciones.setAttribute("onclick","añadirNuevaEspec()");
     div_especificaciones.appendChild(boton_añadir_especificaciones);
+    }
 
   });
 
@@ -160,13 +167,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //esto creara el boton de añadir sprints:
 document.addEventListener('DOMContentLoaded', function() {
-    var div_sprints = document.getElementById("sprints");
-    var boton_añadir_sprints = document.createElement("input");
-    boton_añadir_sprints.setAttribute("name","CrearSprint");
-    boton_añadir_sprints.setAttribute("type","button");
-    boton_añadir_sprints.setAttribute("value","Añadir nuevo sprint");
-    boton_añadir_sprints.setAttribute("onclick","generar_formulario_nuevo_sprint()");
-    div_sprints.appendChild(boton_añadir_sprints);
+	if (tipo_usuario == 1) {
+        var div_sprints = document.getElementById("sprints");
+	    var boton_añadir_sprints = document.createElement("input");
+	    boton_añadir_sprints.setAttribute("name","CrearSprint");
+	    boton_añadir_sprints.setAttribute("type","button");
+	    boton_añadir_sprints.setAttribute("value","Añadir nuevo sprint");
+	    boton_añadir_sprints.setAttribute("onclick","generar_formulario_nuevo_sprint()");
+	    div_sprints.appendChild(boton_añadir_sprints);      	              
+    }
+    
   });
 
 // funcion para generar el formulario del nuevo sprint
