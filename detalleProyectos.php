@@ -130,13 +130,13 @@
                     }
                     else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                         echo "<div style='border:black 4px solid' class='collapsible-header'>Sprint".$registreSpr['NumeroSprint'].
-                        "<img src='img/Abierto.png' id='CandadoNegro' height='20px' width='20px'><img src='img/X.png' onclick= 'eliminarSprint(this)' id='EliminarSprint' height='20px' width='20px'>
+                        "<img src='img/Cerrado.png' onclick='CambiarCandado(this)' id='CandadoNegro' height='20px' width='20px'><img src='img/X.png' onclick= 'eliminarSprint(this)' id='EliminarSprint' height='20px' width='20px'>
                         </div>";
                     }
                     else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
                         //no puede aparecer el boton de eliminar si la fecha de inicio es anterior a hoy
                         echo "<div style='border:gray 4px solid' class='collapsible-header'>Sprint".$registreSpr['NumeroSprint']."
-                        <img src='img/Abierto.png' id='CandadoGris' height='20px' width='20px'></div>";
+                        <img src='img/Cerrado.png' id='CandadoGris' height='20px' width='20px'></div>";
                     }
                     //Se crea el contenido del sprint
                       echo "<div class='collapsible-body'>";
