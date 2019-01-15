@@ -15,6 +15,11 @@
             $pagina_proyectos = $_SESSION['url'];
 
 			mysqli_query($con,"DELETE from sprints WHERE NumeroSprint=$sprint_a_eliminar");
+
+
+			$quitar_idSprint_a_la_especificacion = "UPDATE especificaciones SET IdSprint = null where IdSprint = $sprint_a_eliminar";
+            $especificacion_en_null = mysqli_query($con, $quitar_idSprint_a_la_especificacion);
+
 			mysqli_close($con);
 			header("Location:$pagina_proyectos");
 

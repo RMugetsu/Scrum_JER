@@ -145,7 +145,7 @@
                       echo "<table>";
                       $idSprint=$registreSpr['NumeroSprint'];
                       $horas = 0;
-                      $consultaSprs = "SELECT e.Id, e.Nombre, e.Dificultad, e.Horas, u.Nombre as usuario FROM especificaciones e, usuario u  WHERE e.IdSprint= $idSprint AND e.IdUsuario= u.Id AND e.IdProyecto = $numero_del_proyecto2";
+                      $consultaSprs = "SELECT Nombre, Dificultad, Horas FROM especificaciones  WHERE IdSprint= $idSprint AND IdProyecto = $numero_del_proyecto2";
                     $resultatSprs = mysqli_query($con, $consultaSprs);
                     //Se muestran las especificaciones del sprint
                         while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
@@ -155,8 +155,6 @@
 		                                echo "<td> ".$registreSprs['Dificultad'];
 		                                echo "</td>";
 		                                echo "<td> ".$registreSprs['Horas'];
-		                                echo "</td>";
-		                                echo "<td> ".$registreSprs['usuario'];
 		                                echo "</td>";
 		                            echo "</tr>";
                             
