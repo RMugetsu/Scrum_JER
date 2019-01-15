@@ -1,5 +1,5 @@
 var controlError = 0;
-function generarError(div,error){
+function generarError(error){
 	var divError = document.querySelector("#error");
 	if(controlError==0){
 		divError.style.display= "block";

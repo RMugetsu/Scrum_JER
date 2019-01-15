@@ -2,14 +2,14 @@
 <html>
     <head>
         <title>Proyectos</title>
+        <script type="text/javascript" src="script/script.js" defer></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <script src="script/script_proyectos.js"></script>
+        <script src="script/script_proyectos.js" defer></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/especificaciones.css">
-        <script type="text/javascript" src="script/script.js" defer></script>
     </head>
     <body>
        
@@ -42,7 +42,7 @@
                     <a href="logout.php"><img src="img/cerrar.png" id="imgCerrar"></a>
                 </div>
             </div>
-            <div id="error" onclick="generarError('error','holanxdgjlfskjvrbggjbsklfbgñhsloñduilvbdfzblxcbzklvzuvgbukdzsbuildjkv kjzsv bdkbzsdjk.vbskdjvbgkjzsvjuzbskjvbkjzsvbckhjzbgkjuvbzsjkdvbzk')" class="poscError">Error</div>
+            <div id="error" class="poscError" style="display: none"></div>
             <?php
             //Informacion del proyecto
             //Info General
