@@ -14,3 +14,18 @@
 #boton_nueva_especificacion {
 	margin-left: 2%;
 }
+#EliminarSprint{
+	margin-left: 2%;
+}
+#CandadoVerde{
+	margin-left: 70%;
+}
+#CandadoNegro{
+	margin-left: 70%;
+}
+#CandadoNegro:hover{
+	filter: blur(2px);
+}
+#CandadoGris{
+	margin-left: 70%;
+}

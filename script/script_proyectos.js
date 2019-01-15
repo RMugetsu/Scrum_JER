@@ -1,8 +1,43 @@
+//variables globales
+
+var nueva_especiificacion = [];
+
+document.addEventListener('DOMContentLoaded', function(){
+    //comprobara si hay sprints o no
+	var numero_de_sprints = document.getElementById("numero_de_sprints").innerText;
+	if (numero_de_sprints == 0) {
+		existen_sprints = false;
+		}
+	else{
+		existen_sprints = true;
+	}
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+	//crea el boton de enviar
+    var div_especificaciones = document.getElementById("especificaciones");
+    var boton_añadir_especificaciones = document.createElement("input");
+    boton_añadir_especificaciones.setAttribute("name","Crearespecificaciones");
+    boton_añadir_especificaciones.setAttribute("type","button");
+    boton_añadir_especificaciones.setAttribute("value","Guardar cambios");
+    boton_añadir_especificaciones.setAttribute("onclick","guardarCambiosEspecificaciones()");
+    div_especificaciones.appendChild(boton_añadir_especificaciones);
+
+  });
+
+
 //Comienzan las funciones de ordenar o eliminar las especificaiones
 function eliminarEspecificacion(element){
 	//boton de eliminar
    	var elemento_padre = element.parentNode;
+
 	elemento_padre.parentNode.removeChild(elemento_padre);
+
+	console.log(elemento_padre.innerText);
+	//elimina la especificacion del array
+	nueva_especiificacion.splice( nueva_especiificacion.indexOf(elemento_padre.innerText), 1 );
+	console.log("array"+nueva_especiificacion);
+	//eliminarEspecificacionBBDD(elemento_padre.innerText);
 
 }
 
@@ -101,6 +136,11 @@ function añadirEspecificacion(){
 		nuevo_li.appendChild(flecha_arriba);
 
 		lista_especificaciones.appendChild(nuevo_li);
+
+		nueva_especiificacion.push(nueva_especificacion);
+		console.log(nueva_especiificacion);
+
+		//añadirEspecificacionBBDD(nueva_especificacion);
 	}
 	else{
 		alert("Introduce un nombre");
@@ -133,8 +173,30 @@ function generar_formulario_nuevo_sprint() {
 	deshabilitarBotonNuevoSprint();
 	var div_nuevo_sprint = document.getElementById("nuevo_sprint");
 	var form_nuevo_sprint = document.createElement("form");
-	form_nuevo_sprint.setAttribute("action","#");
+	form_nuevo_sprint.setAttribute("action","insert/insert_nuevo_sprint.php");
+	form_nuevo_sprint.setAttribute("method","post");
 	form_nuevo_sprint.setAttribute("id","form_nuevo_sprint");
+
+	//crea el label y el date de la fecha inicio
+	var label_numero_nuevo_sprint = document.createElement("label");
+	var texto_numero_nuevo_sprint = document.createTextNode("Numero de Sprint");
+	label_numero_nuevo_sprint.appendChild(texto_numero_nuevo_sprint);
+	form_nuevo_sprint.appendChild(label_numero_nuevo_sprint);
+
+	form_nuevo_sprint.appendChild(document.createElement("br"));
+
+	var label_horas_numero_nuevo_sprint = document.createElement("label");
+	var id_sprint_nuevo = document.getElementById("id_sprint").innerText;
+	if (existen_sprints == false) {
+		var horas_numero_nuevo_sprint = document.createTextNode(id_sprint_nuevo);
+	}
+	else{
+		var horas_numero_nuevo_sprint = document.createTextNode(id_sprint_nuevo);
+	}
+	label_horas_numero_nuevo_sprint.appendChild(horas_numero_nuevo_sprint);
+	form_nuevo_sprint.appendChild(horas_numero_nuevo_sprint);
+
+	form_nuevo_sprint.appendChild(document.createElement("br"));
 
 	//crea el label y el date de la fecha inicio
 	var label_inicio_nuevo_sprint = document.createElement("label");
@@ -145,7 +207,7 @@ function generar_formulario_nuevo_sprint() {
 	var fecha_inicio_nuevo_sprint = document.createElement("input");
 	fecha_inicio_nuevo_sprint.setAttribute("id","fecha_inicial_sprint");
 	fecha_inicio_nuevo_sprint.setAttribute("type","date");
-	//fecha_inicio_nuevo_sprint.setAttribute("required","true");
+	fecha_inicio_nuevo_sprint.setAttribute("name","nueva_fecha_inicio");
 	form_nuevo_sprint.appendChild(fecha_inicio_nuevo_sprint);
 
 	form_nuevo_sprint.appendChild(document.createElement("br"));
@@ -159,7 +221,7 @@ function generar_formulario_nuevo_sprint() {
 	var fecha_final_nuevo_sprint = document.createElement("input");
 	fecha_final_nuevo_sprint.setAttribute("id","fecha_final_sprint");
 	fecha_final_nuevo_sprint.setAttribute("type","date");
-	//fecha_final_nuevo_sprint.setAttribute("required","true");
+	fecha_final_nuevo_sprint.setAttribute("name","nueva_fecha_fin");
 	form_nuevo_sprint.appendChild(fecha_final_nuevo_sprint);
 
 	//crea el label y el introducir un numero de horas
@@ -171,8 +233,7 @@ function generar_formulario_nuevo_sprint() {
 	var numero_horasDisponibles_nuevo_sprint = document.createElement("input");
 	numero_horasDisponibles_nuevo_sprint.setAttribute("id","numero_horas_disponibles");
 	numero_horasDisponibles_nuevo_sprint.setAttribute("type","number");
-	//numero_horasDisponibles_nuevo_sprint.setAttribute("max","999");
-	//numero_horasDisponibles_nuevo_sprint.setAttribute("required","true");
+	numero_horasDisponibles_nuevo_sprint.setAttribute("name","nueva_horas_disponibles");
 	form_nuevo_sprint.appendChild(numero_horasDisponibles_nuevo_sprint);
 
 	//crea el boton de enviar
@@ -201,58 +262,138 @@ function comprobarFechas() {
 	var fecha_fin_sprint_valor = new Date(fecha_fin_sprint).getTime();
 
 
-
-
-	//coge la "p" dentro del "div" que esta dentro de la "ul"
-	var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
-	//coge el contenido de la "p"
-	var fecha_inicio_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_inicio]").innerHTML;
-	//filtra para que solo coja la fecha y no todo el contenido 
-	var fecha_inicio_ultimo_sprint = fecha_inicio_ultimo_sprint.replace("Fecha Inicio:", "");
-	//y lo convierte a "time"
-	var fecha_inicio_ultimo_sprint = new Date(fecha_inicio_ultimo_sprint).getTime();
-
-	//ahora lo mismo pero con la fecha de fin:
-	var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
-	var fecha_fin_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_fin]").innerHTML;
-	var fecha_fin_ultimo_sprint = fecha_fin_ultimo_sprint.replace("Fecha Fin:", "");
-	var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
-
-
-	if (fecha_inicio_sprint == "") {
-		alert("rellena la fecha de inicio")
+	
+	if (existen_sprints == false) {
+		if (fecha_inicio_sprint == "") {
+			alert("rellena la fecha de inicio")
+		}
+		else if (fecha_inicio_sprint_valor <= fecha_actual_comparacion) {
+			alert("fecha de inicio elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_sprint == "") {
+			alert("rellena la fecha de fin")
+		}
+		else if (fecha_fin_sprint_valor <= fecha_actual_comparacion) {
+			alert("fecha de fin elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_sprint_valor <= fecha_inicio_sprint_valor) {
+			alert("fecha de fin es anterior o igual a la fecha de inicio");
+		}
+		else if (horas_disponibles < 1) {
+			alert("las horas no pueden ser menos de 1");
+		}
+		else if (horas_disponibles > 999) {
+			alert("las horas no pueden ser mas de 999");
+		}
+		else {
+			document.getElementById("form_nuevo_sprint").submit();
+		}
 	}
-	else if (fecha_inicio_sprint_valor <= fecha_actual_comparacion) {
-		alert("fecha de inicio elegida es anterior o igual a hoy");
-	}
-	else if (fecha_fin_sprint == "") {
-		alert("rellena la fecha de fin")
-	}
-	else if (fecha_fin_sprint_valor <= fecha_actual_comparacion) {
-		alert("fecha de fin elegida es anterior o igual a hoy");
-	}
-	else if (fecha_fin_sprint_valor <= fecha_inicio_sprint_valor) {
-		alert("fecha de fin es anterior o igual a la fecha de inicio");
-	}
-	else if (horas_disponibles < 1) {
-		alert("las horas no pueden ser menos de 1");
-	}
-	else if (horas_disponibles > 999) {
-		alert("las horas no pueden ser mas de 999");
-	}
+	else{
+
+		//coge la "p" dentro del "div" que esta dentro de la "ul"
+		var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
+		//coge el contenido de la "p"
+		var fecha_inicio_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_inicio]").innerHTML;
+		//filtra para que solo coja la fecha y no todo el contenido 
+		var fecha_inicio_ultimo_sprint = fecha_inicio_ultimo_sprint.replace("Fecha Inicio:", "");
+		//y lo convierte a "time"
+		var fecha_inicio_ultimo_sprint = new Date(fecha_inicio_ultimo_sprint).getTime();
+
+		//ahora lo mismo pero con la fecha de fin:
+		var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
+		var fecha_fin_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_fin]").innerHTML;
+		var fecha_fin_ultimo_sprint = fecha_fin_ultimo_sprint.replace("Fecha Fin:", "");
+		var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
 
 
+		if (fecha_inicio_sprint == "") {
+			alert("rellena la fecha de inicio")
+		}
+		else if (fecha_inicio_sprint_valor <= fecha_actual_comparacion) {
+			alert("fecha de inicio elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_sprint == "") {
+			alert("rellena la fecha de fin")
+		}
+		else if (fecha_fin_sprint_valor <= fecha_actual_comparacion) {
+			alert("fecha de fin elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_sprint_valor <= fecha_inicio_sprint_valor) {
+			alert("fecha de fin es anterior o igual a la fecha de inicio");
+		}
+		else if (horas_disponibles < 1) {
+			alert("las horas no pueden ser menos de 1");
+		}
+		else if (horas_disponibles > 999) {
+			alert("las horas no pueden ser mas de 999");
+		}
 
-
-	else if (fecha_inicio_sprint_valor <= fecha_fin_ultimo_sprint) {
-		alert("La fecha de inicio introducida es anterior a la fecha fin del ultimo sprint");
+		else if (fecha_inicio_sprint_valor <= fecha_fin_ultimo_sprint) {
+			alert("La fecha de inicio introducida es anterior a la fecha fin del ultimo sprint");
+		}
+		else {
+			document.getElementById("form_nuevo_sprint").submit();
+		}
 	}
-	else {
-		alert("ta to bien");
-	}
-
 }
 
 function paginaAnterior(){
 	document.location = "home.php";
+}
+function eliminarSprint(element){
+	//elimina el sprint
+   	var elemento_padre = element.parentNode;
+   	//quitamos el texto de "sprint"
+   	var elemento_padre_sin_sprint = elemento_padre.innerText.replace("Sprint","");
+   	//eliminamos los espacios del texto
+   	var elemento_padre_sin_espacios = elemento_padre_sin_sprint.trim();
+   	//y tendremos el numero del sprint para poderlo borrar de la base de datos
+   	var elemento_abuelo = elemento_padre.parentNode;
+	elemento_abuelo.parentNode.removeChild(elemento_abuelo);
+
+	eliminarSprintBDD(elemento_padre_sin_espacios);
+}
+
+function eliminarSprintBDD(elemento_padre_sin_espacios){
+
+	var form_a_enviar_para_eliminar_sprint = document.getElementById("eliminar__sprint");
+	var input_para_eliminar = document.createElement("input");
+	input_para_eliminar.setAttribute("value",elemento_padre_sin_espacios);
+    input_para_eliminar.setAttribute("name","numero_a_eliminar");
+    //si esta deshabilitado no lo hace
+    //input_para_eliminar.setAttribute("disabled","true");
+    input_para_eliminar.setAttribute("hidden","true");
+	form_a_enviar_para_eliminar_sprint.appendChild(input_para_eliminar);
+
+	document.getElementById("eliminar__sprint").submit();
+}
+
+function añadirEspecificacionBBDD(nueva_especificacion){
+	var form_a_enviar_para_agregar_sprint = document.getElementById("nueva_especifiacion");
+	var input_para_añadir = document.createElement("input");
+	input_para_añadir.setAttribute("value",nueva_especificacion);
+    input_para_añadir.setAttribute("name","especificacion_bbdd");
+    input_para_añadir.setAttribute("hidden","true");
+	form_a_enviar_para_agregar_sprint.appendChild(input_para_añadir);
+
+	document.getElementById("nueva_especifiacion").submit();
+}
+
+function eliminarEspecificacionBBDD(elemento_padre){
+	var form_a_enviar_para_eliminar_especificacion = document.getElementById("eliminar_especifiacion");
+	var input_para_añadir = document.createElement("input");
+	input_para_añadir.setAttribute("value",elemento_padre);
+    input_para_añadir.setAttribute("name","espec_a_eliminar");
+    input_para_añadir.setAttribute("hidden","true");
+	form_a_enviar_para_eliminar_especificacion.appendChild(input_para_añadir);
+
+	document.getElementById("eliminar_especifiacion").submit();
+}
+
+function guardarCambiosEspecificaciones(){
+	alert("En produccion");
+	//document.getElementById("nueva_especifiacion").submit();
+	console.log(nueva_especiificacion);
+	document.getElementById("rueba").innerText = nueva_especiificacion;
 }

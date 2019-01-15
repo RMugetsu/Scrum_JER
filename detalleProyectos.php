@@ -15,16 +15,14 @@
        
         <?php
 
-            //ejemplo de insert
-            //INSERT INTO `especificaciones`(`Nombre`,`Horas`, `Dificultad`, `IdUsuario`, `IdProyecto`) VALUES ('Proyecto1',20,'Dificil',1,2);
             session_start();
-            //echo $_SESSION['Nombre'];
-            //echo "$_GET['Nombre']";
-
+            //guardaremos la url para poder luego acceder al insertar un nuevo sprint
+            $_SESSION['url'] = $_SERVER["REQUEST_URI"];  
+            //y nos conectamos a la base de datos
             $con = mysqli_connect('localhost', 'admin','1234');
             mysqli_select_db($con, 'projecte_scrumb');
             $nombre_proyecto = $_GET['proyect'];
-            $consulta = "select e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto AND e.IdSprint='null'" ;
+            $consulta = "select e.IdSprint, e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto  AND e.IdSprint is null" ;
             $resultat = mysqli_query($con, $consulta);
            
            
@@ -88,67 +86,95 @@
             $fecha_actual = strtotime(date('y-m-d'));
 
             //Sprints del proyecto
-            $consultaSpr = "SELECT s.Id, s.Inicio_Sprint, s.Final_Sprint, s.Horas_Disponibles FROM proyecto p, sprints s WHERE p.Nombre='$nombre_proyecto' AND p.Id = s.IdProyecto";
+            $consultaSpr = "SELECT s.Id, s.Inicio_Sprint, s.Final_Sprint, s.Horas_Disponibles, s.IdProyecto FROM proyecto p, sprints s WHERE p.Nombre='$nombre_proyecto' AND p.Id = s.IdProyecto";
             $resultatSpr = mysqli_query($con, $consultaSpr);
+            $numero_de_sprints = mysqli_num_rows($resultatSpr);
+            echo "<p id='numero_de_sprints' hidden>$numero_de_sprints</p>";
+            //comprobara si existe algun sprint, si no existe se asignara un numero, sino sumara el que tenia
+                    if ($numero_de_sprints == 0) {
+                    	$_SESSION['id_sprint'] = 1;
+                    	echo "<p id='id_sprint' hidden>".$_SESSION['id_sprint']."</p>";
+                    }
             echo "<div class='row'>";
             echo "<div class='col s12 m12'>";
             echo "<div class='row'>";
             echo "<div id='sprints' class='col s6 m6 info'>";
             echo "<ul id='ul_sprints' class='collapsible'>";
-            while($registreSpr = mysqli_fetch_assoc($resultatSpr)){
-                echo "<li>";
-                //fechas de inicio y fin metidas en strtotime para calcular tiempos
-                $fecha_inicio_sprint = strtotime($registreSpr['Inicio_Sprint']);
-                $fecha_final_sprint = strtotime($registreSpr['Final_Sprint']);
-                //if de colores
-                if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
-                    echo "<div style='border:green 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
-                }
-                //este tendria que ser negro?
-                else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
-                    echo "<div style='border:black 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
-                }
-                else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
-                    echo "<div style='border:gray 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."</div>";
-                }
-                //Se crea el contenido del sprint
-                  echo "<div class='collapsible-body'>";
-                  echo "<p name='fecha_inicio'>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
-                  echo "<p name='fecha_fin'>Fecha Fin:".$registreSpr['Final_Sprint']."</p>";
-                  echo "<table>";
-                  $idSprint=$registreSpr['Id'];
-                  $horas = 0;
-                  $consultaSprs = "SELECT e.Nombre, e.Dificultad, e.Horas, u.Nombre as usuario FROM especificaciones e, usuario u  WHERE e.IdSprint= $idSprint AND e.IdUsuario= u.Id";
-                $resultatSprs = mysqli_query($con, $consultaSprs);
-                //Se muestran las especificaciones del sprint
-                    while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
-                        echo "<tr>";
-                            echo "<td> ".$registreSprs['Nombre'];
-                            echo "</td>";
-                            echo "<td> ".$registreSprs['Dificultad'];
-                            echo "</td>";
-                            echo "<td> ".$registreSprs['Horas'];
-                            echo "</td>";
-                            echo "<td> ".$registreSprs['usuario'];
-                            echo "</td>";
-                        echo "</tr>";
-                        $horas += $registreSprs['Horas'];
+            //if ($registreSpr = mysqli_fetch_assoc($resultatSpr)) {
+                while($registreSpr = mysqli_fetch_assoc($resultatSpr)){
+                    echo "<li>";
+                    //fechas de inicio y fin metidas en strtotime para calcular tiempos
+                    $fecha_inicio_sprint = strtotime($registreSpr['Inicio_Sprint']);
+                    $fecha_final_sprint = strtotime($registreSpr['Final_Sprint']);
+                    //guardo el id proyecto en una session para luego poder crear un insert y el id normal
+                    $_SESSION['id_proyecto'] = $registreSpr['IdProyecto']; 
+                    //comprobara si existe algun sprint, si no existe se asignara un numero, sino sumara el que tenia
+                    if ($numero_de_sprints != 0) {
+                    	$_SESSION['id_sprint'] = $registreSpr['Id']+1; 
                     }
-                echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
-                echo "</table>";
+                    //if de colores
+                    if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
+                        //no puede aparecer el boton de eliminar si la fecha de inicio es anterior a hoy
+                        echo "<div style='border:green 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."<img src='img/Cerrado.png' id='CandadoVerde' height='20px' width='20px'>
+                        </div>";
+                    }
+                    else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
+                        echo "<div style='border:black 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id'].
+                        "<img src='img/Abierto.png' id='CandadoNegro' height='20px' width='20px'><img src='img/X.png' onclick= 'eliminarSprint(this)' id='EliminarSprint' height='20px' width='20px'>
+                        </div>";
+                    }
+                    else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
+                        //no puede aparecer el boton de eliminar si la fecha de inicio es anterior a hoy
+                        echo "<div style='border:gray 4px solid' class='collapsible-header'>Sprint".$registreSpr['Id']."
+                        <img src='img/Abierto.png' id='CandadoGris' height='20px' width='20px'></div>";
+                    }
+                    //Se crea el contenido del sprint
+                      echo "<div class='collapsible-body'>";
+                      echo "<p name='fecha_inicio'>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
+                      echo "<p name='fecha_fin'>Fecha Fin:".$registreSpr['Final_Sprint']."</p>";
+                      echo "<table>";
+                      $idSprint=$registreSpr['Id'];
+                      $horas = 0;
+                      $consultaSprs = "SELECT e.Id, e.Nombre, e.Dificultad, e.Horas, u.Nombre as usuario FROM especificaciones e, usuario u  WHERE e.IdSprint= $idSprint AND( e.IdUsuario= u.Id or e.IdUsuario IS  NULL)";
+                    $resultatSprs = mysqli_query($con, $consultaSprs);
+                    //Se muestran las especificaciones del sprint
+                        while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
+                            echo "<tr>";
+                                echo "<td> ".$registreSprs['Nombre'];
+                                echo "</td>";
+                                echo "<td> ".$registreSprs['Dificultad'];
+                                echo "</td>";
+                                echo "<td> ".$registreSprs['Horas'];
+                                echo "</td>";
+                                echo "<td> ".$registreSprs['usuario'];
+                                echo "</td>";
+                            echo "</tr>";
+                            $horas += $registreSprs['Horas'];
+                        }
+                    echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
+                    echo "</table>";
+                    echo "</div>";
+                    echo "</li>";
+                }
+                echo "</ul>";
                 echo "</div>";
-                echo "</li>";
+                //Tiene que cerrar y volver a abrir porque hay un problema de
+                //compatibilidad de nuestro javascript con el materialize
+                echo "<div class='col s1 m1'>";
+                echo "</div>";
+                //añadimos un echo de una "p" en hidden para poder pasar los datos al formulario a traves de javascript
+                echo "<p id='id_sprint' hidden>".$_SESSION['id_sprint']."</p>";
+            /*
             }
-            echo "</ul>";
-            echo "</div>";
-            //Tiene que cerrar y volver a abrir porque hay un problema de
-            //compatibilidad de nuestro javascript con el materialize
-            echo "<div class='col s1 m1'>";
-            echo "</div>";
-            echo "<div class='col s5 m5 info'>";
+            else {
+                echo "no hay esp";
+            }
+            */
+            
+            echo "<div id='especificaciones' class='col s5 m5 info'>";
             echo "<ul id='lista_especificaciones' class='collection with-header'>";
             while($registre = mysqli_fetch_assoc($resultat)){
-                 echo "<li class='collection-item' id='listado_esp'>";
+                echo "<li class='collection-item' id='listado_esp'>";
                  if ($_SESSION['Tipo'] == 2) {
                      echo $registre["Nombre"]
                  .'<img class="secondary-content boton_eliminar" onclick="eliminarEspecificacion(this)" src="img/eliminar.png" height="25">'
@@ -159,6 +185,8 @@
                     echo $registre["Nombre"];
                  }
                  echo "</li>";
+                
+                 
                  
              }
             echo "</ul>";
@@ -177,17 +205,17 @@
                 <div class="col s11 m11"></div>
                 <div class="col s1 m1"><img src="./img/flecha_arriba.svg" id="retroceder" onclick="paginaAnterior()"></div>
             </div>
-             <?php
-             /*
-             ///ESTO ES DE PRUEBA 
-            	$consultaSprs = "SELECT Inicio_Sprint, Final_Sprint as inicio, final FROM sprints";
-                $resultatSprs = mysqli_query($con, $consultaSprs);
-                
-                    while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
-                    	echo "<br>";
-                    	echo $registreSprs['Inicio_Sprint'];
-                    }
-             */
-             ?>
+
+            <!--- Esto es para eliminar el sprint seleccionado -->
+            <form action="delete/eliminar_sprint.php" method="post" id="eliminar__sprint">
+            </form>
+            <!--- Esto es para añadir la especificacion a la base de datos -->
+            <form action="insert/nueva_especifiacion.php" method="post" id="nueva_especifiacion">
+            </form>
+            <!--- Esto es para eliminar la especificacion de la base de datos -->
+            <form action="delete/eliminar_especificacion.php" method="post" id="eliminar_especifiacion">
+            </form>
+
+            <p id="rueba"></p>
     </body>
 </html>
