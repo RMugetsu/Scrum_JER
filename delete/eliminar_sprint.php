@@ -14,7 +14,7 @@
 
             $pagina_proyectos = $_SESSION['url'];
 
-			mysqli_query($con,"DELETE from sprints WHERE Id=$sprint_a_eliminar");
+			mysqli_query($con,"DELETE from sprints WHERE NumeroSprint=$sprint_a_eliminar");
 			mysqli_close($con);
 			header("Location:$pagina_proyectos");
 

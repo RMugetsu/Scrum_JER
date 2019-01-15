@@ -1,16 +1,13 @@
 -- phpMyAdmin SQL Dump
-CREATE DATABASE IF NOT EXISTS projecte_scrumb;
--- version 4.8.3
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 13-01-2019 a las 21:13:05
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.10
+-- Servidor: localhost:3306
+-- Tiempo de generación: 15-01-2019 a las 17:51:40
+-- Versión del servidor: 5.7.24-0ubuntu0.18.04.1
+-- Versión de PHP: 7.2.10-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -45,7 +42,7 @@ CREATE TABLE `especificaciones` (
 --
 
 INSERT INTO `especificaciones` (`Id`, `Nombre`, `IdSprint`, `Descripción`, `Horas`, `Dificultad`, `IdUsuario`, `IdProyecto`) VALUES
-(1, 'Espec1', 1, NULL, 20, 'Dificil', 1, 2),
+(1, 'Espec1', 2, NULL, 20, 'Dificil', 1, 2),
 (2, 'Espec2', 2, NULL, 20, 'Dificil', 2, 1),
 (3, 'Espec3', 3, NULL, 20, 'Dificil', 3, 3),
 (4, 'Espec4', 1, NULL, 20, 'Dificil', 3, 1),
@@ -108,6 +105,7 @@ INSERT INTO `proyecto` (`Id`, `Nombre`, `NumSprint`, `PO_Id`, `SM_Id`, `Descripc
 
 CREATE TABLE `sprints` (
   `Id` int(11) NOT NULL,
+  `NumeroSprint` int(11) NOT NULL,
   `IdProyecto` int(11) NOT NULL,
   `Inicio_Sprint` date NOT NULL,
   `Final_Sprint` date NOT NULL,
@@ -119,13 +117,13 @@ CREATE TABLE `sprints` (
 -- Volcado de datos para la tabla `sprints`
 --
 
-INSERT INTO `sprints` (`Id`, `IdProyecto`, `Inicio_Sprint`, `Final_Sprint`, `Estado`, `Horas_Disponibles`) VALUES
-(1, 1, '2018-12-01', '2018-12-09', '', 100),
-(2, 1, '2018-12-16', '2018-08-16', '', 100),
-(3, 1, '2018-12-01', '2018-12-09', '', 100),
-(4, 1, '2018-12-16', '2019-01-01', '', 100),
-(5, 1, '2019-01-12', '2019-01-13', '', 100),
-(6, 1, '2019-01-14', '2019-01-15', '', 100);
+INSERT INTO `sprints` (`Id`, `NumeroSprint`, `IdProyecto`, `Inicio_Sprint`, `Final_Sprint`, `Estado`, `Horas_Disponibles`) VALUES
+(1, 1, 1, '2018-08-06', '2018-08-16', '', 100),
+(2, 2, 1, '2018-11-14', '2018-11-16', '', 100),
+(3, 3, 1, '2018-12-01', '2018-12-09', '', 100),
+(4, 4, 1, '2018-12-16', '2019-01-01', '', 100),
+(5, 5, 1, '2019-01-12', '2019-01-13', '', 100),
+(6, 6, 1, '2019-01-14', '2019-01-15', '', 100);
 
 -- --------------------------------------------------------
 
@@ -223,37 +221,31 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `especificaciones`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `sprints`
 --
 ALTER TABLE `sprints`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -263,7 +255,6 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `FOREIGN` FOREIGN KEY (`Tipo`) REFERENCES `tipo_usuario` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

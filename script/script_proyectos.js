@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     boton_añadir_especificaciones.setAttribute("name","Crearespecificaciones");
     boton_añadir_especificaciones.setAttribute("type","button");
     boton_añadir_especificaciones.setAttribute("value","Guardar cambios");
-    boton_añadir_especificaciones.setAttribute("onclick","guardarCambiosEspecificaciones()");
+    boton_añadir_especificaciones.setAttribute("onclick","añadirNuevaEspec()");
     div_especificaciones.appendChild(boton_añadir_especificaciones);
 
   });
@@ -141,6 +141,7 @@ function añadirEspecificacion(){
 		console.log(nueva_especiificacion);
 
 		//añadirEspecificacionBBDD(nueva_especificacion);
+		guardarCambiosEspecificaciones();
 	}
 	else{
 		alert("Introduce un nombre");
@@ -392,8 +393,10 @@ function eliminarEspecificacionBBDD(elemento_padre){
 }
 
 function guardarCambiosEspecificaciones(){
-	alert("En produccion");
 	//document.getElementById("nueva_especifiacion").submit();
 	console.log(nueva_especiificacion);
-	document.getElementById("rueba").innerText = nueva_especiificacion;
+	document.getElementById("insertar_nueva_especificacion").value = nueva_especiificacion;
+}
+function añadirNuevaEspec(){
+	document.getElementById("form_nuevo_sprint").submit();
 }
