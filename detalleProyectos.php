@@ -188,7 +188,7 @@
                 echo "<li class='collection-item' id='listado_esp'>";
                  if ($_SESSION['Tipo'] == 2) {
                      echo $registre["Nombre"]
-                 .'<img class="secondary-content boton_eliminar" onclick="eliminarEspecificacion(this)" src="img/eliminar.png" height="25">'
+                 .'<img class="secondary-content boton_eliminar" onclick="eliminarEspecificacionBBDD(this)" src="img/eliminar.png" height="25">'
                  .'<img class="secondary-content flecha_abajo" onclick="posicionAbajo(this)" src="img/flecha_arriba.svg" height="25">'
                  .'<img class="secondary-content flecha_arriba" onclick="posicionArriba(this)" src="img/flecha_arriba.svg" height="25">';       
                  }

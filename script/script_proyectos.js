@@ -37,7 +37,6 @@ function eliminarEspecificacion(element){
 	//elimina la especificacion del array
 	nueva_especiificacion.splice( nueva_especiificacion.indexOf(elemento_padre.innerText), 1 );
 	console.log("array"+nueva_especiificacion);
-	//eliminarEspecificacionBBDD(elemento_padre.innerText);
 
 }
 
@@ -138,10 +137,11 @@ function añadirEspecificacion(){
 		lista_especificaciones.appendChild(nuevo_li);
 
 		nueva_especiificacion.push(nueva_especificacion);
-		console.log(nueva_especiificacion);
+
+		document.getElementById("nueva_especificacion").value = "";
 
 		//añadirEspecificacionBBDD(nueva_especificacion);
-		guardarCambiosEspecificaciones();
+		
 	}
 	else{
 		generarError("Introduce un nombre");
@@ -381,12 +381,17 @@ function añadirEspecificacionBBDD(nueva_especificacion){
 	document.getElementById("nueva_especifiacion").submit();
 }
 
-function eliminarEspecificacionBBDD(elemento_padre){
+function eliminarEspecificacionBBDD(elemento){
+
+	var elemento_padre = elemento.parentNode;
+	var texto_elemento_padre = elemento_padre.innerText;
+
 	var form_a_enviar_para_eliminar_especificacion = document.getElementById("eliminar_especifiacion");
 	var input_para_añadir = document.createElement("input");
-	input_para_añadir.setAttribute("value",elemento_padre);
+	input_para_añadir.setAttribute("value",texto_elemento_padre);
     input_para_añadir.setAttribute("name","espec_a_eliminar");
     input_para_añadir.setAttribute("hidden","true");
+    console.log(texto_elemento_padre);
 	form_a_enviar_para_eliminar_especificacion.appendChild(input_para_añadir);
 
 	document.getElementById("eliminar_especifiacion").submit();
@@ -394,9 +399,9 @@ function eliminarEspecificacionBBDD(elemento_padre){
 
 function guardarCambiosEspecificaciones(){
 	//document.getElementById("nueva_especifiacion").submit();
-	console.log(nueva_especiificacion);
 	document.getElementById("insertar_nueva_especificacion").value = nueva_especiificacion;
 }
 function añadirNuevaEspec(){
+	guardarCambiosEspecificaciones();
 	document.getElementById("nueva_especifiacion").submit();
 }
