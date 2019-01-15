@@ -1,11 +1,10 @@
 //variables globales
 
-var nueva_especiificacion = [];
+var array_nuevas_especificaciones = [];
+//cogera que tipo de usuario es
+var tipo_usuario = document.getElementById("tipo_usuario").innerText;
 
 document.addEventListener('DOMContentLoaded', function(){
-	//cogera que tipo de usuario es
-	var tipo_usuario = document.getElementById("tipo_usuario");
-
     //comprobara si hay sprints o no
 	var numero_de_sprints = document.getElementById("numero_de_sprints").innerText;
 	if (numero_de_sprints == 0) {
@@ -40,10 +39,8 @@ function eliminarEspecificacion(element){
 
 	elemento_padre.parentNode.removeChild(elemento_padre);
 
-	console.log(elemento_padre.innerText);
 	//elimina la especificacion del array
-	nueva_especiificacion.splice( nueva_especiificacion.indexOf(elemento_padre.innerText), 1 );
-	console.log("array"+nueva_especiificacion);
+	array_nuevas_especificaciones.splice( array_nuevas_especificaciones.indexOf(elemento_padre.innerText), 1 );
 
 }
 
@@ -82,7 +79,9 @@ document.addEventListener('DOMContentLoaded', function(){
     var texto_añadir = document.createElement("input");
     texto_añadir.setAttribute("type","textfield");
     texto_añadir.setAttribute("id","nueva_especificacion");
-    div_añadir_especificaciones.appendChild(texto_añadir);
+    if (div_añadir_especificaciones) {
+    	div_añadir_especificaciones.appendChild(texto_añadir);
+    }
 
     //añade el textfield y el boton de añadir especificaciones
     div_añadir_especificaciones = document.getElementById("div_añadir_especificaciones");
@@ -98,7 +97,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
     icono_boton_añadir_espec.appendChild(texto_icono_boton_añadir_espec);
     boton_añadir_espec.appendChild(icono_boton_añadir_espec);
-    div_añadir_especificaciones.appendChild(boton_añadir_espec);
+    if (div_añadir_especificaciones) {
+    	div_añadir_especificaciones.appendChild(boton_añadir_espec);
+    }
     
 });
 
@@ -143,7 +144,7 @@ function añadirEspecificacion(){
 
 		lista_especificaciones.appendChild(nuevo_li);
 
-		nueva_especiificacion.push(nueva_especificacion);
+		array_nuevas_especificaciones.push(nueva_especificacion);
 
 		document.getElementById("nueva_especificacion").value = "";
 
@@ -187,6 +188,33 @@ function generar_formulario_nuevo_sprint() {
 	form_nuevo_sprint.setAttribute("action","insert/insert_nuevo_sprint.php");
 	form_nuevo_sprint.setAttribute("method","post");
 	form_nuevo_sprint.setAttribute("id","form_nuevo_sprint");
+
+	var url_sprint = document.createElement("input");
+	url_sprint.setAttribute("type","text");
+	url_sprint.setAttribute("name","url");
+	url_sprint.setAttribute("readonly","readonly");
+	var url = document.getElementById("url").innerText;
+	url_sprint.setAttribute("value",url);
+	url_sprint.setAttribute("hidden",true);
+	form_nuevo_sprint.appendChild(url_sprint);
+
+	var id_proyecto_sprint = document.createElement("input");
+	id_proyecto_sprint.setAttribute("type","text");
+	id_proyecto_sprint.setAttribute("name","id_proyecto");
+	id_proyecto_sprint.setAttribute("readonly","readonly");
+	var id_proyecto = document.getElementById("id_proyecto").innerText;
+	id_proyecto_sprint.setAttribute("value",id_proyecto);
+	id_proyecto_sprint.setAttribute("hidden",true);
+	form_nuevo_sprint.appendChild(id_proyecto_sprint);
+
+	var id_sprint = document.createElement("input");
+	id_sprint.setAttribute("type","text");
+	id_sprint.setAttribute("name","id_sprint");
+	id_sprint.setAttribute("readonly","readonly");
+	var id_sprint_sprint = document.getElementById("id_sprint").innerText;
+	id_sprint.setAttribute("value",id_sprint_sprint);
+	id_sprint.setAttribute("hidden",true);
+	form_nuevo_sprint.appendChild(id_sprint);
 
 	//crea el label y el date de la fecha inicio
 	var label_numero_nuevo_sprint = document.createElement("label");
@@ -375,6 +403,16 @@ function eliminarSprintBDD(elemento_padre_sin_espacios){
     //si esta deshabilitado no lo hace
     //input_para_eliminar.setAttribute("disabled","true");
     input_para_eliminar.setAttribute("hidden","true");
+
+    var url_sprint = document.createElement("input");
+	url_sprint.setAttribute("type","text");
+	url_sprint.setAttribute("name","url");
+	url_sprint.setAttribute("readonly","readonly");
+	var url = document.getElementById("url").innerText;
+	url_sprint.setAttribute("value",url);
+	url_sprint.setAttribute("hidden",true);
+	form_a_enviar_para_eliminar_sprint.appendChild(url_sprint);
+
 	form_a_enviar_para_eliminar_sprint.appendChild(input_para_eliminar);
 
 	document.getElementById("eliminar__sprint").submit();
@@ -401,15 +439,23 @@ function eliminarEspecificacionBBDD(elemento){
 	input_para_añadir.setAttribute("value",texto_elemento_padre);
     input_para_añadir.setAttribute("name","espec_a_eliminar");
     input_para_añadir.setAttribute("hidden","true");
-    console.log(texto_elemento_padre);
-	form_a_enviar_para_eliminar_especificacion.appendChild(input_para_añadir);
 
+    var url_espec = document.createElement("input");
+	url_espec.setAttribute("type","text");
+	url_espec.setAttribute("name","url");
+	url_espec.setAttribute("readonly","readonly");
+	var url = document.getElementById("url").innerText;
+	url_espec.setAttribute("value",url);
+	url_espec.setAttribute("hidden",true);
+	form_a_enviar_para_eliminar_especificacion.appendChild(url_espec);
+
+	form_a_enviar_para_eliminar_especificacion.appendChild(input_para_añadir);
 	document.getElementById("eliminar_especifiacion").submit();
 }
 
 function guardarCambiosEspecificaciones(){
 	//document.getElementById("nueva_especifiacion").submit();
-	document.getElementById("insertar_nueva_especificacion").value = nueva_especiificacion;
+	document.getElementById("insertar_nueva_especificacion").value = array_nuevas_especificaciones;
 }
 function añadirNuevaEspec(){
 	guardarCambiosEspecificaciones();

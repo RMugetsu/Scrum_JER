@@ -16,10 +16,11 @@
         <?php
 
             session_start();
+            //guardaremos y printaremos en hidden el tipo, para poder compararlo en javascript
             $tipo_usuario = $_SESSION['Tipo'];
-            echo "<p id=tipo_usuario hidden>$tipo_usuario</p>";
+            echo "<p id='tipo_usuario' hidden>$tipo_usuario</p>";
             //guardaremos la url para poder luego acceder al insertar un nuevo sprint
-            $_SESSION['url'] = $_SERVER["REQUEST_URI"];  
+            $url = $_SERVER["REQUEST_URI"];  
             //y nos conectamos a la base de datos
             $con = mysqli_connect('localhost', 'admin','1234');
             mysqli_select_db($con, 'projecte_scrumb');
@@ -28,12 +29,11 @@
             $consulta_idproy = "select Id from proyecto where Nombre='$nombre_proyecto'" ;
             $resultado_idproy = mysqli_query($con, $consulta_idproy);
 
+            //guardo el id proyecto para luego poder crear un insert y el id normal
             while($numero_del_proyecto = mysqli_fetch_assoc($resultado_idproy)){
                 $numero_del_proyecto2 = $numero_del_proyecto['Id'];
             }
-            //guardo el id proyecto en una session para luego poder crear un insert y el id normal
-                $_SESSION['id_proyecto'] = $numero_del_proyecto2; 
-            
+     
 
             $consulta = "select e.IdSprint, e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto  AND e.IdSprint is null" ;
             $resultat = mysqli_query($con, $consulta);
@@ -105,8 +105,8 @@
             echo "<p id='numero_de_sprints' hidden>$numero_de_sprints</p>";
             //comprobara si existe algun sprint, si no existe se asignara un numero, sino sumara el que tenia
                     if ($numero_de_sprints == 0) {
-                    	$_SESSION['id_sprint'] = 1;
-                    	echo "<p id='id_sprint' hidden>".$_SESSION['id_sprint']."</p>";
+                    	$id_sprint = 1;
+                    	echo "<p id='id_sprint' hidden>".$id_sprint."</p>";
                     }
             echo "<div class='row'>";
             echo "<div class='col s12 m12'>";
@@ -122,7 +122,7 @@
 
                     //comprobara si existe algun sprint, si no existe se asignara un numero, sino sumara el que tenia
                     if ($numero_de_sprints != 0) {
-                    	$_SESSION['id_sprint'] = $registreSpr['NumeroSprint']+1; 
+                    	$id_sprint = $registreSpr['NumeroSprint']+1; 
                     }
                     //if de colores
                     if ($fecha_actual >= $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
@@ -132,8 +132,11 @@
                     }
                     else if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                         echo "<div style='border:black 4px solid' class='collapsible-header'>Sprint".$registreSpr['NumeroSprint'].
-                        "<img src='img/Cerrado.png' onclick='CambiarCandado(this)' id='CandadoNegro' height='20px' width='20px'><img src='img/X.png' onclick= 'eliminarSprint(this)' id='EliminarSprint' height='20px' width='20px'>
-                        </div>";
+                        "<img src='img/Cerrado.png' onclick='CambiarCandado(this)' id='CandadoNegro' height='20px' width='20px'>";
+                        if ($tipo_usuario == 1) {
+                            echo "<img src='img/X.png' onclick= 'eliminarSprint(this)' id='EliminarSprint' height='20px' width='20px'>";
+                        }
+                        echo "</div>";
                     }
                     else if ($fecha_actual > $fecha_inicio_sprint && $fecha_actual >= $fecha_final_sprint) {
                         //no puede aparecer el boton de eliminar si la fecha de inicio es anterior a hoy
@@ -174,7 +177,7 @@
                 echo "<div class='col s1 m1'>";
                 echo "</div>";
                 //añadimos un echo de una "p" en hidden para poder pasar los datos al formulario a traves de javascript
-                echo "<p id='id_sprint' hidden>".$_SESSION['id_sprint']."</p>";
+                echo "<p id='id_sprint' hidden>".$id_sprint."</p>";
             /*
             }
             else {
@@ -218,14 +221,22 @@
             </div>
 
             <!--- Esto es para eliminar el sprint seleccionado -->
-            <form action="delete/eliminar_sprint.php" method="post" id="eliminar__sprint">
+            <form action="delete/eliminar_sprint.php" method="post" id="eliminar__sprint" hidden>
             </form>
             <!--- Esto es para añadir la especificacion a la base de datos -->
-            <form action="insert/nueva_especifiacion.php" method="post" id="nueva_especifiacion">
-            	<input type="text" id="insertar_nueva_especificacion" name="especificacion_bbdd" readonly="readonly" >
+            <form action="insert/nueva_especifiacion.php" method="post" id="nueva_especifiacion" hidden>
+            	<input type="text" id="insertar_nueva_especificacion" name="especificacion_bbdd" readonly="readonly" hidden>
+                <?php 
+                    echo "<input type='text'  name='id_proyecto' readonly='readonly' hidden>$numero_del_proyecto2 
+                    <p id='id_proyecto' hidden>$numero_del_proyecto2</p>
+                    ";
+                    echo "<input type='text'  name='url' readonly='readonly' hidden>$url 
+                    <p id='url' hidden>$url</p>
+                    ";
+                 ?>
             </form>
             <!--- Esto es para eliminar la especificacion de la base de datos -->
-            <form action="delete/eliminar_especificacion.php" method="post" id="eliminar_especifiacion">
+            <form action="delete/eliminar_especificacion.php" method="post" id="eliminar_especifiacion" >
             </form>
     </body>
 </html>
