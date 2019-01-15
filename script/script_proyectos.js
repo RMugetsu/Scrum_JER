@@ -144,7 +144,7 @@ function añadirEspecificacion(){
 		guardarCambiosEspecificaciones();
 	}
 	else{
-		alert("Introduce un nombre");
+		generarError("Introduce un nombre");
 	}
 
 }
@@ -266,25 +266,25 @@ function comprobarFechas() {
 	
 	if (existen_sprints == false) {
 		if (fecha_inicio_sprint == "") {
-			alert("rellena la fecha de inicio")
+			generarError("rellena la fecha de inicio")
 		}
 		else if (fecha_inicio_sprint_valor <= fecha_actual_comparacion) {
-			alert("fecha de inicio elegida es anterior o igual a hoy");
+			generarError("fecha de inicio elegida es anterior o igual a hoy");
 		}
 		else if (fecha_fin_sprint == "") {
-			alert("rellena la fecha de fin")
+			generarError("rellena la fecha de fin")
 		}
 		else if (fecha_fin_sprint_valor <= fecha_actual_comparacion) {
-			alert("fecha de fin elegida es anterior o igual a hoy");
+			generarError("fecha de fin elegida es anterior o igual a hoy");
 		}
 		else if (fecha_fin_sprint_valor <= fecha_inicio_sprint_valor) {
-			alert("fecha de fin es anterior o igual a la fecha de inicio");
+			generarError("fecha de fin es anterior o igual a la fecha de inicio");
 		}
 		else if (horas_disponibles < 1) {
-			alert("las horas no pueden ser menos de 1");
+			generarError("las horas no pueden ser menos de 1");
 		}
 		else if (horas_disponibles > 999) {
-			alert("las horas no pueden ser mas de 999");
+			generarError("las horas no pueden ser mas de 999");
 		}
 		else {
 			document.getElementById("form_nuevo_sprint").submit();
@@ -309,29 +309,29 @@ function comprobarFechas() {
 
 
 		if (fecha_inicio_sprint == "") {
-			alert("rellena la fecha de inicio")
+			generarError("rellena la fecha de inicio")
 		}
 		else if (fecha_inicio_sprint_valor <= fecha_actual_comparacion) {
-			alert("fecha de inicio elegida es anterior o igual a hoy");
+			generarError("fecha de inicio elegida es anterior o igual a hoy");
 		}
 		else if (fecha_fin_sprint == "") {
-			alert("rellena la fecha de fin")
+			generarError("rellena la fecha de fin")
 		}
 		else if (fecha_fin_sprint_valor <= fecha_actual_comparacion) {
-			alert("fecha de fin elegida es anterior o igual a hoy");
+			generarError("fecha de fin elegida es anterior o igual a hoy");
 		}
 		else if (fecha_fin_sprint_valor <= fecha_inicio_sprint_valor) {
-			alert("fecha de fin es anterior o igual a la fecha de inicio");
+			generarError("fecha de fin es anterior o igual a la fecha de inicio");
 		}
 		else if (horas_disponibles < 1) {
-			alert("las horas no pueden ser menos de 1");
+			generarError("las horas no pueden ser menos de 1");
 		}
 		else if (horas_disponibles > 999) {
-			alert("las horas no pueden ser mas de 999");
+			generarError("las horas no pueden ser mas de 999");
 		}
 
 		else if (fecha_inicio_sprint_valor <= fecha_fin_ultimo_sprint) {
-			alert("La fecha de inicio introducida es anterior a la fecha fin del ultimo sprint");
+			generarError("La fecha de inicio introducida es anterior a la fecha fin del ultimo sprint");
 		}
 		else {
 			document.getElementById("form_nuevo_sprint").submit();
@@ -398,5 +398,5 @@ function guardarCambiosEspecificaciones(){
 	document.getElementById("insertar_nueva_especificacion").value = nueva_especiificacion;
 }
 function añadirNuevaEspec(){
-	document.getElementById("form_nuevo_sprint").submit();
+	document.getElementById("nueva_especifiacion").submit();
 }

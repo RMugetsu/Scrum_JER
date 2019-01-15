@@ -222,7 +222,7 @@
             </form>
             <!--- Esto es para añadir la especificacion a la base de datos -->
             <form action="insert/nueva_especifiacion.php" method="post" id="nueva_especifiacion">
-            	<input type="text" id="insertar_nueva_especificacion" name="especificacion_bbdd">
+            	<input type="text" id="insertar_nueva_especificacion" name="especificacion_bbdd" readonly="readonly" >
             </form>
             <!--- Esto es para eliminar la especificacion de la base de datos -->
             <form action="delete/eliminar_especificacion.php" method="post" id="eliminar_especifiacion">

@@ -16,7 +16,10 @@
 
             $pagina_proyectos = $_SESSION['url'];
 
-            foreach ($especificacion_a_insertar as $key => $value) {
+            $str="foo,bar,baz,bat";
+            $array_especificacion_a_insertar=explode(",",$especificacion_a_insertar);
+
+            foreach ($array_especificacion_a_insertar as $key => $value) {
             	mysqli_query($con,"INSERT into especificaciones VALUES (null, '$value', null, null, null, null, null, $id_proyecto)");
             }
             mysqli_close($con);
