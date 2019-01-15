@@ -50,6 +50,7 @@
 			<a href="logout.php"><img src="img/cerrar.png" id="imgCerrar"></a>
 		</div>
 	</div>
+	<div  id="error" class="animacion2" style="display: none"></div>
 	<br>
 	<br>
 	<br>
@@ -58,13 +59,11 @@
 		<div id="pro" class="grid" class="animacion2">
 			<h4>Listado de Proyectos</h4>
 		</div>
-		<!--
+		
 		<div id="generarError">
 			<button onclick="generarError()">Generar Error</button>
 		</div>
-		-->
-		<div  id="error" class="animacion2" style="display: none">
-		</div>
+		
 	</div>
 	
 	<div id="formulario">

@@ -27,7 +27,11 @@ h4{
 #error{
   z-index: 1;
   position: fixed;
-  margin-left: 80%;
+  margin-left: 70%;
+  margin-top: 3%;
+  width: 30%;
+  background-color: white;
+  text-align: justify-all;
   border: 4px teal solid;
 }
 #hola{
@@ -133,4 +137,8 @@ textarea{
   -ms-transform: rotate(270deg); /* IE 9 */
   -webkit-transform: rotate(270deg); /* Safari */
   transform: rotate(270deg); /* Standard syntax */
+}
+
+#error2{
+  border: 4px teal solid;
 }
