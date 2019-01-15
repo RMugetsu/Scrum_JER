@@ -16,7 +16,6 @@
 
             $pagina_proyectos = $_SESSION['url'];
 
-            $str="foo,bar,baz,bat";
             $array_especificacion_a_insertar=explode(",",$especificacion_a_insertar);
 
             foreach ($array_especificacion_a_insertar as $key => $value) {
