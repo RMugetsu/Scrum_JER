@@ -17,15 +17,15 @@
 #EliminarSprint{
 	margin-left: 2%;
 }
-#CandadoA{
+#CandadoVerde{
 	margin-left: 70%;
 }
-#CandadoB{
+#CandadoNegro{
 	margin-left: 70%;
 }
-#CandadoB:hover{
+#CandadoNegro:hover{
 	filter: blur(2px);
 }
-#CandadoC{
+#CandadoGris{
 	margin-left: 70%;
 }
