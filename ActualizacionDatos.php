@@ -18,7 +18,7 @@
 				if( mysqli_query($conIn, $consultaIn2)){
 					echo "Valores Actualizados";
 				}
-				Header( "Location: index.php" );	
+				Header( "Location: home.php" );	
 	 		?>
 	 	
 </body>

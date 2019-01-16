@@ -38,6 +38,7 @@
 					<?php
  				}
 	?>
+	<form method="POST"  action="InsertarDatos.php" >
 	<div id="cabecera">
 		<div id="titulo">
 			<label>Bienvenido a la mejor pagina de gestion de SCRUM</label>
@@ -50,7 +51,6 @@
 			<a href="logout.php"><img src="img/cerrar.png" id="imgCerrar"></a>
 		</div>
 	</div>
-	<div  id="error" class="animacion2" style="display: none"></div>
 	<br>
 	<br>
 	<br>
@@ -59,11 +59,13 @@
 		<div id="pro" class="grid" class="animacion2">
 			<h4>Listado de Proyectos</h4>
 		</div>
-		
+		<!--
 		<div id="generarError">
 			<button onclick="generarError()">Generar Error</button>
 		</div>
-		
+		-->
+		<div  id="error" class="animacion2" style="display: none">
+		</div>
 	</div>
 	
 	<div id="formulario">
@@ -194,35 +196,37 @@
 		  body.appendChild(DivGuay);
 		  addElement(DivGuay,"Form",undefined,["method=Post","action=#"]);
 		  var form= document.querySelector("form");
-		  addElement(form,"div",undefined,["style=display:none;", "id=formulario"]);
+		  //addElement(form,"div",undefined,["style=display:none;", "id=formulario"]);
 		  var div1 = document.querySelector("div[id=formulario]");
+		  addElement(div1,"div",undefined,["id=divInterior"]);
+		  var divInt =document.querySelector("div[id=divInterior");
 		  addElement(div1,"br");
-		  addElement(div1,"label","Nombre Proyecto: ",undefined);
-		  addElement(div1,"br");
-		  addElement(div1,"input",undefined,["type=text", "name=TextName","id=TextName","required"]);
-		  addElement(div1,"br");
-  		  addElement(div1,"label","Numero Sprint: ",undefined);
-		  addElement(div1,"br");
-		  addElement(div1,"input",undefined,["type=text", "name=TextSprint","id=TextSprint","required"]);
-		  addElement(div1,"br");
-		  addElement(div1,"label","Product Owner: ",undefined);
-		  addElement(div1,"br");
-		  addElement(div1,"Select",undefined,["name=Owner","id=Owner","required"]);
-		  addElement(div1,"br");
-  		  addElement(div1,"label","Scrum Master",undefined);
-  		  addElement(div1,"br");
-		  addElement(div1,"Select",undefined,["name=Master","id=Master","required"]);		  
-		  addElement(div1,"br");
-		  addElement(div1,"label","Grupo: ",undefined);
-		  addElement(div1,"br");
-		  addElement(div1,"Select",undefined,[ "name=Grupo", "id=Grupo","required"]);
-		  addElement(div1,"input","+",["type=button","name=mas","onclick=Mas()"]);
-		  addElement(div1,"br");
-		  addElement(div1,"label","Descripción: ",undefined);
-  		  addElement(div1,"br");
-		  addElement(div1,"input",undefined,["type=text","name=TextDescript"]);
-		  addElement(div1,"br");
-		  addElement(div1,"button","Create Project",["type=submit","name=CrearProyecto", "onclick=ComprobarAction()"]);
+		  addElement(divInt,"label","Nombre Proyecto: ",undefined);
+		  addElement(divInt,"br");
+		  addElement(divInt,"input",undefined,["type=text", "name=TextName","id=TextName","required"]);
+		  addElement(divInt,"br");
+  		  addElement(divInt,"label","Numero Sprint: ",undefined);
+		  addElement(divInt,"br");
+		  addElement(divInt,"input",undefined,["type=text", "name=TextSprint","id=TextSprint","required"]);
+		  addElement(divInt,"br");
+		  addElement(divInt,"label","Product Owner: ",undefined);
+		  addElement(divInt,"br");
+		  addElement(divInt,"Select",undefined,["name=Owner","id=Owner","required"]);
+		  addElement(divInt,"br");
+  		  addElement(divInt,"label","Scrum Master",undefined);
+  		  addElement(divInt,"br");
+		  addElement(divInt,"Select",undefined,["name=Master","id=Master","required"]);		  
+		  addElement(divInt,"br");
+		  addElement(divInt,"label","Grupo: ",undefined);
+		  addElement(divInt,"br");
+		  addElement(divInt,"Select",undefined,[ "name=Grupo", "id=Grupo","required"]);
+		  addElement(divInt,"input","+",["type=button","name=mas","onclick=Mas()"]);
+		  addElement(divInt,"br");
+		  addElement(divInt,"label","Descripción: ",undefined);
+  		  addElement(divInt,"br");
+		  addElement(divInt,"input",undefined,["type=text","name=TextDescript"]);
+		  addElement(divInt,"br");
+		  addElement(divInt,"button","Create Project",["type=submit","name=CrearProyecto", "onclick=ComprobarAction()"]);
 		  var SelectOwner= document.querySelector("Select[name=Owner]");
 		  var SelectMaster= document.querySelector("Select[name=Master]");
 		  var SelectGrupo= document.querySelector("Select[name=Grupo]");

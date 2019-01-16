@@ -142,3 +142,14 @@ textarea{
 #error2{
   border: 4px teal solid;
 }
+
+#divInterior{
+  text-align: left;
+  left: 20px;
+  border:  #117864  4px solid;
+  margin-left: 125px;
+  margin-right: 365px;
+  margin-top: 5px;
+  
+
+}
