@@ -479,3 +479,11 @@ function guardarCambiosEspecificaciones(){
 function añadirNuevaEspec(){
 	guardarCambiosEspecificaciones();
 }
+
+function pasarDatosParaCambiarSprint(elemento){
+	var datos_generales_sprint = elemento.parentNode;
+	fecha_inicial_a_cambiar = datos_generales_sprint.querySelector("input[name=fecha_inicio]").value;
+	fecha_fin_a_cambiar = datos_generales_sprint.querySelector("input[name=fecha_fin]").value;
+	numero_horas_totales_a_cambiar = datos_generales_sprint.querySelector("input[name=horas_disponibles]").value;
+
+}
