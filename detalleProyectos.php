@@ -177,7 +177,9 @@
 	                    echo "<input type='number' name='horas_disponibles' value='".$registreSpr['Horas_Disponibles']."'";
 	                    echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
 	                    echo "</table>";
-	                    echo "<button id='cambiar_datos_sprint'>Guardar los cambios</button>";
+	                    if ($tipo_usuario == 1) {
+                            echo "<button id='cambiar_datos_sprint'>Guardar los cambios</button>";
+                        }
 	                    $modificable = true;
                       }
                       else{
