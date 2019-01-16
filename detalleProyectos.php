@@ -145,28 +145,61 @@
                     }
                     //Se crea el contenido del sprint
                       echo "<div class='collapsible-body'>";
-                      echo "<p name='fecha_inicio'>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
-                      echo "<p name='fecha_fin'>Fecha Fin:".$registreSpr['Final_Sprint']."</p>";
-                      echo "<table>";
-                      $idSprint=$registreSpr['NumeroSprint'];
-                      $horas = 0;
-                      $consultaSprs = "SELECT Nombre, Dificultad, Horas FROM especificaciones  WHERE IdSprint= $idSprint AND IdProyecto = $numero_del_proyecto2";
-                    $resultatSprs = mysqli_query($con, $consultaSprs);
-                    //Se muestran las especificaciones del sprint
-                        while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
-		                      	echo "<tr>";
-		                                echo "<td> ".$registreSprs['Nombre'];
-		                                echo "</td>";
-		                                echo "<td> ".$registreSprs['Dificultad'];
-		                                echo "</td>";
-		                                echo "<td> ".$registreSprs['Horas'];
-		                                echo "</td>";
-		                            echo "</tr>";
-                            
-                            $horas += $registreSprs['Horas'];
-                        }
-                    echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
-                    echo "</table>";
+                      if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
+                      	echo "<label>Fecha inicio:</label>";
+                      	echo "<input type='date' name='fecha_inicio' value='".$registreSpr['Inicio_Sprint']."'<br>";
+                      	echo "<label>Fecha Fin:</label>";
+                      	echo "<input type='date' name='fecha_fin' value='".$registreSpr['Final_Sprint']."'";
+	                      echo "<table>";
+	                      $idSprint=$registreSpr['NumeroSprint'];
+	                      $horas = 0;
+
+	                    $consultaSprs = "SELECT Nombre, Dificultad, Horas FROM especificaciones  WHERE IdSprint= $idSprint AND IdProyecto = $numero_del_proyecto2";
+	                    $resultatSprs = mysqli_query($con, $consultaSprs);
+	                    //Se muestran las especificaciones del sprint
+	                        while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
+			                      	echo "<tr>";
+			                                echo "<td> ".$registreSprs['Nombre'];
+			                                echo "</td>";
+			                                echo "<td> ".$registreSprs['Dificultad'];
+			                                echo "</td>";
+			                                echo "<td> ".$registreSprs['Horas'];
+			                                echo "</td>";
+			                            echo "</tr>";
+	                            
+	                            $horas += $registreSprs['Horas'];
+	                        }
+	                    echo "<label>horas usadas: ".$horas."</label> <br>";
+	                    echo "<label>Total Disponibles:</label>";
+	                    echo "<input type='number' name='horas_disponibles' value='".$registreSpr['Horas_Disponibles']."'";
+	                    echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
+	                    echo "</table>";
+                      }
+                      else{
+	                      echo "<p name='fecha_inicio'>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
+	                      echo "<p name='fecha_fin'>Fecha Fin:".$registreSpr['Final_Sprint']."</p>";
+	                      echo "<table>";
+	                      $idSprint=$registreSpr['NumeroSprint'];
+	                      $horas = 0;
+
+	                    $consultaSprs = "SELECT Nombre, Dificultad, Horas FROM especificaciones  WHERE IdSprint= $idSprint AND IdProyecto = $numero_del_proyecto2";
+	                    $resultatSprs = mysqli_query($con, $consultaSprs);
+	                    //Se muestran las especificaciones del sprint
+	                        while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
+			                      	echo "<tr>";
+			                                echo "<td> ".$registreSprs['Nombre'];
+			                                echo "</td>";
+			                                echo "<td> ".$registreSprs['Dificultad'];
+			                                echo "</td>";
+			                                echo "<td> ".$registreSprs['Horas'];
+			                                echo "</td>";
+			                            echo "</tr>";
+	                            
+	                            $horas += $registreSprs['Horas'];
+	                        }
+	                    echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
+	                    echo "</table>";
+                    }
                     echo "</div>";
                     echo "</li>";
                 }
