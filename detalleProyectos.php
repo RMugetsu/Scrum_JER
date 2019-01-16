@@ -224,7 +224,7 @@
             <form action="delete/eliminar_sprint.php" method="post" id="eliminar__sprint" hidden>
             </form>
             <!--- Esto es para añadir la especificacion a la base de datos -->
-            <form action="insert/nueva_especifiacion.php" method="post" id="nueva_especifiacion" hidden>
+            <form action="insert/nueva_especificacion.php" method="post" id="nueva_especificacion" hidden>
             	<input type="text" id="insertar_nueva_especificacion" name="especificacion_bbdd" readonly="readonly" hidden>
                 <?php 
                     echo "<input type='text'  name='id_proyecto' readonly='readonly' hidden>$numero_del_proyecto2 

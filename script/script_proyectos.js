@@ -419,14 +419,14 @@ function eliminarSprintBDD(elemento_padre_sin_espacios){
 }
 
 function añadirEspecificacionBBDD(nueva_especificacion){
-	var form_a_enviar_para_agregar_sprint = document.getElementById("nueva_especifiacion");
+	var form_a_enviar_para_agregar_sprint = document.getElementById("nueva_especificacion");
 	var input_para_añadir = document.createElement("input");
 	input_para_añadir.setAttribute("value",nueva_especificacion);
     input_para_añadir.setAttribute("name","especificacion_bbdd");
-    input_para_añadir.setAttribute("hidden","true");
+    //input_para_añadir.setAttribute("hidden","true");
 	form_a_enviar_para_agregar_sprint.appendChild(input_para_añadir);
 
-	document.getElementById("nueva_especifiacion").submit();
+	document.getElementById("nueva_especificacion").submit();
 }
 
 function eliminarEspecificacionBBDD(elemento){
@@ -434,7 +434,7 @@ function eliminarEspecificacionBBDD(elemento){
 	var elemento_padre = elemento.parentNode;
 	var texto_elemento_padre = elemento_padre.innerText;
 
-	var form_a_enviar_para_eliminar_especificacion = document.getElementById("eliminar_especifiacion");
+	var form_a_enviar_para_eliminar_especificacion = document.getElementById("eliminar_especificacion");
 	var input_para_añadir = document.createElement("input");
 	input_para_añadir.setAttribute("value",texto_elemento_padre);
     input_para_añadir.setAttribute("name","espec_a_eliminar");
@@ -450,14 +450,14 @@ function eliminarEspecificacionBBDD(elemento){
 	form_a_enviar_para_eliminar_especificacion.appendChild(url_espec);
 
 	form_a_enviar_para_eliminar_especificacion.appendChild(input_para_añadir);
-	document.getElementById("eliminar_especifiacion").submit();
+	document.getElementById("eliminar_especificacion").submit();
 }
 
 function guardarCambiosEspecificaciones(){
-	//document.getElementById("nueva_especifiacion").submit();
+	//document.getElementById("nueva_especificacion").submit();
 	document.getElementById("insertar_nueva_especificacion").value = array_nuevas_especificaciones;
 }
 function añadirNuevaEspec(){
 	guardarCambiosEspecificaciones();
-	document.getElementById("nueva_especifiacion").submit();
+	document.getElementById("nueva_especificacion").submit();
 }
