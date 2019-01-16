@@ -33,6 +33,9 @@
             while($numero_del_proyecto = mysqli_fetch_assoc($resultado_idproy)){
                 $numero_del_proyecto2 = $numero_del_proyecto['Id'];
             }
+
+            //indica al javascript si el sprint si es modificable o no para crear el siguiente
+            $modificable = false;
      
 
             $consulta = "select e.IdSprint, e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto  AND e.IdSprint is null AND p.Id = '$numero_del_proyecto2'" ;
@@ -174,7 +177,8 @@
 	                    echo "<input type='number' name='horas_disponibles' value='".$registreSpr['Horas_Disponibles']."'";
 	                    echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
 	                    echo "</table>";
-	                    echo "<button id='cambiar_datos_sprint'>Guardar los cambios</butto>";
+	                    echo "<button id='cambiar_datos_sprint'>Guardar los cambios</button>";
+	                    $modificable = true;
                       }
                       else{
 	                      echo "<p name='fecha_inicio'>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
@@ -200,6 +204,7 @@
 	                        }
 	                    echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
 	                    echo "</table>";
+	                    $modificable = false;
                     }
                     echo "</div>";
                     echo "</li>";
@@ -222,7 +227,7 @@
             echo "<div id='especificaciones' class='col s5 m5 info'>";
             echo "<ul id='lista_especificaciones' class='collection with-header'>";
             while($registre = mysqli_fetch_assoc($resultat)){
-                echo "<li class='collection-item' id='listado_esp'>";
+                echo "<li class='collection-item' >";
                  if ($_SESSION['Tipo'] == 2) {
                      echo $registre["Nombre"]
                  .'<img class="secondary-content boton_eliminar" onclick="eliminarEspecificacionBBDD(this)" src="img/eliminar.png" height="25">'
@@ -268,5 +273,15 @@
             <!--- Esto es para eliminar la especificacion de la base de datos -->
             <form action="delete/eliminar_especificacion.php" method="post" id="eliminar_especificacion" hidden>
             </form>
+            <p id="modificable">
+            	<?php 
+            		if ($modificable == true) {
+            			echo "<p id='modificable' hidden>modificable";
+            		}
+            		else{
+            			echo "<p id='modificable' hidden>no_modificable";
+            		}
+            	 ?>
+            </p>
     </body>
 </html>

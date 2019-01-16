@@ -116,7 +116,6 @@ function añadirEspecificacion(){
 
 		var nuevo_li = document.createElement("li");
 		nuevo_li.setAttribute("class", "collection-item");
-		nuevo_li.setAttribute("id", "listado_esp");
 		var texto_nueva_esp = document.createTextNode(nueva_especificacion);
 		nuevo_li.appendChild(texto_nueva_esp);
 
@@ -329,19 +328,33 @@ function comprobarFechas() {
 
 		//coge la "p" dentro del "div" que esta dentro de la "ul"
 		var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
-		//coge el contenido de la "p"
-		var fecha_inicio_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_inicio]").innerHTML;
-		//filtra para que solo coja la fecha y no todo el contenido 
-		var fecha_inicio_ultimo_sprint = fecha_inicio_ultimo_sprint.replace("Fecha Inicio:", "");
-		//y lo convierte a "time"
-		var fecha_inicio_ultimo_sprint = new Date(fecha_inicio_ultimo_sprint).getTime();
 
-		//ahora lo mismo pero con la fecha de fin:
-		var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
-		var fecha_fin_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_fin]").innerHTML;
-		var fecha_fin_ultimo_sprint = fecha_fin_ultimo_sprint.replace("Fecha Fin:", "");
-		var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
+		if (document.getElementById("modificable").innerText == "modificable") {
+			//coge el contenido de la "p"
+			var fecha_inicio_ultimo_sprint = ul_sprints.querySelector("input[name=fecha_inicio]").value;
+			//y lo convierte a "time"
+			var fecha_inicio_ultimo_sprint = new Date(fecha_inicio_ultimo_sprint).getTime();
 
+			//ahora lo mismo pero con la fecha de fin:
+			var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
+			var fecha_fin_ultimo_sprint = ul_sprints.querySelector("input[name=fecha_fin]").value;
+			var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
+		}
+		else if (document.getElementById("modificable").innerText == "no_modificable") {
+
+			//coge el contenido de la "p"
+			var fecha_inicio_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_inicio]").innerHTML;
+			//filtra para que solo coja la fecha y no todo el contenido 
+			var fecha_inicio_ultimo_sprint = fecha_inicio_ultimo_sprint.replace("Fecha Inicio:", "");
+			//y lo convierte a "time"
+			var fecha_inicio_ultimo_sprint = new Date(fecha_inicio_ultimo_sprint).getTime();
+
+			//ahora lo mismo pero con la fecha de fin:
+			var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
+			var fecha_fin_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_fin]").innerHTML;
+			var fecha_fin_ultimo_sprint = fecha_fin_ultimo_sprint.replace("Fecha Fin:", "");
+			var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
+		}
 
 		if (fecha_inicio_sprint == "") {
 			generarError("rellena la fecha de inicio")
@@ -379,7 +392,7 @@ function paginaAnterior(){
 }
 function eliminarSprint(element){
 	//elimina el sprint
-	
+
    	var elemento_padre = element.parentNode;
    	//quitamos el texto de "sprint"
    	var elemento_padre_sin_sprint = elemento_padre.innerText.replace("Sprint","");
