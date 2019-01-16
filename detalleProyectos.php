@@ -35,7 +35,7 @@
             }
      
 
-            $consulta = "select e.IdSprint, e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto  AND e.IdSprint is null" ;
+            $consulta = "select e.IdSprint, e.Nombre from especificaciones e, proyecto p where p.Id = e.IdProyecto  AND e.IdSprint is null AND p.Id = '$numero_del_proyecto2'" ;
             $resultat = mysqli_query($con, $consulta);
            
            
