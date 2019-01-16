@@ -482,8 +482,42 @@ function añadirNuevaEspec(){
 
 function pasarDatosParaCambiarSprint(elemento){
 	var datos_generales_sprint = elemento.parentNode;
+
 	fecha_inicial_a_cambiar = datos_generales_sprint.querySelector("input[name=fecha_inicio]").value;
 	fecha_fin_a_cambiar = datos_generales_sprint.querySelector("input[name=fecha_fin]").value;
 	numero_horas_totales_a_cambiar = datos_generales_sprint.querySelector("input[name=horas_disponibles]").value;
 
+	if (fecha_inicial_a_cambiar == "" || fecha_fin_a_cambiar == "") {
+		generarError("No puedes guardar los cambios sin rellenar las dos fechas");
+	}
+	if (numero_horas_totales_a_cambiar <= 0) {
+		generarError("tienes que introducir mas de una hora");
+	}
+/*
+esto es para tomarlo de ejemplo
+	if (fecha_inicio_sprint == "") {
+			generarError("rellena la fecha de inicio")
+		}
+		else if (fecha_inicio_sprint_valor <= fecha_actual_comparacion) {
+			generarError("fecha de inicio elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_sprint == "") {
+			generarError("rellena la fecha de fin")
+		}
+		else if (fecha_fin_sprint_valor <= fecha_actual_comparacion) {
+			generarError("fecha de fin elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_sprint_valor <= fecha_inicio_sprint_valor) {
+			generarError("fecha de fin es anterior o igual a la fecha de inicio");
+		}
+		else if (horas_disponibles < 1) {
+			generarError("las horas no pueden ser menos de 1");
+		}
+		else if (horas_disponibles > 999) {
+			generarError("las horas no pueden ser mas de 999");
+		}
+		else {
+			document.getElementById("form_nuevo_sprint").submit();
+		}
+*/
 }
