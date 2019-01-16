@@ -225,18 +225,14 @@
             </form>
             <!--- Esto es para añadir la especificacion a la base de datos -->
             <form action="insert/nueva_especificacion.php" method="post" id="nueva_especificacion" hidden>
-            	<input type="text" id="insertar_nueva_especificacion" name="especificacion_bbdd" readonly="readonly" hidden>
+            	<input type="text" id="insertar_nueva_especificacion" name="especificacion_bbdd" readonly="readonly">
                 <?php 
-                    echo "<input type='text'  name='id_proyecto' readonly='readonly' hidden>$numero_del_proyecto2 
-                    <p id='id_proyecto' hidden>$numero_del_proyecto2</p>
-                    ";
-                    echo "<input type='text'  name='url' readonly='readonly' hidden>$url 
-                    <p id='url' hidden>$url</p>
-                    ";
+                    echo "<p id='id_proyecto' hidden>$numero_del_proyecto2</p>";
+                    echo "<p id='url' hidden>$url</p>";
                  ?>
             </form>
             <!--- Esto es para eliminar la especificacion de la base de datos -->
-            <form action="delete/eliminar_especificacion.php" method="post" id="eliminar_especifiacion" >
+            <form action="delete/eliminar_especificacion.php" method="post" id="eliminar_especificacion" hidden>
             </form>
     </body>
 </html>

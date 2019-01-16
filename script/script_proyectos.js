@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var div_añadir_especificaciones = document.getElementById("div_añadir_especificaciones");
     var texto_añadir = document.createElement("input");
     texto_añadir.setAttribute("type","textfield");
-    texto_añadir.setAttribute("id","nueva_especificacion");
+    texto_añadir.setAttribute("id","nueva_especificacion_textfield");
     if (div_añadir_especificaciones) {
     	div_añadir_especificaciones.appendChild(texto_añadir);
     }
@@ -110,7 +110,7 @@ function añadirEspecificacion(){
 	//cogemos el segundo valor (1), ya que el primero pertenece a otra lista,
 	//cogemos el padre, y del padre sacamos el ultimo hijo, que sera el ultimo de la lista.
 	//a partir de aqui, ya podremos isertar lo del textfield
-	var nueva_especificacion = document.getElementById("nueva_especificacion").value;
+	var nueva_especificacion = document.getElementById("nueva_especificacion_textfield").value;
 
 	if (nueva_especificacion != "") {
 
@@ -146,10 +146,7 @@ function añadirEspecificacion(){
 
 		array_nuevas_especificaciones.push(nueva_especificacion);
 
-		document.getElementById("nueva_especificacion").value = "";
-
-		//añadirEspecificacionBBDD(nueva_especificacion);
-		
+		document.getElementById("nueva_especificacion_textfield").value = "";		
 	}
 	else{
 		generarError("Introduce un nombre");
@@ -382,6 +379,7 @@ function paginaAnterior(){
 }
 function eliminarSprint(element){
 	//elimina el sprint
+	
    	var elemento_padre = element.parentNode;
    	//quitamos el texto de "sprint"
    	var elemento_padre_sin_sprint = elemento_padre.innerText.replace("Sprint","");
@@ -400,8 +398,6 @@ function eliminarSprintBDD(elemento_padre_sin_espacios){
 	var input_para_eliminar = document.createElement("input");
 	input_para_eliminar.setAttribute("value",elemento_padre_sin_espacios);
     input_para_eliminar.setAttribute("name","numero_a_eliminar");
-    //si esta deshabilitado no lo hace
-    //input_para_eliminar.setAttribute("disabled","true");
     input_para_eliminar.setAttribute("hidden","true");
 
     var url_sprint = document.createElement("input");
@@ -416,17 +412,6 @@ function eliminarSprintBDD(elemento_padre_sin_espacios){
 	form_a_enviar_para_eliminar_sprint.appendChild(input_para_eliminar);
 
 	document.getElementById("eliminar__sprint").submit();
-}
-
-function añadirEspecificacionBBDD(nueva_especificacion){
-	var form_a_enviar_para_agregar_sprint = document.getElementById("nueva_especificacion");
-	var input_para_añadir = document.createElement("input");
-	input_para_añadir.setAttribute("value",nueva_especificacion);
-    input_para_añadir.setAttribute("name","especificacion_bbdd");
-    //input_para_añadir.setAttribute("hidden","true");
-	form_a_enviar_para_agregar_sprint.appendChild(input_para_añadir);
-
-	document.getElementById("nueva_especificacion").submit();
 }
 
 function eliminarEspecificacionBBDD(elemento){
@@ -454,10 +439,30 @@ function eliminarEspecificacionBBDD(elemento){
 }
 
 function guardarCambiosEspecificaciones(){
-	//document.getElementById("nueva_especificacion").submit();
+
 	document.getElementById("insertar_nueva_especificacion").value = array_nuevas_especificaciones;
+
+	var form_a_enviar_para_agregar_espec = document.getElementById("nueva_especificacion");
+	var id_proyecto_espec = document.createElement("input");
+	id_proyecto_espec.setAttribute("type","text");
+	id_proyecto_espec.setAttribute("name","id_proyecto");
+	id_proyecto_espec.setAttribute("readonly","readonly");
+	var id_espec = document.getElementById("id_proyecto").innerText;
+	id_proyecto_espec.setAttribute("value",id_espec);
+	id_proyecto_espec.setAttribute("hidden",true);
+	form_a_enviar_para_agregar_espec.appendChild(id_proyecto_espec);
+
+	var url_espec = document.createElement("input");
+	url_espec.setAttribute("type","text");
+	url_espec.setAttribute("name","url");
+	url_espec.setAttribute("readonly","readonly");
+	var url = document.getElementById("url").innerText;
+	url_espec.setAttribute("value",url);
+	url_espec.setAttribute("hidden",true);
+	form_a_enviar_para_agregar_espec.appendChild(url_espec);
+
+	document.getElementById("nueva_especificacion").submit();
 }
 function añadirNuevaEspec(){
 	guardarCambiosEspecificaciones();
-	document.getElementById("nueva_especificacion").submit();
 }

@@ -6,7 +6,7 @@
 <body>
 	<?php 
 
-			$con = mysqli_connect('localhost', 'admin','1234');
+		$con = mysqli_connect('localhost', 'admin','1234');
             mysqli_select_db($con, 'projecte_scrumb');
 
             $especificacion_a_insertar = $_POST["especificacion_bbdd"];
@@ -21,8 +21,7 @@
             	mysqli_query($con,"INSERT into especificaciones VALUES (null, '$value', null, null, null, null, null, $id_proyecto)");
             }
             mysqli_close($con);
-            var_dump($id_proyecto);
-			header("Location:$pagina_proyectos");
+		header("Location:$pagina_proyectos");
 		 ?>
 		 
 </body>
