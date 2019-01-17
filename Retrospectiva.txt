@@ -10,3 +10,19 @@ Retro Sprint 2
 				Como mejorar:
 
 					Hay que procurar hacer un codigo facil de leer y comentar todo aquello que pensemos que puede causar confusion.
+
+
+
+Retro Sprint 3:
+
+				Miembros del grupo:	Eric, Jordi y Ruben
+
+				Ruben:
+
+					Cosas a mejorar:
+
+						En este sprint me he centrado demasiado en solucionar pequeños "problemas" que veniamos arrastrando de otros sprints y no he podido trabajar todo lo que querria en las especificaciones de este sprint.
+
+					Como mejorar:
+
+						Intentar en la medidad de lo posible hacer un codigo que sea facilmente modificable para no perder mas tiempo del necesario.

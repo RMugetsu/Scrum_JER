@@ -158,8 +158,8 @@
                       	echo "<label>Fecha inicio:</label>";
                       	echo "<input type='date' name='fecha_inicio' value='".$registreSpr['Inicio_Sprint']."'<br>";
                       	echo "<label>Fecha Fin:</label>";
-                      	echo "<input type='date' name='fecha_fin' value='".$registreSpr['Final_Sprint']."'";
-	                      echo "<table>";
+                      	echo "<input type='date' name='fecha_fin' value='".$registreSpr['Final_Sprint']."'>";
+                          echo "<div ondrop='drop(event)' ondragover='allowDrop(event)' class='arrastrar'>";
 	                      $idSprint=$registreSpr['NumeroSprint'];
 	                      $horas = 0;
 
@@ -167,22 +167,18 @@
 	                    $resultatSprs = mysqli_query($con, $consultaSprs);
 	                    //Se muestran las especificaciones del sprint
 	                        while($registreSprs = mysqli_fetch_assoc($resultatSprs)){
-			                      	echo "<tr>";
-			                                echo "<td> ".$registreSprs['Nombre'];
-			                                echo "</td>";
-			                                echo "<td> ".$registreSprs['Dificultad'];
-			                                echo "</td>";
-			                                echo "<td> ".$registreSprs['Horas'];
-			                                echo "</td>";
-			                            echo "</tr>";
-	                            
+                                    echo "<label> ".$registreSprs['Nombre'];
+                                    echo "</label>";
+                                    echo "<input> ".$registreSprs['Dificultad'];
+                                    echo "<input> ".$registreSprs['Horas'];
 	                            $horas += $registreSprs['Horas'];
 	                        }
-	                    echo "<label>horas usadas: ".$horas."</label> <br>";
-	                    echo "<label>Total Disponibles:</label>";
-	                    echo "<input type='number' name='horas_disponibles' value='".$registreSpr['Horas_Disponibles']."'";
-	                    echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
-	                    echo "</table>";
+                        echo "</div>";
+                        echo "<label>Horas usadas: ".$horas."</label> <br>";
+                        echo "<label>Total Disponibles:</label>";
+                        echo "<input type='number' name='horas_disponibles' value='".$registreSpr['Horas_Disponibles']."'";
+                        echo 'Total horas: '.$horas.' / '.$registreSpr['Horas_Disponibles'];
+                        echo "</div>";
 	                    if ($tipo_usuario == 1) {
                             echo "<button id='cambiar_datos_sprint' onclick='pasarDatosParaCambiarSprint(this)'>Guardar los cambios</button>";
                         }
@@ -191,6 +187,7 @@
                       else{
 	                      echo "<p name='fecha_inicio'>Fecha Inicio:".$registreSpr['Inicio_Sprint']."</p>";
 	                      echo "<p name='fecha_fin'>Fecha Fin:".$registreSpr['Final_Sprint']."</p>";
+                          
 	                      echo "<table>";
 	                      $idSprint=$registreSpr['NumeroSprint'];
 	                      $horas = 0;
@@ -234,20 +231,21 @@
             
             echo "<div id='especificaciones' class='col s5 m5 info'>";
             echo "<ul id='lista_especificaciones' class='collection with-header'>";
+            $mover = 0;
             while($registre = mysqli_fetch_assoc($resultat)){
-                echo "<li class='collection-item' >";
+                echo "<li class='collection-item' id='mover".$mover."' draggable='true' ondragstart='drag(event)'>";
                  if ($_SESSION['Tipo'] == 2) {
-                     echo $registre["Nombre"]
-                 .'<img class="secondary-content boton_eliminar" onclick="eliminarEspecificacionBBDD(this)" src="img/eliminar.png" height="25">'
-                 .'<img class="secondary-content flecha_abajo" onclick="posicionAbajo(this)" src="img/flecha_arriba.svg" height="25">'
-                 .'<img class="secondary-content flecha_arriba" onclick="posicionArriba(this)" src="img/flecha_arriba.svg" height="25">';       
+                    echo "<label>".$registre["Nombre"]."</label>"
+                    .'<img class="secondary-content boton_eliminar" onclick="eliminarEspecificacionBBDD(this)" src="img/eliminar.png" height="25">'
+                    .'<img class="secondary-content flecha_abajo" onclick="posicionAbajo(this)" src="img/flecha_arriba.svg" height="25">'
+                    .'<img class="secondary-content flecha_arriba" onclick="posicionArriba(this)" src="img/flecha_arriba.svg" height="25">';
                  }
                  else{
                     echo $registre["Nombre"];
                  }
                  echo "</li>";
                 
-                 
+                 $mover= $mover +1;
                  
              }
             echo "</ul>";

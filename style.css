@@ -1,0 +1,159 @@
+body{
+  background-color: #ccffcc;
+}
+div{
+  color: gray;
+}
+#generarError{
+  margin-left: 10%;
+}
+#imgUsuario, #imgCerrar{
+  width: 30px;
+  height: 30px;
+}
+.ImgError{
+  width: 40px;
+  height: 40px;
+}
+h4{
+    margin-left: 75%;
+}
+.grid{
+  margin-left: 10%;
+  width: 60%;
+  height: 30%;
+  border: 4px teal solid;
+}
+#error{
+  z-index: 1;
+  position: fixed;
+  margin-left: 70%;
+  margin-top: 3%;
+  width: 30%;
+  background-color: white;
+  text-align: justify-all;
+  border: 4px teal solid;
+}
+#hola{
+  height: 100px;
+  width: 100px;
+}
+
+.animacion {
+       /*position: absolute;*/
+  animation-name: blink1;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name:blink1;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blink1{
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blink1 {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@keyframes blink1 {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+.animacion2 {
+       /*position: absolute;*/
+
+  animation-name: blink;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name:blink;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blink{
+  50% { border: 4px solid rgba(0,0,0,0.3); }
+}
+
+@-webkit-keyframes blink {  
+ 50% { border: 4px solid rgba(0,0,0,0.3); }
+}
+
+@keyframes blink {
+  50% { border: 4px solid rgba(0,0,0,0.3); }
+}
+
+#cabecera{
+  width:100%;
+  height: 10%;
+  background-color: teal;
+}
+
+#titulo{
+  float: left;
+  width: 75%;
+}
+#usuario{
+  float: left;
+  width: 20%;
+}
+.linksProyectos{
+  font-size: 20px;
+}
+label{
+  font-size: 25px;
+}
+.ubicar{
+  margin-left: 10%;
+}
+textarea{
+  resize: none;
+}
+#title{
+  background: white;
+  height: 20%;
+}
+.info{
+  background: white;
+  color:black;
+  border: teal 10px solid;
+}
+
+#retroceder{
+  height: 40px;
+  -ms-transform: rotate(270deg); /* IE 9 */
+  -webkit-transform: rotate(270deg); /* Safari */
+  transform: rotate(270deg); /* Standard syntax */
+}
+
+#error2{
+  border: 4px teal solid;
+}
+
+#divInterior{
+  text-align: left;
+  left: 20px;
+  border:  #117864  4px solid;
+  margin-left: 125px;
+  margin-right: 365px;
+  margin-top: 5px;
+  
+
+}
+.arrastrar{
+  border: teal solid 5px;
+  padding-bottom: 50px;
+}
