@@ -179,7 +179,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // funcion para generar el formulario del nuevo sprint
 function generar_formulario_nuevo_sprint() {
 	deshabilitarBotonNuevoSprint();
-	document.getElementById("nuevo_sprint").style.border="teal 9px solid";
 	var div_nuevo_sprint = document.getElementById("nuevo_sprint");
 	var form_nuevo_sprint = document.createElement("form");
 	form_nuevo_sprint.setAttribute("action","insert/insert_nuevo_sprint.php");

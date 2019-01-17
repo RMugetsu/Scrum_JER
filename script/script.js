@@ -190,3 +190,28 @@ function reiniciarAnimacionErrores(){
 			 }
 
 		}
+
+
+
+
+// DRAG & DROP
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+	ev.preventDefault();
+	var data = ev.dataTransfer.getData("text");
+	var textoTemporal = document.getElementById(data).childNodes[0].textContent;
+	var divTemporal = document.createElement("Div");
+	addElement(divTemporal,"Label",textoTemporal,undefined);
+	addElement(divTemporal,"Input",undefined,["placeholder=Dificultad","type=text"]);
+	addElement(divTemporal,"Input",undefined,["placeholder=Horas","type=number"]);
+	ev.target.appendChild(divTemporal);
+	var especificacionEliminar = document.getElementById(data);
+	especificacionEliminar.parentElement.removeChild(especificacionEliminar);
+}
