@@ -153,3 +153,13 @@ textarea{
   
 
 }
+
+#nuevo_sprint{
+  text-align: left;
+  left: 20px; 
+  margin-left: 190px;
+  margin-right: 365px;
+  margin-top: 5px;
+  background-color: white;
+
+}
