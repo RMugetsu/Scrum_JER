@@ -147,7 +147,13 @@
                         <img src='img/Cerrado.png' id='CandadoGris' height='20px' width='20px'></div>";
                     }
                     //Se crea el contenido del sprint
-                      echo "<div class='collapsible-body'>";
+                    if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
+                        echo "<div modificable='si' class='collapsible-body'>";
+                    }
+                    else{
+                        echo "<div modificable='no' class='collapsible-body'>";
+                    }
+                      
                       if ($fecha_actual < $fecha_inicio_sprint && $fecha_actual < $fecha_final_sprint) {
                       	echo "<label>Fecha inicio:</label>";
                       	echo "<input type='date' name='fecha_inicio' value='".$registreSpr['Inicio_Sprint']."'<br>";
@@ -275,15 +281,16 @@
             <!--- Esto es para eliminar la especificacion de la base de datos -->
             <form action="delete/eliminar_especificacion.php" method="post" id="eliminar_especificacion" hidden>
             </form>
-            <p id="modificable">
+            <form action="insert/cambiar_datos_sprint.php" method="post" id="cambiar_datos_sprint_form">
+            </form>
             	<?php 
             		if ($modificable == true) {
-            			echo "<p id='modificable' hidden>modificable";
+            			echo "<p id='modificable' hidden>modificable</p>";
             		}
             		else{
-            			echo "<p id='modificable' hidden>no_modificable";
+            			echo "<p id='modificable' hidden>no_modificable</p> ";
             		}
             	 ?>
-            </p>
+
     </body>
 </html>

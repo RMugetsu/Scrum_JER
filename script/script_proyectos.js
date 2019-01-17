@@ -336,7 +336,6 @@ function comprobarFechas() {
 			var fecha_inicio_ultimo_sprint = new Date(fecha_inicio_ultimo_sprint).getTime();
 
 			//ahora lo mismo pero con la fecha de fin:
-			var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
 			var fecha_fin_ultimo_sprint = ul_sprints.querySelector("input[name=fecha_fin]").value;
 			var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
 		}
@@ -350,7 +349,6 @@ function comprobarFechas() {
 			var fecha_inicio_ultimo_sprint = new Date(fecha_inicio_ultimo_sprint).getTime();
 
 			//ahora lo mismo pero con la fecha de fin:
-			var ul_sprints = document.getElementById("ul_sprints").lastChild.lastChild;
 			var fecha_fin_ultimo_sprint = ul_sprints.querySelector("p[name=fecha_fin]").innerHTML;
 			var fecha_fin_ultimo_sprint = fecha_fin_ultimo_sprint.replace("Fecha Fin:", "");
 			var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
@@ -377,7 +375,6 @@ function comprobarFechas() {
 		else if (horas_disponibles > 999) {
 			generarError("las horas no pueden ser mas de 999");
 		}
-
 		else if (fecha_inicio_sprint_valor <= fecha_fin_ultimo_sprint) {
 			generarError("La fecha de inicio introducida es anterior a la fecha fin del ultimo sprint");
 		}
@@ -481,43 +478,140 @@ function añadirNuevaEspec(){
 }
 
 function pasarDatosParaCambiarSprint(elemento){
+
+	var fecha_actual = new Date();
+	var fecha_actual_comparacion = fecha_actual.getTime();
+
 	var datos_generales_sprint = elemento.parentNode;
 
-	fecha_inicial_a_cambiar = datos_generales_sprint.querySelector("input[name=fecha_inicio]").value;
-	fecha_fin_a_cambiar = datos_generales_sprint.querySelector("input[name=fecha_fin]").value;
-	numero_horas_totales_a_cambiar = datos_generales_sprint.querySelector("input[name=horas_disponibles]").value;
+	var fecha_inicial_a_cambiar = datos_generales_sprint.querySelector("input[name=fecha_inicio]").value;
+	var fecha_fin_a_cambiar = datos_generales_sprint.querySelector("input[name=fecha_fin]").value;
+	var numero_horas_totales_a_cambiar = datos_generales_sprint.querySelector("input[name=horas_disponibles]").value;
 
-	if (fecha_inicial_a_cambiar == "" || fecha_fin_a_cambiar == "") {
-		generarError("No puedes guardar los cambios sin rellenar las dos fechas");
-	}
-	if (numero_horas_totales_a_cambiar <= 0) {
-		generarError("tienes que introducir mas de una hora");
-	}
-/*
-esto es para tomarlo de ejemplo
-	if (fecha_inicio_sprint == "") {
-			generarError("rellena la fecha de inicio")
+	var fecha_inicial_a_cambiar_valor = new Date(fecha_inicial_a_cambiar).getTime();
+	var fecha_fin_a_cambiar_valor = new Date(fecha_fin_a_cambiar).getTime();
+
+	var li_sprint = datos_generales_sprint.parentNode;
+	var anterior_li_sprint = li_sprint.previousSibling;
+	if (anterior_li_sprint != null) {
+			var datos_generales_anterior_sprint = anterior_li_sprint.lastChild;
+		var modificable = datos_generales_anterior_sprint.getAttribute("modificable");
+
+		if (modificable == "si") {
+			var fecha_fin_ultimo_sprint = datos_generales_anterior_sprint.querySelector("input[name=fecha_fin]").value;
+			var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
 		}
-		else if (fecha_inicio_sprint_valor <= fecha_actual_comparacion) {
-			generarError("fecha de inicio elegida es anterior o igual a hoy");
+		else if (modificable == "no") {
+			var fecha_fin_ultimo_sprint = datos_generales_anterior_sprint.querySelector("p[name=fecha_fin]").innerHTML;
+			var fecha_fin_ultimo_sprint = fecha_fin_ultimo_sprint.replace("Fecha Fin:", "");
+			var fecha_fin_ultimo_sprint = new Date(fecha_fin_ultimo_sprint).getTime();
 		}
-		else if (fecha_fin_sprint == "") {
-			generarError("rellena la fecha de fin")
+		if (fecha_inicial_a_cambiar == "" || fecha_fin_a_cambiar == "") {
+			generarError("No puedes guardar los cambios sin rellenar las dos fechas");
 		}
-		else if (fecha_fin_sprint_valor <= fecha_actual_comparacion) {
-			generarError("fecha de fin elegida es anterior o igual a hoy");
+		else if (numero_horas_totales_a_cambiar <= 0) {
+			generarError("tienes que introducir mas de una hora");
 		}
-		else if (fecha_fin_sprint_valor <= fecha_inicio_sprint_valor) {
-			generarError("fecha de fin es anterior o igual a la fecha de inicio");
-		}
-		else if (horas_disponibles < 1) {
-			generarError("las horas no pueden ser menos de 1");
-		}
-		else if (horas_disponibles > 999) {
+		else if (numero_horas_totales_a_cambiar > 999) {
 			generarError("las horas no pueden ser mas de 999");
 		}
-		else {
-			document.getElementById("form_nuevo_sprint").submit();
+		else if (fecha_inicial_a_cambiar_valor <= fecha_actual_comparacion) {
+			generarError("fecha de inicio elegida es anterior o igual a hoy");
 		}
-*/
+		else if (fecha_fin_a_cambiar_valor <= fecha_actual_comparacion) {
+			generarError("fecha de fin elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_a_cambiar_valor <= fecha_inicial_a_cambiar_valor) {
+			generarError("fecha de fin es anterior o igual a la fecha de inicio");
+		}
+		else if (fecha_inicial_a_cambiar_valor <= fecha_fin_ultimo_sprint) {
+			generarError("La fecha de inicio introducida es anterior a la fecha fin del ultimo sprint");
+		}
+		else {
+			var numero_del_sprint_para_guardar_cambios = li_sprint.firstChild.innerText.replace("Sprint", "");
+			cambiarDatosSprint(numero_del_sprint_para_guardar_cambios, fecha_inicial_a_cambiar, fecha_fin_a_cambiar, numero_horas_totales_a_cambiar);
+		}
+	}
+	else{
+		if (fecha_inicial_a_cambiar == "" || fecha_fin_a_cambiar == "") {
+			generarError("No puedes guardar los cambios sin rellenar las dos fechas");
+		}
+		else if (numero_horas_totales_a_cambiar <= 0) {
+			generarError("tienes que introducir mas de una hora");
+		}
+		else if (numero_horas_totales_a_cambiar > 999) {
+			generarError("las horas no pueden ser mas de 999");
+		}
+		else if (fecha_inicial_a_cambiar_valor <= fecha_actual_comparacion) {
+			generarError("fecha de inicio elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_a_cambiar_valor <= fecha_actual_comparacion) {
+			generarError("fecha de fin elegida es anterior o igual a hoy");
+		}
+		else if (fecha_fin_a_cambiar_valor <= fecha_inicial_a_cambiar_valor) {
+			generarError("fecha de fin es anterior o igual a la fecha de inicio");
+		}
+		else{
+			var numero_del_sprint_para_guardar_cambios = li_sprint.firstChild.innerText.replace("Sprint", "");
+			cambiarDatosSprint(numero_del_sprint_para_guardar_cambios, fecha_inicial_a_cambiar, fecha_fin_a_cambiar, numero_horas_totales_a_cambiar);
+		}
+		
+	}
+
+}
+function cambiarDatosSprint(numero_del_sprint_para_guardar_cambios, fecha_inicial_a_cambiar, fecha_fin_a_cambiar, numero_horas_totales_a_cambiar){
+
+	var form_cambiar_datos_sprint = document.getElementById("cambiar_datos_sprint_form");
+
+	var url_sprint = document.createElement("input");
+	url_sprint.setAttribute("type","text");
+	url_sprint.setAttribute("name","url");
+	url_sprint.setAttribute("readonly","readonly");
+	var url = document.getElementById("url").innerText;
+	url_sprint.setAttribute("value",url);
+	url_sprint.setAttribute("hidden",true);
+	form_cambiar_datos_sprint.appendChild(url_sprint);
+
+	var id_proyecto_sprint = document.createElement("input");
+	id_proyecto_sprint.setAttribute("type","text");
+	id_proyecto_sprint.setAttribute("name","id_proyecto");
+	id_proyecto_sprint.setAttribute("readonly","readonly");
+	var id_proyecto = document.getElementById("id_proyecto").innerText;
+	id_proyecto_sprint.setAttribute("value",id_proyecto);
+	id_proyecto_sprint.setAttribute("hidden",true);
+	form_cambiar_datos_sprint.appendChild(id_proyecto_sprint);
+
+	var id_sprint = document.createElement("input");
+	id_sprint.setAttribute("type","text");
+	id_sprint.setAttribute("name","id_sprint");
+	id_sprint.setAttribute("readonly","readonly");
+	id_sprint.setAttribute("value",numero_del_sprint_para_guardar_cambios);
+	id_sprint.setAttribute("hidden",true);
+	form_cambiar_datos_sprint.appendChild(id_sprint);
+
+	var cambiar_fecha_inicial = document.createElement("input");
+	cambiar_fecha_inicial.setAttribute("type","text");
+	cambiar_fecha_inicial.setAttribute("name","fecha_inicial_a_cambiar");
+	cambiar_fecha_inicial.setAttribute("readonly","readonly");
+	cambiar_fecha_inicial.setAttribute("value",fecha_inicial_a_cambiar);
+	cambiar_fecha_inicial.setAttribute("hidden",true);
+	form_cambiar_datos_sprint.appendChild(cambiar_fecha_inicial);
+
+	var cambiar_fecha_final = document.createElement("input");
+	cambiar_fecha_final.setAttribute("type","text");
+	cambiar_fecha_final.setAttribute("name","fecha_fin_a_cambiar");
+	cambiar_fecha_final.setAttribute("readonly","readonly");
+	cambiar_fecha_final.setAttribute("value",fecha_fin_a_cambiar);
+	cambiar_fecha_final.setAttribute("hidden",true);
+	form_cambiar_datos_sprint.appendChild(cambiar_fecha_final);
+
+	var cambiar_horas_totales = document.createElement("input");
+	cambiar_horas_totales.setAttribute("type","text");
+	cambiar_horas_totales.setAttribute("name","numero_horas_totales_a_cambiar");
+	cambiar_horas_totales.setAttribute("readonly","readonly");
+	cambiar_horas_totales.setAttribute("value",numero_horas_totales_a_cambiar);
+	cambiar_horas_totales.setAttribute("hidden",true);
+	form_cambiar_datos_sprint.appendChild(cambiar_horas_totales);
+
+	document.getElementById("cambiar_datos_sprint_form").submit();
 }
