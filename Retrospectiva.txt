@@ -31,3 +31,15 @@ Retro Sprint 3:
 							La planificación del tiempo ha sido algo complicada y hemos tenido que trabajar en cosas que teniamos de Sprints anteriores.
 						Como mejorar:
 							Tratar de concretar tanto en tiempo como a la hora de hacer las especifiaciones y intentar no liarnos ya que hay que reorganizar mucho codigo.
+
+				Jordi:
+
+					Cosas a mejorar:
+
+						Me ha costado un poco modificar mi propio codigo, ya que muchas veces no lo comento, y puedo meter cosas donde no van, y luego cuesta mas de encontrar donde esta lo que falla de lo nuevo que he introducido, dandome cuenta de que no lo metia donde debia
+
+					Como mejorar:
+
+						Comentar más el codigo a medida que lo voy programando
+
+
