@@ -26,3 +26,8 @@ Retro Sprint 3:
 					Como mejorar:
 
 						Intentar en la medidad de lo posible hacer un codigo que sea facilmente modificable para no perder mas tiempo del necesario.
+						Eric:
+						Cosas a mejorar:
+							La planificación del tiempo ha sido algo complicada y hemos tenido que trabajar en cosas que teniamos de Sprints anteriores.
+						Como mejorar:
+							Tratar de concretar tanto en tiempo como a la hora de hacer las especifiaciones y intentar no liarnos ya que hay que reorganizar mucho codigo.
